@@ -1,0 +1,21 @@
+header ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+header ul li {
+  display: inline;
+}
+
+header ul li a {
+  color: white;
+  text-decoration: none; /* Remove underline from links */
+  padding: 10px 20px; /* Add padding for better appearance */
+  background-color: purple;
+
+}
+
+header ul li a:hover {
+  background-color: darkpurple; /* Change background color on hover */
+}

@@ -1,21 +1,75 @@
-header ul {
+header {
+  margin: 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+header li {
+  display: inline;
+}
+.nav-login {
+  background-color: #200035;
+  padding: 10px;
+}
+
+.nav-login ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  justify-content: left;
 }
 
-header ul li {
-  display: inline;
+.nav-login a {
+  text-decoration: none;
+  color: white; /* Set text color to white */
+  padding: 1px 10px;
 }
 
-header ul li a {
+section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Logo,
+.Search,
+.Advance-Search {
+  display: flex;
+  align-items: center;
+}
+
+.Logo {
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center; /* Align Logo to the left */
+}
+
+.Search {
+  flex: 1;
+  justify-content: center;
+  align-items: center; /* Align search to the center */
+}
+
+.Search input[type="text"] {
+  width: 300px; /* Set the width of the search box */
+}
+
+.Advance-Search {
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.Advance-Search a {
+  background-color: #200035;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
   color: white;
-  text-decoration: none; /* Remove underline from links */
-  padding: 10px 20px; /* Add padding for better appearance */
-  background-color: purple;
-
+  text-decoration: none;
+  display: inline-block; /* Ensure background covers only the text */
 }
 
-header ul li a:hover {
-  background-color: darkpurple; /* Change background color on hover */
+.Search {
+  margin-left: 10px; /* Adjust spacing between Logo and Search */
 }

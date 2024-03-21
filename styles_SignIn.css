@@ -1,0 +1,132 @@
+header {
+  margin: 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+header li {
+  display: inline;
+}
+.nav-login {
+  background-color: #200035;
+  padding: 10px;
+}
+
+.nav-login ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  justify-content: left;
+}
+
+.nav-login a {
+  text-decoration: none;
+  color: white; /* Set text color to white */
+  padding: 1px 10px;
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Logo {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Align Logo to the left */
+  padding: 10 px 10 px;
+}
+
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+}
+
+/* Form container */
+.login-container {
+  width: 300px;
+  padding: 16px;
+  background: linear-gradient(to bottom, #4e0b5f, #b1007c);
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-top: 100px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Form title */
+.login-title {
+  margin-bottom: 20px;
+}
+
+.login-title h1 {
+  margin-top: 0;
+}
+
+/* Form input fields */
+.login-container label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Form checkbox */
+.login-container label input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Form submit button */
+.login-container input[type="submit"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Change the color of the submit button on hover */
+.login-container input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Add a red background color to the submit button if the form is invalid */
+.login-container input[type="submit"].invalid {
+  background-color: #f44336;
+}
+
+/* Form link */
+.login-container p a {
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+/* Form link hover */
+.login-container p a:hover {
+  text-decoration: underline;
+}
+
+body {
+  background-image: url("background-image.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Keeps the background image fixed while scrolling */
+  background-position: center; /* Centers the background image */
+}

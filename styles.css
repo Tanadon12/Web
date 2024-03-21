@@ -26,6 +26,13 @@ header li {
   padding: 1px 10px;
 }
 
+body {
+  background-image: url("Material/BB.png");
+  background-size: cover;
+  background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */
+  background-attachment: fixed; /* Optional: Fixes the background image in place */
+}
+
 section {
   display: flex;
   justify-content: space-between;
@@ -72,4 +79,33 @@ section {
 
 .Search {
   margin-left: 10px; /* Adjust spacing between Logo and Search */
+}
+
+/* 3rd part */
+
+.navbar {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Display list items in the same line */
+  justify-content: center; /* Center the navigation bar horizontally */
+}
+
+.navbar li {
+  display: inline; /* Display list items in the same line */
+  margin: 0 5%; /* Add spacing between items */
+}
+
+.navbar li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold; /* Apply bold text */
+  font-size: 20px; /* Apply larger font size */
+}
+
+/* Style for the separator */
+.separator {
+  height: 1px;
+  background-color: black;
+  margin-top: 20px; /* Adjust margin as needed */
 }

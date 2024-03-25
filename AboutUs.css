@@ -57,6 +57,7 @@ footer {
   bottom: 0; 
   left: 0; 
   width: 100%; 
+  text-align: center;
 }
 
 footer a {
@@ -121,6 +122,11 @@ main {
     width: 100%; 
     min-height: 200px; 
   }
+  footer {
+    padding: 10px; 
+    font-size: 16px;
+  }
+  
 }
 
 
@@ -144,4 +150,8 @@ main {
 
 .email-link:hover {
   background-color: #4d004d; 
+}
+
+#thank{
+  color: white;
 }

@@ -1,8 +1,13 @@
 header {
-  margin: 0px;
+  margin: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-bottom: 10px;
 }
 
 header li {
@@ -27,7 +32,8 @@ header li {
 }
 
 body {
-  background-image: url("Material/BB.png");
+  /* background-image: url("Material/BB.png"); */
+  padding-top: 40px;
   background-size: cover;
   background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */
   background-attachment: fixed; /* Optional: Fixes the background image in place */
@@ -108,4 +114,62 @@ section {
   height: 1px;
   background-color: black;
   margin-top: 20px; /* Adjust margin as needed */
+}
+
+.webpage {
+  text-align: center; /* Center the content horizontally */
+  padding: 20px; /* Add more padding to create space above and below the image */
+}
+
+.webpage img {
+  max-width: 100%; /* Set maximum width to 100% to make the image responsive */
+  max-height: 200px; /* Set maximum height to control the size of the image */
+  display: block; /* Ensure the image is displayed as a block element */
+  margin: 20px auto; /* Center the image horizontally and add margin above and below */
+}
+
+/*product part*/
+.BestSeller {
+  text-align: center;
+  text-decoration: none; /* Remove underline */
+  color: black; /* Set text color to black */
+  font-size: 18px; /* Set font size to bigger */
+  padding: 20px;
+}
+
+.perfume-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  margin: 0 80px;
+}
+
+.perfume {
+  width: 20%; /* Adjusts the width of each perfume container */
+  text-align: center; /* Center the text */
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for some depth */
+}
+
+.perfume img {
+  width: 80%; /* Make image fill the container */
+  height: auto;
+}
+
+.perfume h2 {
+  font-size: 1em; /* Adjusts the size of the perfume name */
+  color: #333;
+  margin: 10px 0;
+}
+
+.perfume p {
+  font-size: 0.9em;
+  color: #666;
+  margin: 5px 0;
+}
+
+.price {
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 20px;
 }

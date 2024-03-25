@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomePage</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <!-- 1st top part -->
+      <div class="nav-login">
+        <ul>
+          <li><a href="MyAccount.html">👨🏻‍💼 My account </a></li>
+          <li><a href="SignIn.html">Sign In</a></li>
+        </ul>
+      </div>
+    </header>
+    
+    <main>
+      <!-- 2nd part -->
+      <section>
+        <div class="Logo">
+          <a href="Homepage.html"><img src="Material/Logo.png" /> </a>
+          <!-- <h1> E N I G M A </h1> -->
+        </div>
+
+        <div class="Search">
+          <form action="/search" method="get">
+            <input type="text" placeholder="You Looking for ?" name="search" />
+            <button type="submit">🔍</button>
+          </form>
+        </div>
+
+        <div class="Advance-Search">
+          <a href="AdvanceSearch.html">Advance Search</a>
+        </div>
+      </section>
+
+      <!-- 3rd part  -->
+      <nav>
+        <ul class="navbar">
+          <li><a href="#">Men Perfume</a></li>
+          <li><a href="#">Male Perfume</a></li>
+          <li><a href="#">Brand ></a></li>
+        </ul>
+      </nav>
+      <div class="separator"></div>
+
+      
+      <!-- 4rd part  -->
+      <div class="frame">
+        <h1>ADVANCE SEARCH</h1>
+      </div>
+      
+      <form>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name">
+        <label for="brand">Brand</label>
+        <input type="text" id="brand" name="brand">
+        <label for="gender">Gender</label>
+        <input type="text" id="gender" name="gender">
+        <label for="price">Price</label>
+        <input type="text" id="price" name="price">
+        <label for="size">Size</label>
+        <input type="text" id="size" name="size">
+        <input type="submit" value="Search">
+        <div class="filters">
+            <input type="button" value="ADVANCE SEARCH">
+            <input type="button" value="Clear">
+        </div>
+    </form>
+  
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+.frame {
+  border: 2px solid black;
+  padding: 15px;
+  width: 300px;
+  height: 200px;
+}
+
+.frame h1 {
+  text-align: center;
+}
+
+.frame p {
+  text-align: center;
+  margin: 0;
+}

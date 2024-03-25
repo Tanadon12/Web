@@ -109,3 +109,14 @@ section {
   background-color: black;
   margin-top: 20px; /* Adjust margin as needed */
 }
+
+footer {
+  background-color: #200035;
+  padding: 20px;
+  text-align: right;
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+}

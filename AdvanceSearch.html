@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HomePage</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="advance.css" /> 
   </head>
   <body>
     <header>
@@ -49,29 +49,52 @@
 
       
       <!-- 4rd part  -->
-      <div class="frame">
-        <h1>ADVANCE SEARCH</h1>
+        <div class="title">
+          <p>ADVANCE SEARCH</p></div>
       </div>
       
-      <form>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name">
-        <label for="brand">Brand</label>
-        <input type="text" id="brand" name="brand">
-        <label for="gender">Gender</label>
-        <input type="text" id="gender" name="gender">
-        <label for="price">Price</label>
-        <input type="text" id="price" name="price">
-        <label for="size">Size</label>
-        <input type="text" id="size" name="size">
-        <input type="submit" value="Search">
-        <div class="filters">
-            <input type="button" value="ADVANCE SEARCH">
-            <input type="button" value="Clear">
+      <div class="form-search">
+        <div class="input-group">
+          <label class="box" for="name">Name</label>
+          <input type="text" id="name" name="name">
         </div>
-    </form>
-  
+      
+        <div class="input-group">
+          <label class="box" for="type">Type</label>
+          <input type="text" id="type" name="type">
+        </div>
+      
+        <div class="input-group">
+          <label class="box" for="brand">Brand</label>
+          <input type="text" id="brand" name="brand">
+        </div>
+      
+        <div class="input-group">
+          <label class="box" for="gender">Gender</label>
+          <input type="text" id="gender" name="gender">
+        </div>
+      
+        <div class="input-group">
+          <label class="box" for="price">Price</label>
+          <input type="text" id="price" name="price">
+        </div>
+      
+        <div class="input-group">
+          <label class="box" for="size">Size</label>
+          <input type="text" id="size" name="size">
+        </div>
+        <div class="button-group">
+            <div class="button">Clear
+            </div>
+             
+            <div class="button">Search</div>
+          </div>
+        </div>
+       
     </main>
+    <footer>
+      <a id ="About" href ="AboutUs.html">About us </a>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>

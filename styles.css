@@ -38,7 +38,13 @@ body {
   background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */
   background-attachment: fixed; /* Optional: Fixes the background image in place */
 }
-
+.section2{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  
+}
 section {
   display: flex;
   justify-content: space-between;
@@ -47,8 +53,9 @@ section {
 .Logo,
 .Search,
 .Advance-Search {
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* align-items: center; */
+  justify-content: flex-end;
 }
 
 .Logo {
@@ -58,7 +65,7 @@ section {
 }
 
 .Search {
-  flex: 1;
+  /* flex: 1; */
   justify-content: center;
   align-items: center; /* Align search to the center */
 }
@@ -68,7 +75,7 @@ section {
 }
 
 .Advance-Search {
-  flex: 1;
+  /* flex: 1; */
   justify-content: flex-end;
   align-items: center;
   margin: 20px auto;
@@ -138,10 +145,18 @@ section {
 }
 
 .perfume-container {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
   padding: 30px;
-  margin: 0 80px;
+  margin: 0 80px; */
+  display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    margin: 0 80px;
+
+    flex-flow: row wrap;
+    /* flex-wrap: wrap; */
+    align-items: flex-start;
 }
 
 .perfume {
@@ -172,4 +187,40 @@ section {
   font-weight: bold;
   color: #000;
   margin-bottom: 20px;
+}
+@media screen and (max-width: 835px){
+  .perfume-container {
+    /* display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    margin: 0 80px; */
+      padding: 30px;
+      margin: 0 80px;
+      display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+    gap: 10px;
+    justify-items: center;
+  }
+  
+  .perfume {
+    width: 90%; /* Adjusts the width of each perfume container */
+    text-align: center; /* Center the text */
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for some depth */
+    /* flex-grow: 0.5; */
+    
+  }
+  .navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Display list items in the same line */
+    /* justify-content: center; Center the navigation bar horizontally */
+    flex-direction: column;
+    align-items: center;
+  }
+  .section2{
+    flex-direction: column;
+    align-items: center;
+  }
 }

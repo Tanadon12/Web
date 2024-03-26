@@ -194,9 +194,9 @@ section {
     justify-content: space-between;
     padding: 30px;
     margin: 0 80px; */
-      padding: 30px;
-      margin: 0 80px;
-      display: grid;
+    padding: 30px;
+    margin: 0 80px;
+    display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
     gap: 10px;
     justify-items: center;

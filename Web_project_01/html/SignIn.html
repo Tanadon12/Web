@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomePage</title>
+    <link rel="stylesheet" href="../style/styles_SignIn.css" />
+  </head>
+  <body>
+    <header>
+      <div class="nav-login">
+        <ul>
+          <li><a href="../html/MyAccount.html">👨🏻‍💼My account</a></li>
+          <li><a href="SignIn.html">Sign In</a></li>
+        </ul>
+      </div>
+      <div class="Logo">
+        <a href="Homepage.html"><img src="../Material\Logo.png" /></a>
+      </div>
+    </header>
+    <form name="Login" action="/submit_login" method="post">
+      <div class="login-container">
+        <div class="login-title">
+          <h1>Login</h1>
+          <h3>E N I G M A.</h3>
+        </div>
+        <label for="username"></label><br />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="👨🏻‍💼  username;"
+        /><br />
+        <label for="password"></label><br />
+        <div class="password-container">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="🔒   passward"
+          />
+        </div>
+        <br />
+        <button type="button" id="togglePassword">Show Password</button>
+        <label for="remember"
+          ><br />
+          <input type="checkbox" id="remember" name="remember" />
+          Remember me </label
+        ><br />
+        <input type="submit" value="LOG IN" />
+        <p><a href="#">Forgot Password?</a></p>
+      </div>
+    </form>
+
+    <script src="../script/script.js"></script>
+  </body>
+</html>

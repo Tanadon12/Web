@@ -7,7 +7,7 @@ const mysql = require("mysql2");
 const app = express();
 dotenv.config();
 
-app.use(express.static('style'));
+
 
 const connection = mysql.createConnection({
   host: process.env.MYSQL_HOST,
@@ -19,7 +19,9 @@ const connection = mysql.createConnection({
 const router = express.Router();
 
 app.use("/", router);
-
+app.use("/style", express.static(path.join(__dirname, "style")));
+app.use("/Material", express.static(path.join(__dirname, "Material")));
+console.log(path.join(__dirname,"style"))
 router.get("/", (req, res) => {
   console.log("Request at /");
   res.status(200);

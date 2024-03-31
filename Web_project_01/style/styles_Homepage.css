@@ -3,12 +3,15 @@ header {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  position: fixed;
+  /* position: fixed; */
+  /* margin: 0; */
   top: 0;
   left: 0;
   width: 100%;
   padding-bottom: 10px;
 }
+
+
 
 header li {
   display: inline;
@@ -17,6 +20,7 @@ header li {
   background-color: #200035;
   padding: 10px;
 }
+
 
 .nav-login ul {
   list-style-type: none;
@@ -33,11 +37,14 @@ header li {
 
 body {
   /* background-image: url("Material/BB.png"); */
-  padding-top: 40px;
+
+  /* padding-top: 40px; */
+  margin: 0;
   background-size: cover;
   background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */
   background-attachment: fixed; /* Optional: Fixes the background image in place */
 }
+
 .section2{
   display: flex;
   align-items: center;
@@ -75,9 +82,10 @@ section {
 }
 
 .Advance-Search {
-  /* flex: 1; */
-  justify-content: flex-end;
+  flex: 1;
+  display: flex;
   align-items: center;
+  
   margin: 20px auto;
 }
 
@@ -158,6 +166,20 @@ section {
     /* flex-wrap: wrap; */
     align-items: flex-start;
 }
+#randomProductContainer {
+  /* display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  margin: 0 80px; */
+  display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    margin: 0 80px;
+
+    flex-flow: row wrap;
+    /* flex-wrap: wrap; */
+    align-items: flex-start;
+}
 
 .perfume {
   width: 20%; /* Adjusts the width of each perfume container */
@@ -168,8 +190,12 @@ section {
 
 .perfume img {
   width: 80%; /* Make image fill the container */
-  height: auto;
+  width: 200px;
+  height: 180px;
+  object-fit: cover;
 }
+
+
 
 .perfume h2 {
   font-size: 1em; /* Adjusts the size of the perfume name */
@@ -188,6 +214,26 @@ section {
   color: #000;
   margin-bottom: 20px;
 }
+
+footer{
+  background-color: #200035;
+  padding:10px;
+  bottom:0;
+  left: 0;
+  width: 100%;
+  text-align: right;
+}
+
+.link{
+  color:white;
+  text-decoration: none;  
+  padding-right:20px;
+}
+
+.link:hover{
+  color:grey;
+}
+
 @media screen and (max-width: 835px){
   .perfume-container {
     /* display: flex;

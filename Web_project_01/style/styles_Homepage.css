@@ -166,7 +166,7 @@ section {
     /* flex-wrap: wrap; */
     align-items: flex-start;
 }
-#randomProductContainer {
+.randomProductContainer {
   /* display: flex;
   justify-content: space-between;
   padding: 30px;

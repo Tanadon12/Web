@@ -3,6 +3,7 @@ header {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding-bottom: 50px;
 }
 
 header li {
@@ -35,7 +36,6 @@ section {
   display: flex;
   justify-content: center;
   align-items: center; /* Align Logo to the left */
-  padding: 10 px 10 px;
 }
 
 /* General styles */

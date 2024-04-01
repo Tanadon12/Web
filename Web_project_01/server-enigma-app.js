@@ -77,6 +77,59 @@ router.get("/random-products", (req, res) => {
   });
 });
 
+router.get("/product-details/:id", (req, res) => {
+  // Extract the product ID from the request parameters
+  const productId = req.params.id;
+
+  // Query to fetch product details and its attributes
+  const query = `
+    SELECT 
+      p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand,
+      p.Product_Gender, p.Product_image, p.Product_Ingredients, p.Product_Description,
+      pa.Product_SKU, pa.Product_Size, pa.Product_Price
+    FROM Products AS p
+    JOIN Product_Attributes AS pa ON p.Product_ID = pa.Product_ID
+    WHERE p.Product_ID = ?
+  `;
+
+  // Execute the query with the product ID
+  connection.query(query, [productId], (err, results) => {
+    if (err) {
+      console.error('Error fetching product details:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    if (results.length === 0) {
+      res.status(404).send('Product not found');
+      return;
+    }
+
+    // Format the results into a more usable object
+    const productDetails = {
+      product: {
+        Product_ID: results[0].Product_ID,
+        Product_Name: results[0].Product_Name,
+        Product_Type: results[0].Product_Type,
+        Product_Brand: results[0].Product_Brand,
+        Product_Gender: results[0].Product_Gender,
+        Product_image: results[0].Product_image,
+        Product_Ingredients: results[0].Product_Ingredients,
+        Product_Description: results[0].Product_Description
+      },
+      attributes: results.map(row => ({
+        Product_SKU: row.Product_SKU,
+        Product_Size: row.Product_Size,
+        Product_Price: row.Product_Price
+      }))
+    };
+
+    // Send back the formatted product details
+    res.json(productDetails);
+  });
+});
+
+
 connection.connect((err) => {
   if (err) {
     throw err;

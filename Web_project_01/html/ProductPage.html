@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomePage</title>
+    <link rel="stylesheet" href="../style/styles_ProductPage.css" />
+  </head>
+  <body>
+    <header>
+      <!-- 1st top part -->
+      <div class="nav-login">
+        <ul>
+          <li><a class="link" href="../MyAccount">👨🏻‍💼 My account </a></li>
+          <li><a class="link" href="../SignIn">Sign In</a></li>
+        </ul>
+      </div>
+    </header>
+    <!-- 2nd part -->
+    <section class="section2">
+      <div class="Logo">
+        <a href="../Homepage">
+          <img
+            src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N"
+          />
+        </a>
+
+        <!-- <h1> E N I G M A </h1> -->
+      </div>
+
+      <div class="Search">
+        <form action="/search" method="get">
+          <input type="text" placeholder="You Looking for ?" name="search" />
+          <button type="submit">🔍</button>
+        </form>
+      </div>
+
+      <div class="Advance-Search">
+        <a href="../AdvanceSearch">Advance Search</a>
+      </div>
+    </section>
+
+    <!-- 3rd part  -->
+    <nav>
+      <ul class="navbar">
+        <li><a href="#">Men Perfume</a></li>
+        <li><a href="#">Female Perfume</a></li>
+        <li><a href="#">Brand </a></li>
+      </ul>
+    </nav>
+    <div class="separator"></div>
+
+    <div class="webpage">
+      <img
+        src=" https://drive.google.com/thumbnail?id=15banRNxpmSEJ8PO9CLkuWm3IPk759AAJ"
+      />
+    </div>
+    <main id="productDetails" class="product-details-container">
+      <div class="product-image">
+        <img id="productImage" src="" alt="Product Image" />
+      </div>
+      <div class="product-info">
+        <h1 id="productName">Product Name</h1>
+        <p id="productBrand">Brand:</p>
+        <p id="productDescription">Description:</p>
+        <p id="productIngredient">Ingredients:</p>
+        <p id="productType">Type:</p>
+        <p id="productGender">Gender:</p>
+        <p id="productSize">Size:</p>
+        <p id="productPrice">Price:</p>
+      </div>
+    </main>
+    <script src="../script/product.js"></script>
+  </body>
+</html>

@@ -14,37 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function fetchProductsForContainer(containerClass) {
-  fetch("/random-products")
-  .then((response) => response.json())
-  .then((products) => {
-      const container = document.querySelector(`.randomProductContainer.${containerClass}`);
-      container.innerHTML = ""; // Clear the container
-
-      // Directly iterate over the products and append them to the container
-      products.forEach((product) => {
-          // Extract the Google Drive ID from the Product_image URL
-          const driveUrl = product.Product_image;
-          const fileIdMatch = driveUrl.match(/file\/d\/(.*?)\//);
-          const fileId = fileIdMatch ? fileIdMatch[1] : null;
-
-          // Construct the thumbnail src URL
-          const imageUrl = fileId ? `https://drive.google.com/thumbnail?id=${fileId}` : "path/to/default/image.jpg";
-
-          const htmlContent = `
-              <div class="perfume">
-                  <img src="${imageUrl}" alt="${product.Product_Name}" />
-                  <h2>${product.Product_Name}</h2>
-                  <p>By ${product.Product_Brand}</p>
-                  <p class="price">Price : ${product.Product_Price} $</p>
-              </div>
-          `;
-          container.innerHTML += htmlContent; // Append new product content
-      });
-  })
-  .catch((error) => console.error("Error:", error));
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   fetchProductsForContainer("first");
   fetchProductsForContainer("second");
@@ -56,99 +25,98 @@ function extractGoogleDriveId(url) {
   return fileIdMatch ? fileIdMatch[1] : null;
 }
 
-function openModal(productId) {
-  // Fetch the detailed product information from the server using the product's unique identifier
-  fetch(`/product-details/${productId}`)
-    .then((response) => response.json())
-    .then((productDetails) => {
-      // 'productDetails' should be an object containing both 'product' and 'attributes' data
-      const { product, attributes } = productDetails;
+let isHoveringProduct = false; // Tracks if hovering over any product
+let isHoveringModal = false; // Tracks if hovering over the modal
 
-      // Populate modal with the main product info
-      document.getElementById("modalProductName").textContent = product.Product_Name;
-      document.getElementById("modalProductBrand").textContent = product.Product_Brand;
-      document.getElementById("modalProductDescription").textContent = product.Product_Description;
-      document.getElementById("modalProductIngredient").textContent = product.Product_Ingredients;
-      document.getElementById("modalProductType").textContent = product.Product_Type;
-      document.getElementById("modalProductGender").textContent = product.Product_Gender;
-
-      // Use extractGoogleDriveId to get the Google Drive image ID and form the URL for the thumbnail
-      const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}`;
-      // Set the initial image
-      document.getElementById("modalProductImage").src = imageUrl;
-
-      // Assuming 'attributes' contains an array of objects { Product_Size: "50", Product_Price: 49.99 }
-      const sizeSelect = document.getElementById("modalProductSize").querySelector('select');
-      sizeSelect.innerHTML = ""; // Clear existing options
-      attributes.forEach((attr) => {
-        sizeSelect.innerHTML += `<option value="${attr.Product_Size}" data-price="${attr.Product_Price}">${attr.Product_Size} ml</option>`;
-      });
-
-      // Set the initial price based on the first size option
-      document.getElementById("modalProductPrice").textContent = `$${attributes[0].Product_Price}`;
-
-      // Listen for changes in the selected size to update the price
-      sizeSelect.addEventListener('change', () => {
-        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
-        const selectedPrice = selectedOption.getAttribute('data-price');
-        document.getElementById("modalProductPrice").textContent = `$${selectedPrice}`;
-      });
-
-      // Show the modal
-      document.getElementById("productModal").style.display = "block";
-    })
-    .catch((error) => console.error("Error fetching product details:", error));
-}
-// Function to close the modal
-function closeModal() {
-  document.getElementById("productModal").style.display = "none";
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Fetching products for containers with different product sets
-  fetchProductsForContainer("first");
-  fetchProductsForContainer("second");
-
-  // Close functionality for the modal
-  const modal = document.getElementById("productModal");
-  const closeModalButton = document.querySelector(".modal .close");
-
-  // Close the modal when the close button is clicked
-  closeModalButton.addEventListener("click", closeModal);
-
-  // Close the modal when clicking outside of it
-  window.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
-});
 
 function fetchProductsForContainer(containerClass) {
   fetch("/random-products")
   .then(response => response.json())
   .then(products => {
-    const container = document.querySelector(`.randomProductContainer.${containerClass}`);
-    container.innerHTML = ""; // Clear the container
+      const container = document.querySelector(`.randomProductContainer.${containerClass}`);
+      container.innerHTML = ""; // Clear the container
 
-    // Iterate over the products and append them to the container
-    products.forEach(product => {
-      const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}`;
+      products.forEach(product => {
+          const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}`;
+          const productDiv = document.createElement("div");
+          productDiv.className = "perfume";
+          productDiv.innerHTML = `
+          <img src="${imageUrl}" alt="${product.Product_Name}" />
+          <h2>${product.Product_Name}</h2>
+          <p>By ${product.Product_Brand}</p>
+          <p class="price">Price : ${product.Product_Price} $</p>
+          `;
 
-      const productDiv = document.createElement("div");
-      productDiv.className = "perfume";
-      productDiv.innerHTML = `
-        <img src="${imageUrl}" alt="${product.Product_Name}" />
-        <h2>${product.Product_Name}</h2>
-        <p>By ${product.Product_Brand}</p>
-        <p class="price">Price : ${product.Product_Price} $</p>
-      `;
+          container.appendChild(productDiv);
 
-      container.appendChild(productDiv);
+          productDiv.addEventListener("click", () => {
+            window.location.href = `/product-page/${product.Product_ID}`;
+          });
 
-      // Update the event listener to pass the correct product ID
-      productDiv.addEventListener("click", () => openModal(product.Product_ID));
-    });
+          // Hover to show modal
+          productDiv.addEventListener("mouseover", () => {
+              isHoveringProduct = true;
+              openModal(product.Product_ID);
+          });
+          productDiv.addEventListener("mouseleave", () => {
+              isHoveringProduct = false;
+              // Allow some time to move from product to modal
+              setTimeout(() => {
+                  if (!isHoveringModal) closeModal();
+              }, 300); // Reduced delay to 300ms
+          });
+      });
   })
   .catch(error => console.error("Error fetching products:", error));
 }
+
+
+// function openModal(productId) {
+//   fetch(`/product-details/${productId}`)
+//     .then((response) => response.json())
+//     .then((productDetails) => {
+//       const { product, attributes } = productDetails;
+
+//       // Populate modal with product info
+//       document.getElementById("modalProductName").textContent = product.Product_Name;
+//       document.getElementById("modalProductBrand").textContent = "Brand: " + product.Product_Brand;
+//       document.getElementById("modalProductDescription").textContent = "Description: " + product.Product_Description;
+//       document.getElementById("modalProductIngredient").textContent = "Ingredients: " + product.Product_Ingredients;
+//       document.getElementById("modalProductType").textContent = "Type: " + product.Product_Type;
+//       document.getElementById("modalProductGender").textContent = "Gender: " + product.Product_Gender;
+
+//       const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}`;
+//       document.getElementById("modalProductImage").src = imageUrl;
+
+//       // Clear and populate size options
+//       const sizeSelect = document.getElementById("modalProductSize").querySelector('select');
+//       sizeSelect.innerHTML = attributes.map(attr => `<option value="${attr.Product_Size}" data-price="${attr.Product_Price}">${attr.Product_Size} ml</option>`).join('');
+
+//       document.getElementById("modalProductPrice").textContent = "Price: $" + attributes[0].Product_Price;
+
+//       sizeSelect.addEventListener('change', () => {
+//         const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+//         const selectedPrice = selectedOption.getAttribute('data-price');
+//         document.getElementById("modalProductPrice").textContent = "Price: $" + selectedPrice;
+//       });
+
+//       // Ensure modal reference is correct and modal is shown
+//       const modal = document.getElementById("productModal");
+//       modal.style.display = "block";
+
+//       // Add hover state tracking for the modal
+//       modal.onmouseover = () => isHoveringModal = true;
+//       modal.onmouseleave = () => {
+//         isHoveringModal = false;
+//         setTimeout(() => {
+//           if (!isHoveringProduct) closeModal();
+//         }, 50); // Delay before checking hover state and closing
+//       };
+//     })
+//     .catch((error) => console.error("Error fetching product details:", error));
+// }
+
+// function closeModal() {
+//   const modal = document.getElementById("productModal");
+//   modal.style.display = "none";
+// }

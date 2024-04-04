@@ -1,0 +1,202 @@
+header {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* position: fixed; */
+    /* margin: 0; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+  
+  header li {
+    display: inline;
+  }
+  .nav-login {
+    background-color: #200035;
+    padding: 10px;
+  }
+  
+  .nav-login ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    justify-content: left;
+  }
+  
+  .nav-login a {
+    text-decoration: none;
+    color: white; /* Set text color to white */
+    padding: 1px 10px;
+  }
+  
+  body {
+    /* background-image: url("Material/BB.png"); */
+  
+    /* padding-top: 40px; */
+  
+    margin: 0;
+    background-size: cover;
+    background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */
+    background-attachment: fixed; /* Optional: Fixes the background image in place */
+  }
+  
+  .section2 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    
+  }
+  section {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .Logo,
+  .Search,
+  .Advance-Search {
+    /* display: flex; */
+    /* align-items: center; */
+    justify-content: flex-end;
+  }
+  
+  .Logo {
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center; /* Align Logo to the left */
+  }
+  
+  .Search {
+    /* flex: 1; */
+    justify-content: center;
+    align-items: center; /* Align search to the center */
+  }
+  
+  .Search input[type="text"] {
+    width: 300px; /* Set the width of the search box */
+  }
+  
+  .Advance-Search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  
+    margin: 20px auto;
+  }
+  
+  .Advance-Search a {
+    background-color: #200035;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    color: white;
+    text-decoration: none;
+    display: inline-block; /* Ensure background covers only the text */
+  }
+  
+  .Search {
+    margin-left: 10px; /* Adjust spacing between Logo and Search */
+  }
+  
+  /* 3rd part */
+  
+  .navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Display list items in the same line */
+    justify-content: center; /* Center the navigation bar horizontally */
+  }
+  
+  .navbar li {
+    display: inline; /* Display list items in the same line */
+    margin: 0 5%; /* Add spacing between items */
+  }
+  
+  .navbar li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold; /* Apply bold text */
+    font-size: 20px; /* Apply larger font size */
+  }
+  
+  /* Style for the separator */
+  .separator {
+    height: 1px;
+    background-color: black;
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
+  .webpage {
+    text-align: center; /* Center the content horizontally */
+    padding: 20px; /* Add more padding to create space above and below the image */
+  }
+  
+  .webpage img {
+    max-width: 100%; /* Set maximum width to 100% to make the image responsive */
+    max-height: 200px; /* Set maximum height to control the size of the image */
+    display: block; /* Ensure the image is displayed as a block element */
+    margin: 20px auto; /* Center the image horizontally and add margin above and below */
+  }
+
+  .product-details-container {
+    display: flex;
+    border: 1px solid #ccc; /* Adds a border around the container */
+    margin: 40px; /* Increases space around the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+    background: #fff; /* Sets a white background for the container */
+    max-width: 80%; /* Reduces the max-width of the box */
+    min-height: 500px; /* Increases the height of the box */
+    margin-left: auto; /* Centers the box horizontally */
+    margin-right: auto; /* Centers the box horizontally */
+}
+
+.product-image {
+    size: 80%;
+    flex: 1; /* Assigns a flex-grow factor to the image container */
+    padding: 10px;
+    order: 1; /* Ensures the image is on the left */
+    border-right: 1px solid #ccc; /* Adds a border between the image and the info */
+}
+
+.product-image img {
+    width: 100%; /* Ensures the image is fully responsive within its container */
+    height: auto;
+    max-height: 100%; /* Ensures the image does not exceed the container's height */
+}
+
+.product-info {
+    flex: 1.5; /* Assigns a larger flex-grow factor to the info container */
+    padding: 20px; /* Adds more padding inside the info container */
+    order: 2; /* Ensures the info is on the right */
+    text-align: left; /* Aligns the text to the left */
+}
+
+.product-info h1,
+.product-info p {
+    margin-bottom: 15px; /* Adds more vertical spacing between the elements */
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+    .product-details-container {
+        flex-direction: column;
+        max-width: 90%; /* Allows the box to take more width on smaller screens */
+        min-height: auto; /* Allows the box height to adjust automatically */
+        margin: 20px auto; /* Reduces the space around the container and centers it */
+    }
+
+    .product-image img {
+        border-right: none; /* Removes the right border on smaller screens */
+        border-bottom: 1px solid #ccc; /* Adds a border below the image */
+        max-height: none; /* Image can take any height */
+    }
+
+    .product-info {
+        padding: 10px; /* Reduces padding inside the info container on smaller screens */
+    }
+}
+
+

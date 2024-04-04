@@ -21,6 +21,8 @@ app.use("/style", express.static(path.join(__dirname, "style")));
 app.use("/Material", express.static(path.join(__dirname, "Material")));
 app.use("/script", express.static(path.join(__dirname, "script")));
 
+
+
 console.log(path.join(__dirname, "style"));
 router.get("/", (req, res) => {
   console.log("Request at /");
@@ -31,35 +33,37 @@ router.get("/", (req, res) => {
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/Homepage.html", (req, res) => {
+router.get("/Homepage", (req, res) => {
   console.log("Request at /Homepage");
   res.status(200);
   res.sendFile(path.join(__dirname, "html", "Homepage.html"));
 });
 
-router.get("/AdvanceSearch.html", (req, res) => {
+router.get("/AdvanceSearch", (req, res) => {
   console.log("Request at /Homepage");
   res.status(200);
   res.sendFile(path.join(__dirname, "html", "AdvanceSearch.html"));
 });
 
-router.get("/MyAccount.html", (req, res) => {
+router.get("/MyAccount", (req, res) => {
   console.log("Request at /Homepage");
   res.status(200);
   res.sendFile(path.join(__dirname, "html", "MyAccount.html"));
 });
 
-router.get("/AboutUs.html", (req, res) => {
+router.get("/AboutUs", (req, res) => {
   console.log("Request at /Homepage");
   res.status(200);
   res.sendFile(path.join(__dirname, "html", "AboutUs.html"));
 });
 
-router.get("/SignIn.html", (req, res) => {
+router.get("/SignIn", (req, res) => {
   console.log("Request at /Homepage");
   res.status(200);
   res.sendFile(path.join(__dirname, "html", "SignIn.html"));
 });
+
+
 
 router.get("/random-products", (req, res) => {
   console.log("applied random-product");
@@ -127,6 +131,23 @@ router.get("/product-details/:id", (req, res) => {
     // Send back the formatted product details
     res.json(productDetails);
   });
+});
+
+
+// This route serves the product page HTML
+router.get("/product-page/:id", (req, res) => {
+  console.log("Request for product page with ID: ", req.params.id);
+  // You might need to adjust the path and file name according to your setup
+  const query = `
+    SELECT 
+      p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand,
+      p.Product_Gender, p.Product_image, p.Product_Ingredients, p.Product_Description,
+      pa.Product_SKU, pa.Product_Size, pa.Product_Price
+    FROM Products AS p
+    JOIN Product_Attributes AS pa ON p.Product_ID = pa.Product_ID
+    WHERE p.Product_ID = ?
+  `;
+  res.sendFile(path.join(__dirname, "html", "ProductPage.html"));
 });
 
 

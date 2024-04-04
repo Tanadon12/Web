@@ -48,7 +48,6 @@ body {
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-end;
-  
 }
 section {
   display: flex;
@@ -144,7 +143,7 @@ section {
 
 /*product part*/
 
-.BestSeller{
+.BestSeller {
   text-align: center;
   justify-self: center;
   text-decoration: none; /* Remove underline */
@@ -152,7 +151,6 @@ section {
   font-size: 18px; /* Set font size to bigger */
   padding: 20px;
 }
-
 
 .randomProductContainer {
   display: flex;
@@ -172,11 +170,19 @@ section {
   cursor: pointer; /* Changes the cursor to indicate the item is clickable */
 }
 
-.perfume img {
+/* .perfume img {
+  justify-content: center;
   width: 200px;
   height: 180px;
   object-fit: cover;
+} */
+.perfume img {
+  justify-content: center;
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
 }
+
 
 .perfume h2 {
   font-size: 1em;
@@ -202,30 +208,44 @@ section {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Make the shadow a bit deeper */
 }
 
-
 /* modal pop up  */
 
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  position: fixed; /* Fixed position to stay in place */
+  z-index: 1000; /* High z-index to ensure it appears on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  width: 100%;
+  height: 100%;
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
 }
 
-/* Modal Content */
+/* Adjust the modal content box */
 .modal-content {
+  position: relative;
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto; /* Adjustment for auto margin for center alignment */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 50%; /* Make the modal wider */
+  max-width: 400px; /* Maximum width of the modal */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Shadow for 3D effect */
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+/* Adjust text and other elements inside modal to be smaller */
+.modal h2,
+.modal p,
+.modal select {
+  font-size: 14px; /* Smaller font size for modal content */
+  margin: 8px 0; /* Tighter spacing */
 }
 
 /* The Close Button */
@@ -243,101 +263,11 @@ section {
   cursor: pointer;
 }
 
-/* Add styles for the modal header and body */
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 60%; /* You can adjust the width as needed */
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-}
-
-.modal-header {
-  padding: 2px 16px;
-  
-  color: black;
-}
-
-.modal-body {
-  display: flex;
-}
-
-.modal-product-image {
-  flex-basis: 40%;
-  padding: 10px;
-}
-
-.modal-product-image img {
-  width: 100%;
-  height: auto;
-}
-
-.modal-product-info {
-  flex-basis: 60%;
-  padding: 10px;
-}
-
-.product-detail {
-  margin-bottom: 10px;
-}
-
-.product-detail label {
-  font-weight: bold;
-}
-
-.product-detail span {
-  padding-left: 8px;
-}
-
-/* Style the select dropdown */
-.product-detail select {
-  padding: 5px;
-  margin-top: 5px;
-}
-
-@media (max-width: 768px) {
-  .modal-body {
-    flex-direction: column;
-  }
-  
-  .modal-product-image,
-  .modal-product-info {
-    flex-basis: 100%;
-  }
-}
-
-
-/* More styles can be added as per your design requirements */
-
-
-/* modal pop up  */
-
+/* Modal animation
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+} */
 
 footer {
   background-color: #200035;
@@ -358,7 +288,7 @@ footer {
   color: grey;
 }
 
-@media screen and (max-width: 835px) {
+@media screen and (max-width: 850px) {
   .perfume-container {
     /* display: flex;
     justify-content: space-between;

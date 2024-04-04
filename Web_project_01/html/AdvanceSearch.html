@@ -3,26 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HomePage</title>
-    <link rel="stylesheet" href="../style/advance.css" /> 
+    <title>Advance-Search</title>
+    <link rel="stylesheet" href="../style/advance.css" />
   </head>
   <body>
     <header>
       <!-- 1st top part -->
       <div class="nav-login">
         <ul>
-          <li><a href="MyAccount.html">👨🏻‍💼 My account </a></li>
-          <li><a href="SignIn.html">Sign In</a></li>
+          <li><a class="link" href="MyAccount.html">👨🏻‍💼 My account </a></li>
+          <li><a class="link" href="SignIn.html">Sign In</a></li>
         </ul>
       </div>
     </header>
-    
+
     <main>
       <!-- 2nd part -->
-      <section>
+      <section class="section2">
         <div class="Logo">
-          <a href="Homepage.html"><img  src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N" /> </a>
-          <!-- <h1> E N I G M A </h1> -->
+          <a href="Homepage.html">
+            <img
+              src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N"
+            />
+          </a>
+
         </div>
 
         <div class="Search">
@@ -41,60 +45,62 @@
       <nav>
         <ul class="navbar">
           <li><a href="#">Men Perfume</a></li>
-          <li><a href="#">Male Perfume</a></li>
-          <li><a href="#">Brand ></a></li>
+          <li><a href="#">Female Perfume</a></li>
+          <li><a href="#">Brand </a></li>
         </ul>
       </nav>
       <div class="separator"></div>
 
-      
-      <!-- 4rd part  -->
-        <div class="title">
-          <p>ADVANCE SEARCH</p></div>
-      </div>
-      
-      <div class="form-search">
-        <div class="input-group">
-          <label class="box" for="name">Name</label>
-          <input type="text" id="name" name="name">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="type">Type</label>
-          <input type="text" id="type" name="type">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="brand">Brand</label>
-          <input type="text" id="brand" name="brand">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="gender">Gender</label>
-          <input type="text" id="gender" name="gender">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="price">Price</label>
-          <input type="text" id="price" name="price">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="size">Size</label>
-          <input type="text" id="size" name="size">
-        </div>
-        <div class="button-group">
-            <div class="button">Clear
+      <div class="advanced-search-container">
+        <div class="search-title">ADVANCE SEARCH</div>
+        <form class="search-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
             </div>
-             
-            <div class="button">Search</div>
-          </div>
-        </div>
-       
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select id="type" name="type">
+                    <option value="">Select Type</option>
+                    <option value="parfum">PARFUM</option>
+                    <option value="eau_de_parfum">EAU DE PARFUM</option>
+                    <option value="eau_de_toilette">EAU DE TOILETTE</option>
+                    <option value="eau_de_cologne">EAU DE COLOGNE</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" id="brand" name="brand">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender </label>
+                <select id="gender" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="men">Men</option>
+                    <option value="women">Women</option>
+                    <option value="unisex">Unisex</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price">
+            </div>
+            <div class="form-group">
+                <label for="size">Size</label>
+                <input type="text" id="size" name="size">
+            </div>
+            <div class="form-buttons">
+                <button type="reset" class="button-clear">Clear</button>
+                <button type="submit" class="button-search">Search</button>
+            </div>
+        </form>
+    </div>
+     
     </main>
     <footer>
-      <a id ="About" href ="AboutUs.html">About us </a>
+      <a class="link" href="AboutUs.html">About us </a>
     </footer>
-    <script src="script.js"></script>
+    <script src="../script/script.js"></script>
   </body>
+
 </html>

@@ -48,7 +48,6 @@ body {
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-end;
-  
 }
 section {
   display: flex;
@@ -144,7 +143,7 @@ section {
 
 /*product part*/
 
-.BestSeller{
+.BestSeller {
   text-align: center;
   justify-self: center;
   text-decoration: none; /* Remove underline */
@@ -152,7 +151,6 @@ section {
   font-size: 18px; /* Set font size to bigger */
   padding: 20px;
 }
-
 
 .randomProductContainer {
   display: flex;
@@ -172,11 +170,19 @@ section {
   cursor: pointer; /* Changes the cursor to indicate the item is clickable */
 }
 
-.perfume img {
+/* .perfume img {
+  justify-content: center;
   width: 200px;
   height: 180px;
   object-fit: cover;
+} */
+.perfume img {
+  justify-content: center;
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
 }
+
 
 .perfume h2 {
   font-size: 1em;
@@ -202,7 +208,6 @@ section {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Make the shadow a bit deeper */
 }
 
-
 /* modal pop up  */
 
 /* The Modal (background) */
@@ -227,7 +232,7 @@ section {
   border: 1px solid #888;
   width: 50%; /* Make the modal wider */
   max-width: 400px; /* Maximum width of the modal */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Shadow for 3D effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Shadow for 3D effect */
   animation-name: animatetop;
   animation-duration: 0.4s;
   transform: translate(-50%, -50%);
@@ -236,7 +241,9 @@ section {
 }
 
 /* Adjust text and other elements inside modal to be smaller */
-.modal h2, .modal p, .modal select {
+.modal h2,
+.modal p,
+.modal select {
   font-size: 14px; /* Smaller font size for modal content */
   margin: 8px 0; /* Tighter spacing */
 }
@@ -256,14 +263,11 @@ section {
   cursor: pointer;
 }
 
-/* Modal animation */
+/* Modal animation
 @keyframes animatetop {
   from {top: -300px; opacity: 0}
   to {top: 0; opacity: 1}
-}
-
-
-
+} */
 
 footer {
   background-color: #200035;
@@ -284,7 +288,7 @@ footer {
   color: grey;
 }
 
-@media screen and (max-width: 835px) {
+@media screen and (max-width: 850px) {
   .perfume-container {
     /* display: flex;
     justify-content: space-between;

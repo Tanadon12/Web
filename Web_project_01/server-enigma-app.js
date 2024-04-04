@@ -21,6 +21,8 @@ app.use("/style", express.static(path.join(__dirname, "style")));
 app.use("/Material", express.static(path.join(__dirname, "Material")));
 app.use("/script", express.static(path.join(__dirname, "script")));
 
+
+
 console.log(path.join(__dirname, "style"));
 router.get("/", (req, res) => {
   console.log("Request at /");

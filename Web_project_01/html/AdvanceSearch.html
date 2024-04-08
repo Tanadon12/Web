@@ -69,8 +69,26 @@
             </div>
             <div class="form-group">
                 <label for="brand">Brand</label>
-                <input type="text" id="brand" name="brand">
+                <select id="brand" name="brand">
+                  <option value="">Select Brand</option>
+                  <option value="Armani">Armani</option>
+                  <option value="Burberry">Burberry</option>
+                  <option value="CalvinKlein">Calvin Klein</option>
+                  <option value="Chanel">Chanel</option>
+                  <option value="Davidoff">Davidoff</option>
+                  <option value="Dior">Dior</option>
+                  <option value="DolceGabbana">Dolce & Gabbana</option>
+                  <option value="EstéeLauder">Estée Lauder</option>
+                  <option value="Givenchy">Givenchy</option>
+                  <option value="Gucci">Gucci</option>
+                  <option value="JeanPaulGaultier">Jean Paul Gaultier</option>
+                  <option value="MCM">MCM</option>
+                  <option value="MFK">Maison Francis Kurkdjian</option>
+                  <option value="TomFord">Tom Ford</option>
+                  <option value="YSL">Yves Saint Laurent</option>
+              </select>
             </div>
+
             <div class="form-group">
                 <label for="gender">Gender </label>
                 <select id="gender" name="gender">
@@ -101,11 +119,11 @@
             
             <div class="price-input-container">
               <label for="min-price">Min Price (฿)</label>
-              <input type="number" id="min-price" name="min-price" value="0" min="0" max="60000" step="500" oninput="validatePriceRange()" />
+              <input type="number" id="min-price" name="min-price" value="0" min="0" max="60000" oninput="validatePriceRange()" />
               <small id="min-price-warning" style="display:none; color: red;">Minimum price cannot be less than 0.</small>
               
               <label for="max-price">Max Price (฿)</label>
-              <input type="number" id="max-price" name="max-price" value="60000" min="0" max="60000" step="500" oninput="validatePriceRange()" />
+              <input type="number" id="max-price" name="max-price" value="60000" min="0" max="60000" oninput="validatePriceRange()" />
               <small id="max-price-warning" style="display:none; color: red;">Maximum price cannot exceed 60,000.</small>
             </div>
             

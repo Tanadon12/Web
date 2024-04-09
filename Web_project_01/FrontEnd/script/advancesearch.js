@@ -38,33 +38,33 @@ function validatePriceRange() {
 document.addEventListener('DOMContentLoaded', validatePriceRange);
 
 
-//SIZE JS 
-  document.addEventListener('DOMContentLoaded', function() {
-    // This function updates the class on labels when their checkboxes are toggled
-    function updateLabelClass(checkbox) {
-      const label = checkbox.parentElement;
-      if (checkbox.checked) {
-        label.classList.add('checked');
-      } else {
-        label.classList.remove('checked');
-      }
-    }
+// //SIZE JS 
+//   document.addEventListener('DOMContentLoaded', function() {
+//     // This function updates the class on labels when their checkboxes are toggled
+//     function updateLabelClass(checkbox) {
+//       const label = checkbox.parentElement;
+//       if (checkbox.checked) {
+//         label.classList.add('checked');
+//       } else {
+//         label.classList.remove('checked');
+//       }
+//     }
   
-    // Select all size checkboxes
-    const sizeCheckboxes = document.querySelectorAll('.size-options input[type="checkbox"]');
+//     // Select all size checkboxes
+//     const sizeCheckboxes = document.querySelectorAll('.size-options input[type="checkbox"]');
   
-    // Initialize each checkbox
-    sizeCheckboxes.forEach(checkbox => {
-      // Update the label class based on the checkbox initial state
-      updateLabelClass(checkbox);
+//     // Initialize each checkbox
+//     sizeCheckboxes.forEach(checkbox => {
+//       // Update the label class based on the checkbox initial state
+//       updateLabelClass(checkbox);
   
-      // Attach a change event listener to toggle the class
-      checkbox.addEventListener('change', function() {
-        updateLabelClass(checkbox);
-      });
-    });
-  });
-  //END OF SIZE JS 
+//       // Attach a change event listener to toggle the class
+//       checkbox.addEventListener('change', function() {
+//         updateLabelClass(checkbox);
+//       });
+//     });
+//   });
+//   //END OF SIZE JS 
 
 
  //CLEAR BUTTON JS 
@@ -98,4 +98,63 @@ document.addEventListener('DOMContentLoaded', validatePriceRange);
     // Initialize values and warnings
     validatePriceRange();
   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('http://localhost:8000/product-search-options')
+      .then(response => response.json())
+      .then(data => {
+        populateDropdown('type', data.types);
+        populateDropdown('brand', data.brands);
+        populateDropdown('gender', data.genders);
+        populateSizes(data.sizes);
+      })
+      .catch(error => console.error('Error fetching search options:', error));
+  });
+  
+  function populateDropdown(dropdownId, options) {
+    const select = document.getElementById(dropdownId);
+    // Clear existing options except the first one
+    Array.from(select.options).slice(1).forEach(option => option.remove());
+    // Append new options
+    options.forEach(optionValue => {
+      const option = document.createElement('option');
+      option.value = optionValue;
+      option.textContent = optionValue;
+      select.appendChild(option);
+    });
+  }
+  
+  function populateSizes(sizes) {
+    const container = document.querySelector('.size-options');
+    // Clear existing checkboxes
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+    // Create new checkboxes and directly attach event listeners
+    sizes.forEach(size => {
+      const label = document.createElement('label');
+      label.className = 'size-label';
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.name = 'size';
+      input.value = size;
+  
+      // Attach an event listener directly to each new checkbox
+      input.addEventListener('change', function() {
+        // This toggles the 'checked' class on the label
+        if (input.checked) {
+          label.classList.add('checked');
+        } else {
+          label.classList.remove('checked');
+        }
+      });
+  
+      label.appendChild(input);
+      label.append(size); // Text next to checkbox
+      container.appendChild(label);
+    });
+  }
+  
+  
+  
   

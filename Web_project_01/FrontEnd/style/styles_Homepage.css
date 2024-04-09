@@ -121,6 +121,7 @@ section {
   font-size: 20px; /* Apply larger font size */
 }
 
+
 /* Style for the separator */
 .separator {
   height: 1px;
@@ -128,18 +129,18 @@ section {
   margin-top: 20px; /* Adjust margin as needed */
 }
 
-.webpage {
+.webpage {  
   text-align: center; /* Center the content horizontally */
   padding: 20px; /* Add more padding to create space above and below the image */
 }
 
 .webpage img {
-  max-width: 100%; /* Set maximum width to 100% to make the image responsive */
-  max-height: 200px; /* Set maximum height to control the size of the image */
-  display: block; /* Ensure the image is displayed as a block element */
-  margin: 20px auto; /* Center the image horizontally and add margin above and below */
+  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+  display: block;
+  margin: 20px auto;
 }
-*/
+
+
 
 /*product part*/
 .BestSeller{
@@ -188,7 +189,7 @@ section {
   width: auto; /* This will keep the image's aspect ratio intact */
   height: auto; /* This will also keep the image's aspect ratio intact */
   max-width: 200px; /* Maximum width limit for the image */
-  max-height: 300px; /* Maximum height limit for the image */
+  max-height: 250px; /* Maximum height limit for the image */
   object-fit: contain; /* This will ensure that the entire image is always visible, scaled to fit */
   margin: auto; /* This will center the image in its container if it is smaller than the container's width */
 }

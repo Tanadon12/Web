@@ -58,7 +58,7 @@ router.get("/SignIn", (req, res) => {
   res.sendFile(path.join(__dirname, "html", "SignIn.html"));
 });
 
-router.get("/product-page/:id", cors(),  (req, res) => {
+router.get("/product-page/:id",  (req, res) => {
   console.log("Request at /product-page ");
   res.status(200);
   res.sendFile(path.join(__dirname, "html", "ProductPage.html"));

@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HomePage</title>
-    <link rel="stylesheet" href="../style/advance.css" /> 
+    <title>Advance-Search</title>
+    <link rel="stylesheet" href="../style/advance.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -16,10 +19,10 @@
         </ul>
       </div>
     </header>
-    
+
     <main>
       <!-- 2nd part -->
-      <section>
+      <section class="section2">
         <div class="Logo">
           <a href="Homepage"><img  src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N" /> </a>
           <!-- <h1> E N I G M A </h1> -->
@@ -41,60 +44,104 @@
       <nav>
         <ul class="navbar">
           <li><a href="#">Men Perfume</a></li>
-          <li><a href="#">Male Perfume</a></li>
-          <li><a href="#">Brand ></a></li>
+          <li><a href="#">Female Perfume</a></li>
+          <li><a href="#">Brand </a></li>
         </ul>
       </nav>
       <div class="separator"></div>
 
-      
-      <!-- 4rd part  -->
-        <div class="title">
-          <p>ADVANCE SEARCH</p></div>
-      </div>
-      
-      <div class="form-search">
-        <div class="input-group">
-          <label class="box" for="name">Name</label>
-          <input type="text" id="name" name="name">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="type">Type</label>
-          <input type="text" id="type" name="type">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="brand">Brand</label>
-          <input type="text" id="brand" name="brand">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="gender">Gender</label>
-          <input type="text" id="gender" name="gender">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="price">Price</label>
-          <input type="text" id="price" name="price">
-        </div>
-      
-        <div class="input-group">
-          <label class="box" for="size">Size</label>
-          <input type="text" id="size" name="size">
-        </div>
-        <div class="button-group">
-            <div class="button">Clear
+      <div class="advanced-search-container">
+        <div class="search-title">ADVANCE SEARCH</div>
+        <form class="search-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
             </div>
-             
-            <div class="button">Search</div>
-          </div>
-        </div>
-       
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select id="type" name="type">
+                    <option value="">Select Type</option>
+                    <option value="parfum">PARFUM</option>
+                    <option value="eau_de_parfum">EAU DE PARFUM</option>
+                    <option value="eau_de_toilette">EAU DE TOILETTE</option>
+                    <option value="eau_de_cologne">EAU DE COLOGNE</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <select id="brand" name="brand">
+                  <option value="">Select Brand</option>
+                  <option value="Armani">Armani</option>
+                  <option value="Burberry">Burberry</option>
+                  <option value="CalvinKlein">Calvin Klein</option>
+                  <option value="Chanel">Chanel</option>
+                  <option value="Davidoff">Davidoff</option>
+                  <option value="Dior">Dior</option>
+                  <option value="DolceGabbana">Dolce & Gabbana</option>
+                  <option value="EstéeLauder">Estée Lauder</option>
+                  <option value="Givenchy">Givenchy</option>
+                  <option value="Gucci">Gucci</option>
+                  <option value="JeanPaulGaultier">Jean Paul Gaultier</option>
+                  <option value="MCM">MCM</option>
+                  <option value="MFK">Maison Francis Kurkdjian</option>
+                  <option value="TomFord">Tom Ford</option>
+                  <option value="YSL">Yves Saint Laurent</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender </label>
+                <select id="gender" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="men">Men</option>
+                    <option value="women">Women</option>
+                    <option value="unisex">Unisex</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+              <label>Size</label>
+              <div class="size-options">
+                <label class="size-label"><input type="checkbox" name="size" value="10ml">10 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="30ml">30 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="35ml">35 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="40ml">40 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="50ml">50 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="60ml">60 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="70ml">70 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="100ml">100 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="125ml">125 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="150ml">150 ml</label>
+                <label class="size-label"><input type="checkbox" name="size" value="200ml">200 ml</label>
+                <label class="size-label"><input type="checkbox" name="size"value="250ml">250 ml</label>
+              </div>
+            </div>
+            
+            <div class="price-input-container">
+              <label for="min-price">Min Price (฿)</label>
+              <input type="number" id="min-price" name="min-price" value="0" min="0" max="60000" oninput="validatePriceRange()" />
+              <small id="min-price-warning" style="display:none; color: red;">Minimum price cannot be less than 0.</small>
+              
+              <label for="max-price">Max Price (฿)</label>
+              <input type="number" id="max-price" name="max-price" value="60000" min="0" max="60000" oninput="validatePriceRange()" />
+              <small id="max-price-warning" style="display:none; color: red;">Maximum price cannot exceed 60,000.</small>
+            </div>
+            
+            
+            
+            
+            <div class="form-buttons">
+                <button type="reset" class="button-clear">Clear</button>
+                <button type="submit" class="button-search">Search</button>
+            </div>
+        </form>
+    </div>
+     
     </main>
     <footer>
-      <a id ="About" href ="AboutUs">About us </a>
+      <a id ="About" href ="AboutUs.html">About us </a>
     </footer>
-    <script src="script.js"></script>
+    <script src="../script/advancesearch.js"></script>
   </body>
+
 </html>

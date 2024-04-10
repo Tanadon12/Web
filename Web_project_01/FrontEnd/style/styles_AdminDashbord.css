@@ -1,0 +1,161 @@
+
+@media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    .nav-login ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header {
+        flex-direction: row;
+    }
+}
+
+body {
+    margin: 0; /* Reset default margin */
+    padding: 0; /* Reset default padding */
+    background-image: url("background-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
+    background-position: center; /* Centers the background image */
+    
+  }
+  
+  header {
+    margin: 0; /* Reset margin */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    border-bottom: 1px solid #ddd; /* Adds a border line */
+  }
+  
+  header li {
+    display: inline;
+  }
+  .nav-login {
+    background-color: #200035;
+    padding: 10px;
+  }
+  
+  .nav-login ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    justify-content: left;
+  }
+  
+  
+  .nav-login a {
+    text-decoration: none;
+    color: white; /* Set text color to white */
+    padding: 1px 10px;
+  }
+  
+  .nav-login a:hover {
+    background-color: #3e2066; /* Darker shade for hover state */
+    border-radius: 5px; /* Optional: adds rounded corners on hover */
+}
+
+  
+  section {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .Logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    padding: 10px;
+    padding-top: 40px;
+  }
+
+  .navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Display list items in the same line */
+    justify-content: center; /* Center navigation bar horizontally */
+  }
+  
+  .navbar li {
+    display: inline; /* Display list items in the same line */
+    margin: 0 2%; /* Add spacing between items */
+  }
+  
+  .navbar li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold; /* Apply bold text */
+    font-size: 15px; /* Apply larger font size */
+  }
+
+  .navbar a:hover {
+    color: white;
+    background-color: #3e2066; /* Darker shade for hover state */
+    border-radius: 3px; /* Optional: adds rounded corners on hover */
+}
+
+  body {
+    background-image: url("background-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
+    background-position: center; /* Centers the background image */
+    font-family: 'Arial', sans-serif; /* Example font */
+    color: #333; /* Dark grey color for better readability */
+  }
+  
+  .dashboard-container {
+    text-align: center; /* Center everything in the dashboard container */
+    padding: 20px;
+}
+
+h1 {
+    color: #333; /* Dark text color for the heading */
+    margin: 20px 0; /* Margin around the heading */
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center; /* Center the stat boxes */
+    flex-wrap: wrap; /* Allow the boxes to wrap on small screens */
+}
+
+.stat-box {
+    background-color: #f3f3f3; /* Light grey background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    width: 200px; /* Fixed width */
+    margin: 10px; /* Margin around the boxes */
+    padding: 20px; /* Padding inside the boxes */
+    position: relative; /* Allows absolute positioning inside */
+    padding-top: 60px; /* Add more padding to the top to make room for the image */
+
+}
+
+.stat-image {
+    width: 50px; /* Set the image width */
+    height: auto; /* Maintain the aspect ratio */
+    position: absolute; /* Position it absolutely... */
+    top: 15px; /* ...half above the top of the box */
+    left: 50%; /* Center the image horizontally */
+    transform: translateX(-50%); /* Offset the image to the left by half its width */
+}
+
+.stat-box p {
+    color: #666; /* Lighter text color for the paragraph */
+    font-size: 18px; /* Larger font size */
+    margin-bottom: 5px; /* Margin at the bottom of the paragraph */
+}
+
+.stat-box h2 {
+    color: #333; /* Dark text color for the number */
+    font-size: 36px; /* Large font size for the number */
+}
+
+  

@@ -29,23 +29,70 @@
     
     <main>
         <section class="product-section">
+            
             <div class="add-product-container">
                 <button class="add-product-btn">+ Add Product</button>
             </div>
-          <!-- Product grid -->
-          <div class="product-grid">
-            <!-- Repeat this block for each product -->
-            <div class="product-card">
-              <img src="https://www.yslbeautyth.com/dw/image/v2/BFZM_PRD/on/demandware.static/-/Sites-ysl-master-catalog/default/dw8497c6e6/images/fragrance-free/WW-50424YSL/WW-50424YSL-3614272648401-30ml-IMAGE1.jpg?sw=930&sh=930&sm=cut&sfrm=jpg&q=85" alt="Yves Saint Laurent" class="product-image">
-              <h3>Yves Saint Laurent</h3>
-              <p>LIBRE EAU DE PARFUM</p>
-              <p class="price">฿33,300.00</p>
-              <button class="edit-btn">EDIT</button>
-              <button class="delete-btn">DELETE</button>
-            </div>
-            <!-- ... other products -->
+       
+                        <div class="product-grid">
+                            <!-- Repeat this block for each product -->
+                            <div class="product-card">
+                            <img src="https://www.yslbeautyth.com/dw/image/v2/BFZM_PRD/on/demandware.static/-/Sites-ysl-master-catalog/default/dw8497c6e6/images/fragrance-free/WW-50424YSL/WW-50424YSL-3614272648401-30ml-IMAGE1.jpg?sw=930&sh=930&sm=cut&sfrm=jpg&q=85" alt="Yves Saint Laurent" class="product-image">
+                            <h3>Yves Saint Laurent</h3>
+                            <p>LIBRE EAU DE PARFUM</p>
+                            <p class="price">฿33,300.00</p>
+                            <button class="edit-btn">EDIT</button>
+                            <button class="delete-btn">DELETE</button>
+                        </div>
 
+                        
+            
         </section>
+
+                        <!-- Add Product Pop-up Form (hidden by default) -->
+                        <div id="addProductModal" class="modal">
+                            <div class="modal-content">
+                              <span class="close">&times;</span>
+                              <h2>Add New Product</h2>
+                              <form id="addProductForm">
+                                <!-- Product name -->
+                                <input type="text" id="productName" name="productName" placeholder="Product Name" required>
+                                <!-- Product description -->
+                                <textarea id="productDescription" name="productDescription" placeholder="Product Description" required></textarea>
+                                <!-- Product price -->
+                                <input type="number" id="productPrice" name="productPrice" placeholder="Price" required>
+                                <!-- Product image -->
+                                <input type="file" id="productImage" name="productImage" accept="image/*">
+                                <!-- Submit button -->
+                                <button type="submit" class="btn">Add Product</button>
+                              </form>
+                            </div>
+                          </div>
+                                <script>
+                                    // Get the modal
+                                    var modal = document.getElementById('addProductModal');
+                                    // Get the button that opens the modal
+                                    var btn = document.getElementsByClassName('add-product-btn')[0];
+                                    // Get the <span> element that closes the modal
+                                    var span = document.getElementsByClassName('close')[0];
+                                    // When the user clicks the button, open the modal
+                                    btn.onclick = function() {
+                                    modal.style.display = "block";
+                                    }
+                                    // When the user clicks on <span> (x), close the modal
+                                    span.onclick = function() {
+                                    modal.style.display = "none";
+                                    }
+                                    // When the user clicks anywhere outside of the modal, close it
+                                    window.onclick = function(event) {
+                                    if (event.target == modal) {
+                                        modal.style.display = "none";
+                                    }
+                                    }
+                                    // TODO: Add form submission logic here, including image handling
+                                    </script>
+                            
+      
       </main>
 
   

@@ -171,6 +171,20 @@ body {
   .account-info span {
     font-weight: bold;
   }
+
+  .account-actions {
+    display: flex;
+    gap: 10px; /* Adds space between buttons */
+  }
+
+  .edit-account-btn {
+    background-color: #007bff; /* A blue color for the button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   
   .delete-account-btn {
     background-color: #F44336; /* A red color for the button */

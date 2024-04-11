@@ -1,0 +1,190 @@
+@media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    .nav-login ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header {
+        flex-direction: row;
+    }
+
+    .account-header, .account-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      .delete-account-btn {
+        margin-top: 10px;
+      }
+}
+
+body {
+    margin: 0; /* Reset default margin */
+    padding: 0; /* Reset default padding */
+    background-image: url("background-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
+    background-position: center; /* Centers the background image */
+    
+  }
+  
+  header {
+    margin: 0; /* Reset margin */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    border-bottom: 1px solid #ddd; /* Adds a border line */
+  }
+  
+  header li {
+    display: inline;
+  }
+  .nav-login {
+    background-color: #200035;
+    padding: 10px;
+  }
+  
+  .nav-login ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    justify-content: left;
+  }
+  
+  
+  .nav-login a {
+    text-decoration: none;
+    color: white; /* Set text color to white */
+    padding: 1px 10px;
+  }
+  
+  .nav-login a:hover {
+    background-color: #3e2066; /* Darker shade for hover state */
+    border-radius: 5px; /* Optional: adds rounded corners on hover */
+}
+
+  
+  section {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .Logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    padding: 10px;
+    padding-top: 40px;
+  }
+
+  .navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Display list items in the same line */
+    justify-content: center; /* Center navigation bar horizontally */
+  }
+  
+  .navbar li {
+    display: inline; /* Display list items in the same line */
+    margin: 0 2%; /* Add spacing between items */
+  }
+  
+  .navbar li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold; /* Apply bold text */
+    font-size: 15px; /* Apply larger font size */
+  }
+
+  .navbar a:hover {
+    color: white;
+    background-color: #3e2066; /* Darker shade for hover state */
+    border-radius: 3px; /* Optional: adds rounded corners on hover */
+}
+
+  body {
+    background-image: url("background-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
+    background-position: center; /* Centers the background image */
+    font-family: 'Arial', sans-serif; /* Example font */
+    color: #333; /* Dark grey color for better readability */
+  }
+
+  body, p {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .account-main {
+    padding: 20px;
+  }
+  
+  .account-container {
+    max-width: 600px; /* Adjust as needed */
+    margin: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .account-header {
+    border-bottom: 2px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .add-account-btn {
+    background-color: #4CAF50; /* A green color for the button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .account-item {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .account-info p {
+    font-size: 14px;
+    line-height: 1.6; /* Spacing between lines */
+    color: #333;
+  }
+  
+  .account-info span {
+    font-weight: bold;
+  }
+  
+  .delete-account-btn {
+    background-color: #F44336; /* A red color for the button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Last item should not have a bottom border */
+  .account-item:last-child {
+    border-bottom: none;
+  }
+  
+
+  

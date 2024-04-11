@@ -1,0 +1,205 @@
+
+@media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    .nav-login ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header {
+        flex-direction: row;
+    }
+
+    .add-product-container {
+        position: static; /* Resets to normal document flow on smaller screens */
+        text-align: center; /* Centers the button */
+        padding: 10px 0; /* Adds vertical padding for spacing */
+
+    }
+}
+
+body {
+    margin: 0; /* Reset default margin */
+    padding: 0; /* Reset default padding */
+    background-image: url("background-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
+    background-position: center; /* Centers the background image */
+    
+  }
+  
+  header {
+    margin: 0; /* Reset margin */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    border-bottom: 1px solid #ddd; /* Adds a border line */
+  }
+  
+  header li {
+    display: inline;
+  }
+  .nav-login {
+    background-color: #200035;
+    padding: 10px;
+  }
+  
+  .nav-login ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    justify-content: left;
+  }
+  
+  
+  .nav-login a {
+    text-decoration: none;
+    color: white; /* Set text color to white */
+    padding: 1px 10px;
+  }
+  
+  .nav-login a:hover {
+    background-color: #3e2066; /* Darker shade for hover state */
+    border-radius: 5px; /* Optional: adds rounded corners on hover */
+}
+
+  
+  section {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .Logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    padding: 10px;
+    padding-top: 40px;
+  }
+
+  .navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Display list items in the same line */
+    justify-content: center; /* Center navigation bar horizontally */
+  }
+  
+  .navbar li {
+    display: inline; /* Display list items in the same line */
+    margin: 0 2%; /* Add spacing between items */
+  }
+  
+  .navbar li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold; /* Apply bold text */
+    font-size: 15px; /* Apply larger font size */
+  }
+
+  .navbar a:hover {
+    color: white;
+    background-color: #3e2066; /* Darker shade for hover state */
+    border-radius: 3px; /* Optional: adds rounded corners on hover */
+}
+
+body {
+    background-image: url("background-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
+    background-position: center; /* Centers the background image */
+    font-family: 'Arial', sans-serif; /* Example font */
+    color: #333; /* Dark grey color for better readability */
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Base styles */
+h3, p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header and navigation styles would go here */
+  
+  /* Main content styles */
+.product-section {
+    max-width: 1200px; /* or your preferred width */
+    margin: 0 auto;
+    padding: 20px;
+    position: relative; /* For absolute positioning of the add product button */
+
+}
+
+.add-product-container {
+    text-align: right; /* Aligns the button to the right */
+    padding: 10px 20px; /* Adds some spacing */
+    position: absolute; /* Position the container absolutely to its parent */
+    right: 20px; /* 20px from the right */
+}
+
+.add-product-btn {
+    background-color: #28a745; /* Example: Bootstrap green color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow */
+}
+  
+  .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+  .product-card {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    width: 250px; /* Adjust width as needed */
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .price {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .edit-btn, .delete-btn {
+    background-color: #007BFF; /* Blue for edit */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-btn {
+    background-color: #DC3545; /* Red for delete */
+  }
+  
+  /* Add any additional styles or adjustments as needed */
+  

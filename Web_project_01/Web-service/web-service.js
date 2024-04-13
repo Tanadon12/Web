@@ -154,6 +154,69 @@ router.get("/product-search-options", (req, res) => {
 });
 
 
+router.post("/searchRes", (req, res) => {
+  const { name, type, brand, gender, minPrice, maxPrice } = req.body;
+  const size = req.body.size; // Ensure size is treated as a singular value
+
+  let query = `
+    SELECT 
+      p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand, 
+      p.Product_Gender, p.Product_image, p.Product_Ingredients, p.Product_Description,
+      GROUP_CONCAT(DISTINCT pa.Product_Size ORDER BY pa.Product_Size) AS Product_Sizes,
+      MIN(pa.Product_Price) AS Min_Product_Price, MAX(pa.Product_Price) AS Max_Product_Price
+    FROM Products p
+    JOIN Product_Attributes pa ON p.Product_ID = pa.Product_ID
+  `;
+
+  const conditions = [];
+  const params = [];
+
+  if (name) {
+    conditions.push(`p.Product_Name LIKE ?`);
+    params.push(`%${name}%`);
+  }
+  if (type) {
+    conditions.push(`p.Product_Type = ?`);
+    params.push(type);
+  }
+  if (brand) {
+    conditions.push(`p.Product_Brand = ?`);
+    params.push(brand);
+  }
+  if (gender) {
+    conditions.push(`p.Product_Gender = ?`);
+    params.push(gender);
+  }
+  if (size) {
+    conditions.push(`pa.Product_Size = ?`);
+    params.push(size);
+  }
+  if (minPrice && maxPrice) {
+    conditions.push(`pa.Product_Price BETWEEN ? AND ?`);
+    params.push(minPrice, maxPrice);
+  }
+
+  if (conditions.length > 0) {
+    query += ` WHERE ${conditions.join(' AND ')}`;
+  }
+
+  query += ` GROUP BY p.Product_ID`;
+
+  // Query the database using safe parameterized SQL
+  connection.query(query, params, (err, results) => {
+    if (err) {
+      console.error("Error executing query: ", err);
+      res.status(500).send("Internal Server Error");
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).send("No products found matching the criteria.");
+      return;
+    }
+    res.json(results); // Send back the results
+  });
+});
+
 
 
 

@@ -153,6 +153,83 @@ router.get("/product-search-options", (req, res) => {
   });
 });
 
+router.post("/searchRes", (req, res) => {
+  const { name, type, brand, gender } = req.body;
+  let { size } = req.body; // Could be a comma-separated string or a single value
+
+  // Correctly reference the hyphenated property names
+  let minPriceInput = parseFloat(req.body['min-price']);
+  let maxPriceInput = parseFloat(req.body['max-price']);
+
+  // Log the parsed prices to verify correctness
+  console.log("Parsed Prices:", minPriceInput, maxPriceInput);
+
+  if (isNaN(minPriceInput) || isNaN(maxPriceInput)) {
+    console.error('Invalid minPrice or maxPrice input:', req.body['min-price'], req.body['max-price']);
+    res.status(400).send("Invalid price inputs");
+    return;
+  }
+
+  let query = `
+    SELECT 
+      p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand,
+      p.Product_Gender, p.Product_image, p.Product_Ingredients, p.Product_Description,
+      GROUP_CONCAT(DISTINCT pa.Product_Size ORDER BY pa.Product_Size) AS Product_Sizes,
+      MIN(pa.Product_Price) AS Min_Product_Price,
+      MAX(pa.Product_Price) AS Max_Product_Price
+    FROM Products p
+    JOIN Product_Attributes pa ON p.Product_ID = pa.Product_ID
+  `;
+
+  const conditions = [];
+  const params = [];
+
+  if (name) {
+    conditions.push("p.Product_Name LIKE ?");
+    params.push(`%${name}%`);
+  }
+  if (type) {
+    conditions.push("p.Product_Type = ?");
+    params.push(type);
+  }
+  if (brand) {
+    conditions.push("p.Product_Brand = ?");
+    params.push(brand);
+  }
+  if (gender) {
+    conditions.push("p.Product_Gender = ?");
+    params.push(gender);
+  }
+  if (size) {
+    size = typeof size === 'string' ? size.split(',').map(s => s.trim()) : [size];
+    conditions.push(`pa.Product_Size IN (${size.map(() => '?').join(',')})`);
+    params.push(...size);
+  }
+
+  if (conditions.length > 0) {
+    query += ` WHERE ${conditions.join(' AND ')}`;
+  }
+
+  query += ` GROUP BY p.Product_ID`;
+
+  // Add HAVING clause to filter by min and max price
+  query += ` HAVING MIN(pa.Product_Price) >= ? AND MAX(pa.Product_Price) <= ?`;
+  params.push(minPriceInput, maxPriceInput);
+
+  connection.query(query, params, (err, results) => {
+    if (err) {
+      console.error("Error executing query: ", err);
+      res.status(500).send("Internal Server Error");
+      return;
+    }
+    if (results.length === 0) {
+      // Explicitly return an empty array if no products are found
+      res.json([]);
+    } else {
+      res.json(results);
+    }
+  });
+});
 
 
 

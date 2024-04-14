@@ -228,7 +228,7 @@ body {
 
  /* Product display result*/
  .ProductSearchResult {
-  display: block; /* Use block instead of flex to stack title and products vertically */
+  display: none; /* Use block instead of flex to stack title and products vertically */
   background-color: #fff;
   padding: 20px;
   justify-content: space-between;

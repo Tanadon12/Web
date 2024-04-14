@@ -153,12 +153,22 @@ router.get("/product-search-options", (req, res) => {
   });
 });
 
-
 router.post("/searchRes", (req, res) => {
   const { name, type, brand, gender } = req.body;
   let { size } = req.body; // Could be a comma-separated string or a single value
-  let minPrice = parseFloat(req.body.minPrice); // Ensuring floating point numbers
-  let maxPrice = parseFloat(req.body.maxPrice);
+
+  // Correctly reference the hyphenated property names
+  let minPriceInput = parseFloat(req.body['min-price']);
+  let maxPriceInput = parseFloat(req.body['max-price']);
+
+  // Log the parsed prices to verify correctness
+  console.log("Parsed Prices:", minPriceInput, maxPriceInput);
+
+  if (isNaN(minPriceInput) || isNaN(maxPriceInput)) {
+    console.error('Invalid minPrice or maxPrice input:', req.body['min-price'], req.body['max-price']);
+    res.status(400).send("Invalid price inputs");
+    return;
+  }
 
   let query = `
     SELECT 
@@ -202,7 +212,9 @@ router.post("/searchRes", (req, res) => {
 
   query += ` GROUP BY p.Product_ID`;
 
-  
+  // Add HAVING clause to filter by min and max price
+  query += ` HAVING MIN(pa.Product_Price) >= ? AND MAX(pa.Product_Price) <= ?`;
+  params.push(minPriceInput, maxPriceInput);
 
   connection.query(query, params, (err, results) => {
     if (err) {
@@ -211,12 +223,15 @@ router.post("/searchRes", (req, res) => {
       return;
     }
     if (results.length === 0) {
-      res.status(404).send("No products found matching the criteria.");
-      return;
+      // Explicitly return an empty array if no products are found
+      res.json([]);
+    } else {
+      res.json(results);
     }
-    res.json(results);
   });
 });
+
+
 
 
 

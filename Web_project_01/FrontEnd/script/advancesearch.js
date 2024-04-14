@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Price range validation function
+
+// Price range validation function
 function validatePriceRange() {
   const minPriceInput = document.getElementById("min-price");
   const maxPriceInput = document.getElementById("max-price");
@@ -20,24 +22,24 @@ function validatePriceRange() {
   minPriceWarning.style.display = "none";
   maxPriceWarning.style.display = "none";
 
-  if (minPrice < 0) {
-    minPriceInput.value = 0;
+  if (isNaN(minPrice) || minPrice < 0) {
+    minPrice = 0;
+    minPriceInput.value = minPrice;
     minPriceWarning.style.display = "block";
   }
 
-  if (maxPrice > 60000) {
-    maxPriceInput.value = 60000;
+  if (isNaN(maxPrice) || maxPrice > 60000) {
+    maxPrice = 60000;
+    maxPriceInput.value = maxPrice;
     maxPriceWarning.style.display = "block";
   }
-
-  if (minPrice > maxPrice) {
-    minPriceInput.value = maxPrice;
-  }
-
+  
   if (maxPrice < minPrice) {
-    maxPriceInput.value = minPrice;
+    maxPriceWarning.textContent = "Max price cannot be less than min price";
+    maxPriceWarning.style.display = "block";
   }
 }
+
 
 // Checkbox functionality for size options
 function initializeSizeCheckboxes() {
@@ -123,7 +125,7 @@ function initializeSearchFormSubmission() {
     event.preventDefault();
     performSearch();
   });
-
+  
   function performSearch() {
     const formData = new FormData(form);
     const searchParams = new URLSearchParams();
@@ -146,47 +148,56 @@ function initializeSearchFormSubmission() {
   }
 }
 
-// Display products on the page
 function displayProducts(products) {
   const container = document.querySelector('.ProductSearchResult');
-  container.innerHTML = ""; // Clear previous results
-  container.style.display = 'none';
+  // Clear previous results
+  container.innerHTML = "";
 
-  if (products.length === 0) {
-    container.innerHTML = "<h2>No product was found</h2>";
-    container.style.display = 'block';
-    return;
+  // Only show the container if there are products or if no products were found
+  if (products.length > 0) {
+    // Create and append the title
+    const titleContainer = document.createElement('div');
+    titleContainer.className = 'product-search-title';
+    titleContainer.innerHTML = `<h2>Product Search Result</h2>`;
+    container.appendChild(titleContainer);
+
+    // Create a container for the products
+    const productsContainer = document.createElement('div');
+    productsContainer.className = 'products-container';
+
+    // Iterate over the products and create DOM elements for each one
+    products.forEach(product => {
+      
+      const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}`;
+      const productDiv = document.createElement("div");
+      productDiv.className = "perfume";
+      productDiv.innerHTML = `
+        <div class="product-image">
+          <img src="${imageUrl}" alt="${product.Product_Name}" />
+        </div>
+        <div class="product-info">
+          <h2>${product.Product_Name}</h2>
+          <p>By ${product.Product_Brand}</p>
+          <p class="price">Price: ${product.Min_Product_Price} $ - ${product.Max_Product_Price} $</p>
+        </div>
+      `;
+      productDiv.addEventListener("click", () => {
+        window.location.href = `/product-page/${product.Product_ID}`;
+      });
+      productsContainer.appendChild(productDiv);
+    });
+
+    container.appendChild(productsContainer);
+  } else if (products.length === 0) {
+    // If no products were found, display a message
+    console.log("no product was found")
+    const noResultsDiv = document.createElement('div');
+    noResultsDiv.className = 'product-search-no-results';
+    noResultsDiv.innerHTML = `<h2>No product was found</h2>`;
+    container.appendChild(noResultsDiv);
   }
 
-  const titleContainer = document.createElement('div');
-  titleContainer.className = 'product-search-title';
-  titleContainer.innerHTML = `<h2>Product Search Result</h2>`;
-  container.appendChild(titleContainer);
-
-  const productsContainer = document.createElement('div');
-  productsContainer.className = 'products-container';
-
-  products.forEach(product => {
-    const productDiv = document.createElement("div");
-    productDiv.className = "perfume";
-    const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}`;
-    productDiv.innerHTML = `
-      <div class="product-image">
-        <img src="${imageUrl}" alt="${product.Product_Name}" />
-      </div>
-      <div class="product-info">
-        <h2>${product.Product_Name}</h2>
-        <p>By ${product.Product_Brand}</p>
-        <p class="price">Price: ${product.Min_Product_Price} $ - ${product.Max_Product_Price} $</p>
-      </div>
-    `;
-    productDiv.addEventListener("click", () => {
-      window.location.href = `/product-page/${product.Product_ID}`;
-    });
-    productsContainer.appendChild(productDiv);
-  });
-
-  container.appendChild(productsContainer);
+  // Display the results container
   container.style.display = 'block';
 }
 

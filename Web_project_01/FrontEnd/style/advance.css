@@ -118,8 +118,7 @@ section {
 .separator {
   height: 1px;
   background-color: black;
-  margin-top: 20px; 
-  margin-bottom: 40px; 
+  margin-top: 20px; /* Adjust margin as needed */
 }
 
 /* end of head and navbar part */
@@ -149,6 +148,7 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 50px;
+  margin-top: 50px;
 }
 
 .search-title {

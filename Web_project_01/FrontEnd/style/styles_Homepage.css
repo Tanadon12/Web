@@ -167,31 +167,25 @@ section {
   padding: 30px;
   margin: 0 80px;
   flex-flow: row wrap;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .perfume {
-  width: 20%;
+  box-sizing: border-box;
+  width: calc(22% - 20px); /* Adjust the width to be 25% minus any margins */
+  margin: 15px auto; /* Add some margin around the items */
+  margin-bottom: 30px; /* Increase the bottom margin to create space between lines */
   text-align: center;
-  margin: 10px;
+  padding: auto;
+  
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and box-shadow */
-  cursor: pointer; /* Changes the cursor to indicate the item is clickable */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* .perfume img {
-  justify-content: center;
-  width: 200px;
-  height: 180px;
-  object-fit: cover;
-} */
 .perfume img {
-  width: auto; /* This will keep the image's aspect ratio intact */
-  height: auto; /* This will also keep the image's aspect ratio intact */
-  max-width: 200px; /* Maximum width limit for the image */
-  max-height: 250px; /* Maximum height limit for the image */
-  object-fit: contain; /* This will ensure that the entire image is always visible, scaled to fit */
-  margin: auto; /* This will center the image in its container if it is smaller than the container's width */
+  max-width: 100%; /* Ensure the image doesn't exceed the container's width */
+  height: auto; /* Keep the aspect ratio of the image */
+  margin-bottom: 10px; /* Add space between the image and the text below */
 }
 
 
@@ -220,67 +214,6 @@ section {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Make the shadow a bit deeper */
 }
 
-/* modal pop up  */
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed position to stay in place */
-  z-index: 1000; /* High z-index to ensure it appears on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
-}
-
-/* Adjust the modal content box */
-.modal-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: 15% auto; /* Adjustment for auto margin for center alignment */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%; /* Make the modal wider */
-  max-width: 400px; /* Maximum width of the modal */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Shadow for 3D effect */
-  animation-name: animatetop;
-  animation-duration: 0.4s;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-}
-
-/* Adjust text and other elements inside modal to be smaller */
-.modal h2,
-.modal p,
-.modal select {
-  font-size: 14px; /* Smaller font size for modal content */
-  margin: 8px 0; /* Tighter spacing */
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Modal animation
-@keyframes animatetop {
-  from {top: -300px; opacity: 0}
-  to {top: 0; opacity: 1}
-} */
-
 footer {
   background-color: #200035;
   padding: 10px;
@@ -300,7 +233,7 @@ footer {
   color: grey;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1000px) {
   .perfume-container {
     /* display: flex;
     justify-content: space-between;
@@ -317,7 +250,7 @@ footer {
   .perfume {
     width: 90%; /* Adjusts the width of each perfume container */
     text-align: center; /* Center the text */
-    margin: 10px;
+    margin: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for some depth */
     /* flex-grow: 0.5; */
   }

@@ -34,6 +34,12 @@ router.get("/Homepage", (req, res) => {
   res.sendFile(path.join(__dirname, "html", "Homepage.html"));
 });
 
+router.get("/Perfume/:gender", (req, res) => {
+  console.log("Perfume/:gender");
+  res.status(200);
+  res.sendFile(path.join(__dirname, "html", "Perfume.html"));
+});
+
 router.get("/AdvanceSearch", (req, res) => {
   console.log("Request at /AdvanceSearch");
   res.status(200);
@@ -57,6 +63,7 @@ router.get("/SignIn", (req, res) => {
   res.status(200);
   res.sendFile(path.join(__dirname, "html", "SignIn.html"));
 });
+
 
 router.get("/product-page/:id",  (req, res) => {
   console.log("Request at /product-page ");

@@ -36,7 +36,7 @@ function validatePriceRange() {
     maxPriceInput.value = ""; // Reset to empty string
     maxPriceInput.placeholder = "60000"; // Set placeholder to default max value
   } else if (isNaN(maxPrice) || maxPrice > 60000) {
-    maxPriceInput.value = ""; // Reset to empty string if not valid
+    maxPriceInput.value = "60000"; // Reset to empty string if not valid
     maxPriceWarning.style.display = "block";
   }
 

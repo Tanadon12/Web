@@ -24,23 +24,38 @@ app.use("/", router);
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-
 router.get("/random-products", (req, res) => {
   console.log("applied random-product");
-  const query = `
-      SELECT p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand, p.Product_Gender, p.Product_image, MIN(pa.Product_Price) AS Product_Price
-      FROM Products AS p
-      JOIN Product_Attributes AS pa ON p.Product_ID = pa.Product_ID
-      GROUP BY p.Product_ID
-      
-      ORDER BY RAND()
-      LIMIT 4
+  let gender = req.query.gender; // Capture the 'gender' parameter from the query string
+  console.log(gender)
+
+  // Start building the SQL query
+  let query = `
+    SELECT p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand, p.Product_Gender, p.Product_image, MIN(pa.Product_Price) AS Product_Price
+    FROM Products AS p
+    JOIN Product_Attributes AS pa ON p.Product_ID = pa.Product_ID
   `;
+
+  // If a gender was provided and is valid, add a WHERE clause to filter by gender
+  if (gender && ['Men', 'Woman'].includes(gender)) {
+    query += ` WHERE p.Product_Gender = '${gender}'`;
+  }
+
+  // Continue with GROUP BY and ORDER BY clauses
+  query += `
+    GROUP BY p.Product_ID
+    ORDER BY RAND()
+    LIMIT 4
+  `;
+
+  // Execute the query
   connection.query(query, (err, results) => {
     if (err) throw err;
     res.json(results); // Send back an array of random product data
   });
 });
+
+
 
 // This route serves the product page HTML
 // router.get("/product-page/:id",cors(), (req, res) => {

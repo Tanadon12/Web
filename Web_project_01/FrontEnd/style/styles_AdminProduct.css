@@ -79,12 +79,13 @@ body {
     align-items: center;    
     padding: 10px;
     padding-top: 40px;
+    margin-bottom: 20px;
   }
 
   .navbar {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin-bottom: 20px;
     display: flex; /* Display list items in the same line */
     justify-content: center; /* Center navigation bar horizontally */
   }
@@ -108,25 +109,9 @@ body {
 }
 
 body {
-    background-image: url("background-image.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
-    background-position: center; /* Centers the background image */
     font-family: "Rubik", sans-serif;
-    color: #333; /* Dark grey color for better readability */
-    margin: 0;
-    padding: 0;
   }
-
-  /* Base styles */
-h3, p {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Header and navigation styles would go here */
-  
+ 
   /* Main content styles */
 .product-section {
     max-width: 1200px; /* or your preferred width */
@@ -155,6 +140,10 @@ h3, p {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow */
 }
 
+.add-product-btn:hover{
+  background-color: #10441c;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -172,10 +161,10 @@ h3, p {
   /* Modal Content */
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    margin: 15% auto; 
+    padding: 30px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%; 
     border-radius: 5px;
   }
 
@@ -199,11 +188,10 @@ textarea,
   color: white;
   text-align: center;
   text-decoration: none;
-  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #45a049;
+  background-color: #10441c;
 }
   /* The Close Button */
   .close {
@@ -222,8 +210,7 @@ textarea,
     margin-right: 15px;
   }
   
-  .close:hover,
-  .close:focus {
+  .close:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -275,7 +262,78 @@ textarea,
     background-color: #DC3545; /* Red for delete */
   }
   
+  select {
+    width: 90%; /* Match the width of other input fields */
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+  }
 
-  /* Add any additional styles or adjustments as needed */
+  .header-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .Search {
+    flex-grow: 1; /* Allow the search bar to take up available space */
+    display: flex;
+    margin-right: 20px; /* Adjust this as necessary */
+    justify-content: center;
+    
+  }
+  
+  .Search form {
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    margin-left: 200px;
+}
+
+  .Search input[type="text"] {
+    width: 60%; /* Input should take up remaining space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    height: 40px; /* This should be the height of your button */
+}
+  
+  .Search button {
+    width: 40px; /* Adjust the width as necessary */
+    height: 40px; /* Make the button the same height as the search box */
+    border: none;
+    background-color: #200035;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    margin-top: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+  
+  .Search button:hover {
+    background-color: #130020; /* Darker shade for hover */
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .Search form {
+      width: auto;
+    }
+  
+    .Search input[type="text"] {
+      flex-grow: 0;
+      width: calc(100% - 45px); /* Subtract the button width */
+    }
+  
+    .Search button {
+      width: 45px; 
+    }
+  }
+  
+ 
 
   

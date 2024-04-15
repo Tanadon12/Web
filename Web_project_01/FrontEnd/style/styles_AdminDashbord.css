@@ -72,6 +72,7 @@ body {
     align-items: center;    
     padding: 10px;
     padding-top: 40px;
+    margin-bottom: 20px;
   }
 
   .navbar {
@@ -80,6 +81,7 @@ body {
     margin: 0;
     display: flex; /* Display list items in the same line */
     justify-content: center; /* Center navigation bar horizontally */
+    margin-bottom: 20px;
   }
   
   .navbar li {

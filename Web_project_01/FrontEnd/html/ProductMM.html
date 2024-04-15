@@ -28,11 +28,21 @@
     </header>
     
     <main>
+
+      <div class="header-actions">
+        <div class="Search">
+          <form action="/search" method="get">
+            <input type="text" placeholder="You Looking for ?" name="search" />
+            <button type="submit">🔍</button>
+          </form>
+        </div>
+        <button class="add-product-btn">+ Add Product</button>
+      </div>
+      
+      
+
         <section class="product-section">
-            
-            <div class="add-product-container">
-                <button class="add-product-btn">+ Add Product</button>
-            </div>
+      
        
                         <div class="product-grid">
                             <!-- Repeat this block for each product -->
@@ -61,36 +71,25 @@
                                 <textarea id="productDescription" name="productDescription" placeholder="Product Description" required></textarea>
                                 <!-- Product price -->
                                 <input type="number" id="productPrice" name="productPrice" placeholder="Price" required>
+                                <!-- Product ingredient -->
+                                <textarea id="productIngredient" name="productIngredient" placeholder="Ingredient" required></textarea>
+                                <!-- Product Size -->
+                                <input type="number" id="productSize" name="productSize" placeholder="Size" required>
+                                <!-- Product Gender -->
+                                <select id="productGender" name="productGender" required>
+                                  <option value="">Select Gender</option>
+                                  <option value="men">Men</option>
+                                  <option value="women">Women</option>
+                                  <option value="unisex">Unisex</option>
+                                </select> 
                                 <!-- Product image -->
-                                <input type="file" id="productImage" name="productImage" accept="image/*">
+                                <input type="text" id="editProductImage" name="productImage" placeholder="Image URL">
                                 <!-- Submit button -->
                                 <button type="submit" class="btn">Add Product</button>
                               </form>
                             </div>
                           </div>
-                                <script>
-                                    // Get the modal
-                                    var modal = document.getElementById('addProductModal');
-                                    // Get the button that opens the modal
-                                    var btn = document.getElementsByClassName('add-product-btn')[0];
-                                    // Get the <span> element that closes the modal
-                                    var span = document.getElementsByClassName('close')[0];
-                                    // When the user clicks the button, open the modal
-                                    btn.onclick = function() {
-                                    modal.style.display = "block";
-                                    }
-                                    // When the user clicks on <span> (x), close the modal
-                                    span.onclick = function() {
-                                    modal.style.display = "none";
-                                    }
-                                    // When the user clicks anywhere outside of the modal, close it
-                                    window.onclick = function(event) {
-                                    if (event.target == modal) {
-                                        modal.style.display = "none";
-                                    }
-                                    }
-                                    // TODO: Add form submission logic here, including image handling
-                                    </script>
+  
                             <div id="editProductModal" class="modal">
                                 <div class="modal-content">
                                   <span class="close-edit">&times;</span>
@@ -116,6 +115,6 @@
 
       </footer>
   
-    <script src="productmanagement.js"> </script>
+    <script src="../script/productmanagement.js"> </script>
   </body>
 </html>

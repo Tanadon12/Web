@@ -57,22 +57,27 @@ router.get("/random-products", (req, res) => {
 
 
 
-// This route serves the product page HTML
-// router.get("/product-page/:id",cors(), (req, res) => {
-//   console.log("Request for product page with ID: ", req.params.id);
-//   // You might need to adjust the path and file name according to your setup
-//   const query = `
-//     SELECT 
-//       p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand,
-//       p.Product_Gender, p.Product_image, p.Product_Ingredients, p.Product_Description,
-//       pa.Product_SKU, pa.Product_Size, pa.Product_Price
-//     FROM Products AS p
-//     JOIN Product_Attributes AS pa ON p.Product_ID = pa.Product_ID
-//     WHERE p.Product_ID = ?
-//   `;
-//   res.sendFile(path.join(__dirname, "html", "ProductPage.html"));
-// });
+router.get("/Perfume/:gender", (req, res) => {
+  const gender = req.params.gender; // Capture the 'gender' parameter from the URL path
+  console.log("fetch all product Unisex + " + gender)
+  let query = `
+    SELECT p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand, p.Product_Gender, p.Product_image, MIN(pa.Product_Price) AS Product_Price
+    FROM Products AS p
+    JOIN Product_Attributes AS pa ON p.Product_ID = pa.Product_ID
+    WHERE p.Product_Gender IN ('${gender}', 'Unisex')
+    GROUP BY p.Product_ID
+    ORDER BY p.Product_Name
+  `;
 
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.json(results); // Send back an array of product data
+    }
+  });
+});
 
 router.get("/product-details/:id", (req, res) => {
   // Extract the product ID from the request parameters

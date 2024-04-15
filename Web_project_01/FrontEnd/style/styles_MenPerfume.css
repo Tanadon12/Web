@@ -251,18 +251,11 @@ footer{
 /* Product  frame */
 .products-container {
   display: flex;
-  justify-content: center;
-}
-.product {
-  width: 25%;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-top: center;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  display: inline-block;          
+  justify-content: space-between;
+  padding: 30px;
+  margin: 0 80px;
+  flex-flow: row wrap;
+  align-items: stretch;
 }
 
 .frame-container  { 

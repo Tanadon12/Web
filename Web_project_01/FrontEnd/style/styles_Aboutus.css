@@ -161,3 +161,7 @@ main {
 body{
   font-family: "Rubik", sans-serif;
 }
+
+.link:hover {
+  color: grey;
+}

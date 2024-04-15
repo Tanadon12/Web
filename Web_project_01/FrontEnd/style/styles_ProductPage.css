@@ -31,12 +31,14 @@ header {
     color: white; /* Set text color to white */
     padding: 1px 10px;
   }
+
+  .navbar li a:hover {
+    color: #9066ab; 
+  }
+  
   
   body {
-    /* background-image: url("Material/BB.png"); */
-  
-    /* padding-top: 40px; */
-  
+    font-family: "Rubik", sans-serif;
     margin: 0;
     background-size: cover;
     background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */

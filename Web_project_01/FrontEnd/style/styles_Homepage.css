@@ -32,10 +32,11 @@ header li {
   padding: 1px 10px;
 }
 
-body {
-  /* background-image: url("Material/BB.png"); */
+.navbar li a:hover {
+  color: #9066ab; 
+}
 
-  /* padding-top: 40px; */
+body {
   font-family: "Rubik", sans-serif;
   margin: 0;
   background-size: cover;
@@ -82,7 +83,6 @@ section {
   flex: 1;
   display: flex;
   align-items: center;
-
   margin: 20px auto;
 }
 
@@ -129,15 +129,80 @@ section {
   margin-top: 20px; /* Adjust margin as needed */
 }
 
-.webpage {  
-  text-align: center; /* Center the content horizontally */
-  padding: 20px; /* Add more padding to create space above and below the image */
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  margin-top: 50px;
 }
 
-.webpage img {
-  max-width: 100%; /* Ensure the image doesn't exceed its container's width */
-  display: block;
-  margin: 20px auto;
+.slide img {
+  width: 100%; /* Will scale the image to the width of the container */
+  height: 300px; /* Will make the image's height exactly 300px */
+  object-fit: contain; /* Will make sure the image is fully visible */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.slide.active {
+  opacity: 1;
+  background-color: white;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  padding: 16px;
+  color: 200035;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  user-select: none;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+/* Dots container */
+.dots-container {
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
 }
 
 
@@ -232,6 +297,8 @@ footer {
 .link:hover {
   color: grey;
 }
+
+
 
 @media screen and (max-width: 1000px) {
   .perfume-container {

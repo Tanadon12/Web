@@ -11,9 +11,6 @@ function extractGoogleDriveId(url) {
   return fileIdMatch ? fileIdMatch[1] : null;
 }
 
-
-
-
 function fetchProductsForContainer(containerClass) {
   const backendBaseUrl = "http://localhost:8000";
   fetch("http://localhost:8000/random-products")
@@ -44,3 +41,66 @@ function fetchProductsForContainer(containerClass) {
   })
   .catch(error => console.error("Error fetching products:", error));
 }
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Auto slide every 5 seconds (5000 milliseconds)
+var slideInterval = setInterval(function() {
+  moveSlide(1); // Move to the next slide
+}, 3000);
+
+// Pause auto sliding when mouse enters the slideshow container
+document.querySelector('.slideshow-container').addEventListener('mouseenter', function() {
+  clearInterval(slideInterval); // Clear the auto slide interval
+});
+
+// Resume auto sliding when mouse leaves the slideshow container
+document.querySelector('.slideshow-container').addEventListener('mouseleave', function() {
+  slideInterval = setInterval(function() {
+    moveSlide(1); // Move to the next slide
+  }, 3000);
+});
+
+function moveSlide(n) {
+  clearInterval(slideInterval); // Clear the auto slide interval before manually moving the slide
+
+  showSlides(slideIndex += n);
+
+  // Restart auto sliding after 5 seconds
+  slideInterval = setInterval(function() {
+    moveSlide(1); // Move to the next slide
+  }, 3000);
+}
+
+function currentSlide(n) {
+  clearInterval(slideInterval); // Clear the auto slide interval before manually moving the slide
+
+  showSlides(slideIndex = n);
+
+  // Restart auto sliding after 5 seconds
+  slideInterval = setInterval(function() {
+    moveSlide(1); // Move to the next slide
+  }, 3000);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("slide");
+  var dots = document.getElementsByClassName("dot");
+  
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.opacity = "0";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  
+  slides[slideIndex-1].style.opacity = "1";  
+  dots[slideIndex-1].className += " active";
+}
+
+

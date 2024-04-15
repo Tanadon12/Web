@@ -113,7 +113,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed; /* Keeps the background image fixed while scrolling */
     background-position: center; /* Centers the background image */
-    font-family: 'Arial', sans-serif; /* Example font */
+    font-family: "Rubik", sans-serif;
     color: #333; /* Dark grey color for better readability */
     margin: 0;
     padding: 0;

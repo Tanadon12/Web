@@ -58,26 +58,70 @@ router.get("/random-products", (req, res) => {
 
 
 router.get("/Perfume/:gender", (req, res) => {
-  const gender = req.params.gender; // Capture the 'gender' parameter from the URL path
-  console.log("fetch all product Unisex + " + gender)
-  let query = `
+  const { gender } = req.params;
+  const limit = parseInt(req.query.limit, 10) || 36; // Default to 36 items if not specified
+  const page = parseInt(req.query.page, 10) || 1;
+  const offset = (page - 1) * limit;
+  const sort = req.query.sort || 'name';  // Default sort by name
+
+  let orderByClause;
+  switch (sort) {
+    case 'name':
+      orderByClause = 'ORDER BY p.Product_Name';
+      break;
+    case 'price-asc':
+      orderByClause = 'ORDER BY MIN(pa.Product_Price) ASC';
+      break;
+    case 'price-desc':
+      orderByClause = 'ORDER BY MIN(pa.Product_Price) DESC';
+      break;
+    default:
+      orderByClause = 'ORDER BY p.Product_Name';
+      break;
+  }
+  
+  // Query to get the total count of products
+  const countQuery = `
+    SELECT COUNT(DISTINCT Product_ID) AS total
+    FROM Products
+    WHERE Product_Gender IN (?, 'Unisex')
+  `;
+  
+  // Query to get the paginated products
+  const productQuery = `
     SELECT p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand, p.Product_Gender, p.Product_image, MIN(pa.Product_Price) AS Product_Price
     FROM Products AS p
     JOIN Product_Attributes AS pa ON p.Product_ID = pa.Product_ID
-    WHERE p.Product_Gender IN ('${gender}', 'Unisex')
+    WHERE p.Product_Gender IN (?, 'Unisex')
     GROUP BY p.Product_ID
-    ORDER BY p.Product_Name
+    ${orderByClause}
+    LIMIT ?, ?
   `;
 
-  connection.query(query, (err, results) => {
+  // Execute count query
+  connection.query(countQuery, [gender], (err, countResults) => {
     if (err) {
-      console.error('Error executing query:', err);
+      console.error('Error executing count query:', err);
       res.status(500).send('Internal Server Error');
-    } else {
-      res.json(results); // Send back an array of product data
+      return;
     }
+
+    const totalProducts = countResults[0].total;
+    
+    // Execute product query
+    connection.query(productQuery, [gender, offset, limit], (err, products) => {
+      if (err) {
+        console.error('Error executing product query:', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+
+      res.json({ products, totalProducts });
+    });
   });
 });
+
+
 
 router.get("/product-details/:id", (req, res) => {
   // Extract the product ID from the request parameters

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MenPerfume</title>
-    <link rel="stylesheet" href="../style/styles_MenPerfume.css" />
+    <link rel="stylesheet" href="../style/styles_Perfume.css" />
   </head>
   <body>
     <header>
@@ -57,7 +57,7 @@
         <ul class="navbar">
           <li><a href=" Men">Men Perfume</a></li>
           <li><a href="Female">Female Perfume</a></li>
-          <li><a href="#">Brand </a></li>
+          <li><a href="../Brand">Brand </a></li>
         </ul>
       </nav>
       <div class="separator"></div>
@@ -77,9 +77,12 @@
         <div class="form-group">
           <label for="Sort">SORT:</label>
           <select id="Sort" name="Sort">
-            <option value="">Featured</option>
+            <option value="name">Name</option>
+            <option value="price-asc">Price Low to High</option>
+            <option value="price-desc">Price High to Low</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="view">VIEW:</label>
           <select id="view" name="view">

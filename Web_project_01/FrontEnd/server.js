@@ -58,6 +58,12 @@ router.get("/AboutUs", (req, res) => {
   res.sendFile(path.join(__dirname, "html", "AboutUs.html"));
 });
 
+router.get("/Brand", (req, res) => {
+  console.log("Request at /AboutUs");
+  res.status(200);
+  res.sendFile(path.join(__dirname, "html", "Brand.html"));
+});
+
 router.get("/SignIn", (req, res) => {
   console.log("Request at /SignIn");
   res.status(200);

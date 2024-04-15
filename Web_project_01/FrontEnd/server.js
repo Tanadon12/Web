@@ -71,6 +71,23 @@ router.get("/product-page/:id",  (req, res) => {
   res.sendFile(path.join(__dirname, "html", "ProductPage.html"));
 });
 
+router.get("/Admin", (req, res) => {
+  console.log("Request at /Admin");
+  res.status(200);
+  res.sendFile(path.join(__dirname, "html", "Admin.html"));
+});
+
+router.get("/AccountMM", (req, res) => {
+  console.log("Request at /AccountMM");
+  res.status(200);
+  res.sendFile(path.join(__dirname, "html", "AccountMM.html"));
+});
+
+router.get("/ProductMM", (req, res) => {
+  console.log("Request at /ProductMM");
+  res.status(200);
+  res.sendFile(path.join(__dirname, "html", "ProductMM.html"));
+});
 
 const FRONT_END_PORT = 3000; // Use environment variable or default to 3000
 app.listen(process.env.FRONT_END_PORT || FRONT_END_PORT, () => {

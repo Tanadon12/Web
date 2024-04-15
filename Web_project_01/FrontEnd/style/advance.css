@@ -110,6 +110,11 @@ section {
   font-size: 20px; /* Apply larger font size */
 }
 
+.navbar li a:hover {
+  color: #9066ab; 
+}
+
+
 .separator {
   height: 1px;
   background-color: black;
@@ -129,7 +134,7 @@ section {
 }
 
 body {
-  background-color: #F4F4F4;
+  background-color: #FFFFFF;
   padding: 20px;
   font-family: "Rubik", sans-serif;
 }

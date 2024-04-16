@@ -40,81 +40,101 @@
       </div>
       
       
+       <!-- 4rd part  -->
+      <div class="randomProductContainer first"></div>
+      <!-- 4rd part  -->
+      <div class="frame-container">
+        <div class="form-group">
+          <label for="Sort">SORT:</label>
+          <select id="Sort" name="Sort">
+            <option value="name">Name</option>
+            <option value="price-asc">Price Low to High</option>
+            <option value="price-desc">Price High to Low</option>
+          </select>
+        </div>
 
-        <section class="product-section">
-      
-       
-                        <div class="product-grid">
-                            <!-- Repeat this block for each product -->
-                            <div class="product-card">
-                            <img src="https://www.yslbeautyth.com/dw/image/v2/BFZM_PRD/on/demandware.static/-/Sites-ysl-master-catalog/default/dw8497c6e6/images/fragrance-free/WW-50424YSL/WW-50424YSL-3614272648401-30ml-IMAGE1.jpg?sw=930&sh=930&sm=cut&sfrm=jpg&q=85" alt="Yves Saint Laurent" class="product-image">
-                            <h3>Yves Saint Laurent</h3>
-                            <p>LIBRE EAU DE PARFUM</p>
-                            <p class="price">฿33,300.00</p>
-                            <button class="edit-btn">EDIT</button>
-                            <button class="delete-btn">DELETE</button>
-                        </div>
+        <div class="form-group">
+          <label for="view">VIEW:</label>
+          <select id="view" name="view">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="36" selected>36</option>
+            <option value="50">50</option>
+          </select>
+        </div>
+        <div class="frame-group">
+          <div class="frame">1</div>
+          <div class="frame">2</div>
+          <div class="frame">3</div>
+          <div class="frame">></div>
+        </div>
+      </div>
 
-                        
-            
-        </section>
+      <div class="products-container">
+        <div class="perfume">Product 1
+        <button class="edit-btn">EDIT</button>
+        <button class="delete-btn">DELETE</button>
+        </div>
+      </div>
 
-                        <!-- Add Product Pop-up Form (hidden by default) -->
-                        <div id="addProductModal" class="modal">
-                            <div class="modal-content">
-                              <span class="close">&times;</span>
-                              <h2>Add New Product</h2>
-                              <form id="addProductForm">
-                                <!-- Product name -->
-                                <input type="text" id="productName" name="productName" placeholder="Product Name" required>
-                                <!-- Product description -->
-                                <textarea id="productDescription" name="productDescription" placeholder="Product Description" required></textarea>
-                                <!-- Product price -->
-                                <input type="number" id="productPrice" name="productPrice" placeholder="Price" required>
-                                <!-- Product ingredient -->
-                                <textarea id="productIngredient" name="productIngredient" placeholder="Ingredient" required></textarea>
-                                <!-- Product Size -->
-                                <input type="number" id="productSize" name="productSize" placeholder="Size" required>
-                                <!-- Product Gender -->
-                                <select id="productGender" name="productGender" required>
-                                  <option value="">Select Gender</option>
-                                  <option value="men">Men</option>
-                                  <option value="women">Women</option>
-                                  <option value="unisex">Unisex</option>
-                                </select> 
-                                <!-- Product image -->
-                                <input type="text" id="editProductImage" name="productImage" placeholder="Image URL">
-                                <!-- Submit button -->
-                                <button type="submit" class="btn">Add Product</button>
-                              </form>
-                            </div>
-                          </div>
   
-                            <div id="editProductModal" class="modal">
-                                <div class="modal-content">
-                                  <span class="close-edit">&times;</span>
-                                  <h2>Edit Product</h2>
-                                  <form id="editProductForm">
-                                    <!-- The product ID is hidden -->
-                                    <input type="hidden" id="editProductId" name="productId">
-                                    <!-- Product name -->
-                                    <input type="text" id="editProductName" name="productName" placeholder="Product Name" required>
-                                    <!-- Product description -->
-                                    <textarea id="editProductDescription" name="productDescription" placeholder="Product Description" required></textarea>
-                                    <!-- Product price -->
-                                    <input type="number" id="editProductPrice" name="productPrice" placeholder="Price" required>
-                                    <!-- Product image (assuming the image URL is stored and can be changed if needed) -->
-                                    <input type="text" id="editProductImage" name="productImage" placeholder="Image URL">
-                                    <!-- Submit button -->
-                                    <button type="submit" class="btn">Save Changes</button>
-                                  </form>
-                                </div>
-                              </div>    
+
+   <div id="addProductModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Product</h2>
+        <form id="addProductForm">
+            <!-- Product name -->
+            <input type="text" id="productName" name="productName" placeholder="Product Name" required>
+            <!-- Product description -->
+            <textarea id="productDescription" name="productDescription" placeholder="Product Description" required></textarea>
+            <!-- Product price -->
+            <input type="number" id="productPrice" name="productPrice" placeholder="Price" required>
+            <!-- Product ingredient -->
+            <textarea id="productIngredient" name="productIngredient" placeholder="Ingredient" required></textarea>
+            <!-- Product Size -->
+            <input type="number" id="productSize" name="productSize" placeholder="Size" required>
+            <!-- Product Gender -->
+            <select id="productGender" name="productGender" required>
+                <option value="">Select Gender</option>
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+                <option value="unisex">Unisex</option>
+            </select> 
+            <!-- Product image -->
+            <input type="text" id="editProductImage" name="productImage" placeholder="Image URL">
+            <!-- Submit button -->
+            <button type="submit" class="btn">Add Product</button>
+        </form>
+    </div>
+</div>
+
+<div id="editProductModal" class="modal">
+    <div class="modal-content">
+        <span class="close-edit">&times;</span>
+        <h2>Edit Product</h2>
+        <form id="editProductForm">
+            <!-- The product ID is hidden -->
+            <input type="hidden" id="editProductId" name="productId">
+            <!-- Product name -->
+            <input type="text" id="editProductName" name="productName" placeholder="Product Name" required>
+            <!-- Product description -->
+            <textarea id="editProductDescription" name="productDescription" placeholder="Product Description" required></textarea>
+            <!-- Product price -->
+            <input type="number" id="editProductPrice" name="productPrice" placeholder="Price" required>
+            <!-- Product image -->
+            <input type="text" id="editProductImage" name="productImage" placeholder="Image URL">
+            <!-- Submit button -->
+            <button type="submit" class="btn">Save Changes</button>
+        </form>
+    </div>
+</div>
+
       </main>
       <footer>
 
       </footer>
   
-    <script src="../script/productmanagement.js"> </script>
+    <script src="../script/productmanagement.js"></script>
   </body>
 </html>

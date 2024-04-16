@@ -58,12 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchAndDisplayProducts(1); // Initially load the first page
 
   // Add event listener to the view selector to reload products when the view changes
-  document.getElementById("view").addEventListener("change", function () {
+document.getElementById("view").addEventListener("change", function () {
     fetchAndDisplayProducts(1); // Always go back to the first page when view changes
-  });
+});
 
   // Event listeners for pagination
-  const paginationButtons = document.querySelectorAll(".frame");
+const paginationButtons = document.querySelectorAll(".frame");
   paginationButtons.forEach((button) => {
     button.addEventListener("click", function () {
       const pageNumber = this.textContent.trim();
@@ -133,8 +133,6 @@ function updateProducts(page = 1) {
     .catch((error) => console.error("Error loading products:", error));
 }
 
-
-
 function updatePaginationControls(totalPages, currentPage) {
   const pagination = document.querySelector(".frame-group");
   pagination.innerHTML = ""; // Clear existing pagination controls
@@ -149,4 +147,6 @@ function updatePaginationControls(totalPages, currentPage) {
 }
 
 // Listen for changes in the sort selection
-document.getElementById("Sort").addEventListener("change", () => updateProducts());
+document
+  .getElementById("Sort")
+  .addEventListener("change", () => updateProducts());

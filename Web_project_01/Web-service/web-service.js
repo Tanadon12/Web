@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const mysql = require("mysql2");
-const cors = require('cors');
+const cors = require("cors");
 
 const app = express();
 dotenv.config();
@@ -20,14 +20,13 @@ router.use(cors());
 
 app.use("/", router);
 
-
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 router.get("/random-products", (req, res) => {
   console.log("applied random-product");
   let gender = req.query.gender; // Capture the 'gender' parameter from the query string
-  console.log(gender)
+  console.log(gender);
 
   // Start building the SQL query
   let query = `
@@ -37,7 +36,7 @@ router.get("/random-products", (req, res) => {
   `;
 
   // If a gender was provided and is valid, add a WHERE clause to filter by gender
-  if (gender && ['Men', 'Woman'].includes(gender)) {
+  if (gender && ["Men", "Woman"].includes(gender)) {
     query += ` WHERE p.Product_Gender = '${gender}'`;
   }
 
@@ -55,64 +54,77 @@ router.get("/random-products", (req, res) => {
   });
 });
 
-
-
-router.get("/Perfume/:gender", (req, res) => {
+router.get("/Perfume/:gender?", (req, res) => {
   const { gender } = req.params;
-  const limit = parseInt(req.query.limit, 10) || 36; // Default to 36 items if not specified
+  if (!gender) {
+    gender = "Unisex"; // Default to Unisex if no gender specified
+  }
+
+  const limit = parseInt(req.query.limit, 10) || 36;
   const page = parseInt(req.query.page, 10) || 1;
   const offset = (page - 1) * limit;
-  const sort = req.query.sort || 'name';  // Default sort by name
+  const sort = req.query.sort || "name";
 
   let orderByClause;
   switch (sort) {
-    case 'name':
-      orderByClause = 'ORDER BY p.Product_Name';
+    case "name":
+      orderByClause = "ORDER BY p.Product_Name";
       break;
-    case 'price-asc':
-      orderByClause = 'ORDER BY MIN(pa.Product_Price) ASC';
+    case "price-asc":
+      orderByClause = "ORDER BY MIN(pa.Product_Price) ASC";
       break;
-    case 'price-desc':
-      orderByClause = 'ORDER BY MIN(pa.Product_Price) DESC';
+    case "price-desc":
+      orderByClause = "ORDER BY MIN(pa.Product_Price) DESC";
       break;
     default:
-      orderByClause = 'ORDER BY p.Product_Name';
+      orderByClause = "ORDER BY p.Product_Name";
       break;
   }
-  
-  // Query to get the total count of products
+
+  let genderFilter;
+  let queryParams;
+  if (gender === "Men" || gender === "Woman") {
+    genderFilter = `p.Product_Gender IN (?, 'Unisex')`;
+    queryParams = [gender, offset, limit]; // Correct order of parameters
+  } else {
+    genderFilter = `p.Product_Gender IN ('Men', 'Woman', 'Unisex')`;
+    queryParams = [offset, limit]; // Gender is not included
+  }
+  console.log("Gender:", gender);
+  console.log("Gender Filter:", genderFilter);
+  console.log("Query Parameters:", queryParams);
+
   const countQuery = `
-    SELECT COUNT(DISTINCT Product_ID) AS total
-    FROM Products
-    WHERE Product_Gender IN (?, 'Unisex')
+    SELECT COUNT(DISTINCT p.Product_ID) AS total
+    FROM Products AS p
+    WHERE ${genderFilter}
   `;
-  
-  // Query to get the paginated products
+
   const productQuery = `
     SELECT p.Product_ID, p.Product_Name, p.Product_Type, p.Product_Brand, p.Product_Gender, p.Product_image, MIN(pa.Product_Price) AS Product_Price
     FROM Products AS p
     JOIN Product_Attributes AS pa ON p.Product_ID = pa.Product_ID
-    WHERE p.Product_Gender IN (?, 'Unisex')
+    WHERE ${genderFilter}
     GROUP BY p.Product_ID
     ${orderByClause}
     LIMIT ?, ?
   `;
 
   // Execute count query
-  connection.query(countQuery, [gender], (err, countResults) => {
+  connection.query(countQuery, queryParams, (err, countResults) => {
     if (err) {
-      console.error('Error executing count query:', err);
-      res.status(500).send('Internal Server Error');
+      console.error("Error executing count query:", err);
+      res.status(500).send("Internal Server Error");
       return;
     }
 
     const totalProducts = countResults[0].total;
-    
+
     // Execute product query
-    connection.query(productQuery, [gender, offset, limit], (err, products) => {
+    connection.query(productQuery, queryParams, (err, products) => {
       if (err) {
-        console.error('Error executing product query:', err);
-        res.status(500).send('Internal Server Error');
+        console.error("Error executing product query:", err);
+        res.status(500).send("Internal Server Error");
         return;
       }
 
@@ -120,8 +132,6 @@ router.get("/Perfume/:gender", (req, res) => {
     });
   });
 });
-
-
 
 router.get("/product-details/:id", (req, res) => {
   // Extract the product ID from the request parameters
@@ -141,13 +151,13 @@ router.get("/product-details/:id", (req, res) => {
   // Execute the query with the product ID
   connection.query(query, [productId], (err, results) => {
     if (err) {
-      console.error('Error fetching product details:', err);
-      res.status(500).send('Internal Server Error');
+      console.error("Error fetching product details:", err);
+      res.status(500).send("Internal Server Error");
       return;
     }
 
     if (results.length === 0) {
-      res.status(404).send('Product not found');
+      res.status(404).send("Product not found");
       return;
     }
 
@@ -161,13 +171,13 @@ router.get("/product-details/:id", (req, res) => {
         Product_Gender: results[0].Product_Gender,
         Product_image: results[0].Product_image,
         Product_Ingredients: results[0].Product_Ingredients,
-        Product_Description: results[0].Product_Description
+        Product_Description: results[0].Product_Description,
       },
-      attributes: results.map(row => ({
+      attributes: results.map((row) => ({
         Product_SKU: row.Product_SKU,
         Product_Size: row.Product_Size,
-        Product_Price: row.Product_Price
-      }))
+        Product_Price: row.Product_Price,
+      })),
     };
 
     // Send back the formatted product details
@@ -178,10 +188,14 @@ router.get("/product-details/:id", (req, res) => {
 router.get("/product-search-options", (req, res) => {
   // Queries to fetch unique options for each dropdown
   const queries = {
-    brands: "SELECT DISTINCT Product_Brand FROM Products WHERE Product_Brand IS NOT NULL ORDER BY Product_Brand",
-    types: "SELECT DISTINCT Product_Type FROM Products WHERE Product_Type IS NOT NULL ORDER BY Product_Type",
-    genders: "SELECT DISTINCT Product_Gender FROM Products WHERE Product_Gender IS NOT NULL ORDER BY Product_Gender",
-    sizes: "SELECT DISTINCT Product_Size FROM Product_Attributes WHERE Product_Size IS NOT NULL ORDER BY Product_Size",
+    brands:
+      "SELECT DISTINCT Product_Brand FROM Products WHERE Product_Brand IS NOT NULL ORDER BY Product_Brand",
+    types:
+      "SELECT DISTINCT Product_Type FROM Products WHERE Product_Type IS NOT NULL ORDER BY Product_Type",
+    genders:
+      "SELECT DISTINCT Product_Gender FROM Products WHERE Product_Gender IS NOT NULL ORDER BY Product_Gender",
+    sizes:
+      "SELECT DISTINCT Product_Size FROM Product_Attributes WHERE Product_Size IS NOT NULL ORDER BY Product_Size",
   };
 
   // Object to hold the final results
@@ -196,7 +210,9 @@ router.get("/product-search-options", (req, res) => {
           reject(err);
         } else {
           // Map results based on the key, ensuring only non-null values are considered
-          searchOptions[key] = results.map(result => result[Object.keys(result)[0]]);
+          searchOptions[key] = results.map(
+            (result) => result[Object.keys(result)[0]]
+          );
           resolve();
         }
       });
@@ -205,16 +221,16 @@ router.get("/product-search-options", (req, res) => {
 
   // Execute all queries in parallel and return the combined result
   Promise.all([
-    fetchOptions('brands'),
-    fetchOptions('types'),
-    fetchOptions('genders'),
-    fetchOptions('sizes'),
+    fetchOptions("brands"),
+    fetchOptions("types"),
+    fetchOptions("genders"),
+    fetchOptions("sizes"),
   ])
-  .then(() => res.json(searchOptions))
-  .catch(err => {
-    console.error('Error fetching search options:', err);
-    res.status(500).send('Internal Server Error');
-  });
+    .then(() => res.json(searchOptions))
+    .catch((err) => {
+      console.error("Error fetching search options:", err);
+      res.status(500).send("Internal Server Error");
+    });
 });
 
 router.post("/searchRes", (req, res) => {
@@ -222,14 +238,18 @@ router.post("/searchRes", (req, res) => {
   let { size } = req.body; // Could be a comma-separated string or a single value
 
   // Correctly reference the hyphenated property names
-  let minPriceInput = parseFloat(req.body['min-price']);
-  let maxPriceInput = parseFloat(req.body['max-price']);
+  let minPriceInput = parseFloat(req.body["min-price"]);
+  let maxPriceInput = parseFloat(req.body["max-price"]);
 
   // Log the parsed prices to verify correctness
   console.log("Parsed Prices:", minPriceInput, maxPriceInput);
 
   if (isNaN(minPriceInput) || isNaN(maxPriceInput)) {
-    console.error('Invalid minPrice or maxPrice input:', req.body['min-price'], req.body['max-price']);
+    console.error(
+      "Invalid minPrice or maxPrice input:",
+      req.body["min-price"],
+      req.body["max-price"]
+    );
     res.status(400).send("Invalid price inputs");
     return;
   }
@@ -265,13 +285,14 @@ router.post("/searchRes", (req, res) => {
     params.push(gender);
   }
   if (size) {
-    size = typeof size === 'string' ? size.split(',').map(s => s.trim()) : [size];
-    conditions.push(`pa.Product_Size IN (${size.map(() => '?').join(',')})`);
+    size =
+      typeof size === "string" ? size.split(",").map((s) => s.trim()) : [size];
+    conditions.push(`pa.Product_Size IN (${size.map(() => "?").join(",")})`);
     params.push(...size);
   }
 
   if (conditions.length > 0) {
-    query += ` WHERE ${conditions.join(' AND ')}`;
+    query += ` WHERE ${conditions.join(" AND ")}`;
   }
 
   query += ` GROUP BY p.Product_ID`;
@@ -294,10 +315,6 @@ router.post("/searchRes", (req, res) => {
     }
   });
 });
-
-
-
-
 
 connection.connect((err) => {
   if (err) {

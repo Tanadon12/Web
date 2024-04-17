@@ -1,200 +1,103 @@
-// Get modals
-var addModal = document.getElementById('addProductModal');
-var editModal = document.getElementById('editProductModal');
 
-// Get buttons
-var addBtn = document.getElementsByClassName('add-product-btn')[0];
-var editBtns = document.getElementsByClassName('edit-btn');
-
-// Get close buttons
-var spanCloseAdd = document.getElementsByClassName('close')[0];
-var spanCloseEdit = document.getElementsByClassName('close-edit')[0];
-
-// Function to toggle modal display
-function toggleModal(modal, show) {
-  modal.style.display = show ? 'block' : 'none';
-}
-
-// Open the Add Product modal
-addBtn.onclick = function() {
-  toggleModal(addModal, true);
-};
-
-// Close the Add Product modal
-spanCloseAdd.onclick = function() {
-  toggleModal(addModal, false);
-};
-
-// Function to open the Edit Product modal
-function openEditModal() {
-  toggleModal(editModal, true);
-  // TODO: Populate form fields with product details
-}
-
-// Attach openEditModal to each edit button
-for (var i = 0; i < editBtns.length; i++) {
-  editBtns[i].onclick = openEditModal;
-}
-
-// Close the Edit Product modal
-spanCloseEdit.onclick = function() {
-  toggleModal(editModal, false);
-};
-
-// Close modals when clicking outside of them
-window.onclick = function(event) {
-  if (event.target == addModal || event.target == editModal) {
-    toggleModal(event.target, false);
-  }
-};
-
-// TODO: Add form submission logic here, including validation and image handling
-
-function updateProducts(page = 1) {
-  const viewCount = document.getElementById("view").value;
-  const sortOption = document.getElementById("Sort").value;
-
-  // Determine the base URL path and adjust gender parameter accordingly
-  const urlPath = window.location.pathname.split("/");
-  let gender = urlPath[2]; // Default to assuming gender is the third URL segment
-
-  // Check and adjust the gender based on known valid values
-  if (gender !== "Men" && gender !== "Woman") {
-    gender = "Unisex"; // Default to 'Unisex' if an unexpected value is found
-  }
-
-  // Construct the URL with proper query parameters
-  let fetchUrl = `http://localhost:8000/Perfume/${gender}?limit=${viewCount}&page=${page}&sort=${sortOption}`;
-
-  console.log("URL being requested:", fetchUrl); // This will show the full URL being requested
-
-  fetch(fetchUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const products = data.products;
-      const totalProducts = data.totalProducts;
-      const totalPages = Math.ceil(totalProducts / viewCount);
-
-      const container = document.querySelector(".products-container");
-      container.innerHTML = "";
-      products.forEach((product) => {
-        const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}`;
-        const productDiv = document.createElement("div");
-        productDiv.className = "perfume";
-        productDiv.innerHTML = `
-            <img src="${imageUrl}" alt="${product.Product_Name}" />
-            <h2>${product.Product_Name}</h2>
-            <p>By ${product.Product_Brand}</p>
-            <p class="price">Price : ${product.Product_Price} $</p>
-            <button class="edit-btn">EDIT</button>
-            <button class="delete-btn">DELETE</button>
-          `;
-        // Append event listener for the whole div
-        productDiv.addEventListener("click", (event) => {
-          if (!event.target.classList.contains('edit-btn') && !event.target.classList.contains('delete-btn')) {
-            window.location.href = `/product-page/${product.Product_ID}`;
-          }
-        });
-        container.appendChild(productDiv);
-      });
-
-      updatePaginationControls(totalPages, page);
-    })
-    .catch((error) => {
-      console.error("Error loading products:", error);
-    });
-}
-
-
-
-// Utility function to extract Google Drive ID from URL
-function extractGoogleDriveId(url) {
-  const fileIdMatch = url.match(/file\/d\/(.*?)\//);
-  return fileIdMatch ? fileIdMatch[1] : null;
-}
-
+// let editModal;
 document.addEventListener("DOMContentLoaded", function () {
-  fetchAndDisplayProducts(1); // Initially load the first page
+  // Initial setup
+  // editModal = document.getElementById('editProductModal');
 
-  // Add event listener to the view selector to reload products when the view changes
-document.getElementById("view").addEventListener("change", function () {
-    fetchAndDisplayProducts(1); // Always go back to the first page when view changes
+  updateProducts(1);
+  initializeEventListeners();
 });
+document.getElementById("Sort").addEventListener("change", () => updateProducts());
 
-  // Event listeners for pagination
-const paginationButtons = document.querySelectorAll(".frame");
-  paginationButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const pageNumber = this.textContent.trim();
-      if (pageNumber === ">") {
-        const currentPage = parseInt(
-          document.querySelector(".frame.active")?.textContent || "1",
-          10
-        );
-        fetchAndDisplayProducts(currentPage + 1);
-      } else {
-        fetchAndDisplayProducts(parseInt(pageNumber, 10));
-      }
-    });
-  });
-});
+function initializeEventListeners() {
+  const addBtn = document.querySelector('.add-product-btn');
+  const addModal = document.getElementById('addProductModal');
+  const spanCloseAdd = document.querySelector('.close');
+  const spanCloseEdit = document.querySelector('.close-edit');
+  const viewSelector = document.getElementById("view");
+  const paginationButtons = document.querySelectorAll(".frame");
 
-document.addEventListener("DOMContentLoaded", function () {
-  updateProducts(); // Initial load
+  // Modal open and close handlers
+  addBtn.onclick = () => toggleModal(addModal, true);
+  spanCloseAdd.onclick = () => toggleModal(addModal, false);
+  spanCloseEdit.onclick = () => toggleModal(editModal, false);
 
-  // Event listener for changing view
-  document.getElementById("view").addEventListener("change", updateProducts);
+  // Close modals when clicking outside of them
+  window.onclick = function(event) {
+    if (event.target === addModal || event.target === editModal) {
+      toggleModal(event.target, false);
+    }
+  };
 
+  // Change handlers
+  viewSelector.addEventListener("change", () => updateProducts(1));
+  
+  
   // Pagination controls
-  document.querySelectorAll(".frame").forEach((frame) => {
-    frame.addEventListener("click", function () {
-      const pageNum = this.innerText.trim();
-      updateProducts(pageNum); // Load specific page
+  paginationButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      const pageNumber = this.textContent.trim() === ">" ?
+        parseInt(document.querySelector(".frame.active")?.textContent || "1", 10) + 1 :
+        parseInt(pageNumber, 10);
+      updateProducts(pageNumber);
     });
   });
-});
+
+  
+}
 
 function updateProducts(page = 1) {
   const viewCount = document.getElementById("view").value;
   const sortOption = document.getElementById("Sort").value;
-  const gender = window.location.pathname.split("/")[2];
+  const gender = window.location.pathname.split("/")[2] || "Unisex"; // Assuming 'Unisex' as default
   const url = `http://localhost:8000/Perfume/${gender}?limit=${viewCount}&page=${page}&sort=${sortOption}`;
 
   fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      const products = data.products;
-      const totalProducts = data.totalProducts;
-      const totalPages = Math.ceil(totalProducts / viewCount);
-
-      const container = document.querySelector(".products-container");
-      container.innerHTML = "";
-      products.forEach((product) => {
-        const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(
-          product.Product_image
-        )}`;
-        const productDiv = document.createElement("div");
-        productDiv.className = "perfume";
-        productDiv.innerHTML = `
-            <img src="${imageUrl}" alt="${product.Product_Name}" />
-            <h2>${product.Product_Name}</h2>
-            <p>By ${product.Product_Brand}</p>
-            <p class="price">Price : ${product.Product_Price} $</p>
-          `;
-        productDiv.addEventListener("click", () => {
-          window.location.href = `/product-page/${product.Product_ID}`;
-        });
-        container.appendChild(productDiv);
-      });
-
-      updatePaginationControls(totalPages, page);
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok: ' + response.statusText);
+      }
+      return response.json();
     })
-    .catch((error) => console.error("Error loading products:", error));
+    .then(data => renderProducts(data))
+    .catch(error => console.error("Error loading products:", error));
+}
+
+function renderProducts(data) {
+  const container = document.querySelector(".products-container");
+  container.innerHTML = ""; // Clear previous content
+  const products = data.products;
+  const totalPages = Math.ceil(data.totalProducts / parseInt(document.getElementById("view").value));
+
+  products.forEach(product => {
+    const productDiv = document.createElement("div");
+    productDiv.className = "perfume";
+    productDiv.dataset.productId = product.Product_ID; // Store product ID for easy access
+    productDiv.innerHTML = `
+      <img src="https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}" alt="${product.Product_Name}" />
+      <h2>${product.Product_Name}</h2>
+      <p>By ${product.Product_Brand}</p>
+      <p class="price">Price : ${product.Product_Price} $</p>
+      <button class="edit-btn">EDIT</button>
+      <button class="delete-btn">DELETE</button>
+    `;
+    container.appendChild(productDiv);
+    
+    // Attach event listener to each edit button within the productDiv
+    container.addEventListener("click", function(event) {
+      const target = event.target;
+      if (target.classList.contains('edit-btn')) {
+        openEditModal(product.Product_ID);
+      } else if (target.classList.contains('delete-btn')) {
+        // Handle delete (additional code needed here if you have delete functionality)
+      } else if (!target.classList.contains('edit-btn') && !target.classList.contains('delete-btn')) {
+        const productId = target.closest('.perfume').dataset.productId;
+        window.location.href = `/product-page/${productId}`;
+      }
+    });
+  });
+
+  updatePaginationControls(totalPages, parseInt(document.getElementById("view").value));
 }
 
 function updatePaginationControls(totalPages, currentPage) {
@@ -210,23 +113,54 @@ function updatePaginationControls(totalPages, currentPage) {
   }
 }
 
-// Listen for changes in the sort selection
-document.addEventListener("DOMContentLoaded", function () {
-  updateProducts(1);  // Consider renaming to ensure it's the correct function being called
-  document.getElementById("view").addEventListener("change", function () {
-    updateProducts(1);
-  });
-  // Setup pagination and sort event listeners here too
-});
+function toggleModal(modal, show) {
+  modal.style.display = show ? 'block' : 'none';
+}
 
-document.addEventListener("DOMContentLoaded", function() {
-  const container = document.querySelector(".products-container");
-  container.addEventListener("click", function(event) {
-    if (event.target.classList.contains('edit-btn')) {
-      // Handle edit
-      openEditModal();
-    } else if (event.target.classList.contains('delete-btn')) {
-      // Handle delete
-    }
-  });
-});
+function openEditModal(productId) {
+  editModal = document.getElementById('editProductModal');
+  console.log(productId)
+  const url = `http://localhost:8000/product-details/${productId}`;
+  console.log('Fetching details from:', url);  // This will help verify the URL is correct
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Failed to fetch product details: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("Received product details:", data);  // Log to see what's received
+      const { product, attributes } = data;
+      
+      // Populate the product details in form fields
+      document.getElementById('editProductId').value = product.Product_ID;
+      document.getElementById('editProductName').value = product.Product_Name;
+      document.getElementById('editProductDescription').value = product.Product_Description;
+      document.getElementById('editProductIngredient').value = product.Product_Ingredients;
+      document.getElementById('editProductImage').value = product.Product_image;
+
+      // Handle attributes - assuming attributes could have multiple entries
+      // You would need to adjust this if you manage multiple attributes like different sizes/prices
+      if (attributes && attributes.length > 0) {
+        document.getElementById('editProductPrice').value = attributes[0].Product_Price; // Just as an example
+        // If handling multiple sizes/prices, you might need to build UI elements dynamically here
+      }
+
+      // Show the modal
+      toggleModal(editModal, true);
+    })
+    .catch(error => {
+      console.error('Error loading product details:', error);
+      alert(`Failed to load product details: ${error.message}`);
+    });
+}
+
+
+// Utility function to extract Google Drive ID from URL
+function extractGoogleDriveId(url) {
+  const fileIdMatch = url.match(/file\/d\/(.*?)\//);
+  return fileIdMatch ? fileIdMatch[1] : null;
+}
+

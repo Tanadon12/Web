@@ -1,19 +1,52 @@
-
-// let editModal;
+let editProductForm = document.getElementById("editProductForm");
 document.addEventListener("DOMContentLoaded", function () {
   // Initial setup
-  // editModal = document.getElementById('editProductModal');
-
+  
+  const editProductForm = document.getElementById("editProductForm");
+  editProductForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const formData = new FormData(editProductForm);
+    const productId = document.getElementById("editProductId").value;
+    submitForm(productId, formData);
+  });
   updateProducts(1);
   initializeEventListeners();
 });
-document.getElementById("Sort").addEventListener("change", () => updateProducts());
+
+function submitForm(productId, formData) {
+  console.log("Submitting form for product ID:", productId);
+  fetch(`http://localhost:8000/editproduct/${productId}`, {
+    method: "PUT",
+    body: formData,
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    alert("Product updated successfully!");
+    console.log("Success:", data);
+    toggleModal(editModal, false);
+    updateProducts();
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+    alert("Failed to update product: " + error.message);
+  });
+}
+
+
+document
+  .getElementById("Sort")
+  .addEventListener("change", () => updateProducts());
 
 function initializeEventListeners() {
-  const addBtn = document.querySelector('.add-product-btn');
-  const addModal = document.getElementById('addProductModal');
-  const spanCloseAdd = document.querySelector('.close');
-  const spanCloseEdit = document.querySelector('.close-edit');
+  const addBtn = document.querySelector(".add-product-btn");
+  const addModal = document.getElementById("addProductModal");
+  const spanCloseAdd = document.querySelector(".close");
+  const spanCloseEdit = document.querySelector(".close-edit");
   const viewSelector = document.getElementById("view");
   const paginationButtons = document.querySelectorAll(".frame");
 
@@ -23,7 +56,7 @@ function initializeEventListeners() {
   spanCloseEdit.onclick = () => toggleModal(editModal, false);
 
   // Close modals when clicking outside of them
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target === addModal || event.target === editModal) {
       toggleModal(event.target, false);
     }
@@ -31,19 +64,20 @@ function initializeEventListeners() {
 
   // Change handlers
   viewSelector.addEventListener("change", () => updateProducts(1));
-  
-  
+
   // Pagination controls
-  paginationButtons.forEach(button => {
+  paginationButtons.forEach((button) => {
     button.addEventListener("click", function () {
-      const pageNumber = this.textContent.trim() === ">" ?
-        parseInt(document.querySelector(".frame.active")?.textContent || "1", 10) + 1 :
-        parseInt(pageNumber, 10);
+      const pageNumber =
+        this.textContent.trim() === ">"
+          ? parseInt(
+              document.querySelector(".frame.active")?.textContent || "1",
+              10
+            ) + 1
+          : parseInt(pageNumber, 10);
       updateProducts(pageNumber);
     });
   });
-
-  
 }
 
 function updateProducts(page = 1) {
@@ -53,51 +87,62 @@ function updateProducts(page = 1) {
   const url = `http://localhost:8000/Perfume/${gender}?limit=${viewCount}&page=${page}&sort=${sortOption}`;
 
   fetch(url)
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not ok: ' + response.statusText);
+        throw new Error("Network response was not ok: " + response.statusText);
       }
       return response.json();
     })
-    .then(data => renderProducts(data))
-    .catch(error => console.error("Error loading products:", error));
+    .then((data) => renderProducts(data))
+    .catch((error) => console.error("Error loading products:", error));
 }
 
 function renderProducts(data) {
   const container = document.querySelector(".products-container");
   container.innerHTML = ""; // Clear previous content
   const products = data.products;
-  const totalPages = Math.ceil(data.totalProducts / parseInt(document.getElementById("view").value));
+  const totalPages = Math.ceil(
+    data.totalProducts / parseInt(document.getElementById("view").value)
+  );
 
-  products.forEach(product => {
+  products.forEach((product) => {
     const productDiv = document.createElement("div");
     productDiv.className = "perfume";
     productDiv.dataset.productId = product.Product_ID; // Store product ID for easy access
     productDiv.innerHTML = `
-      <img src="https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}" alt="${product.Product_Name}" />
+      <img src="https://drive.google.com/thumbnail?id=${extractGoogleDriveId(
+        product.Product_image
+      )}" alt="${product.Product_Name}" />
       <h2>${product.Product_Name}</h2>
       <p>By ${product.Product_Brand}</p>
       <p class="price">Price : ${product.Product_Price} $</p>
       <button class="edit-btn">EDIT</button>
       <button class="delete-btn">DELETE</button>
     `;
-    container.appendChild(productDiv);
-    
-    // Attach event listener to each edit button within the productDiv
-    container.addEventListener("click", function(event) {
+
+    productDiv.addEventListener("click", function (event) {
       const target = event.target;
-      if (target.classList.contains('edit-btn')) {
+      if (target.classList.contains("edit-btn")) {
         openEditModal(product.Product_ID);
-      } else if (target.classList.contains('delete-btn')) {
+      } else if (target.classList.contains("delete-btn")) {
         // Handle delete (additional code needed here if you have delete functionality)
-      } else if (!target.classList.contains('edit-btn') && !target.classList.contains('delete-btn')) {
-        const productId = target.closest('.perfume').dataset.productId;
+      } else if (
+        !target.classList.contains("edit-btn") &&
+        !target.classList.contains("delete-btn")
+      ) {
+        const productId = target.closest(".perfume").dataset.productId;
         window.location.href = `/product-page/${productId}`;
       }
     });
+    container.appendChild(productDiv);
+
+    // Attach event listener to each edit button within the productDiv
   });
 
-  updatePaginationControls(totalPages, parseInt(document.getElementById("view").value));
+  updatePaginationControls(
+    totalPages,
+    parseInt(document.getElementById("view").value)
+  );
 }
 
 function updatePaginationControls(totalPages, currentPage) {
@@ -114,53 +159,68 @@ function updatePaginationControls(totalPages, currentPage) {
 }
 
 function toggleModal(modal, show) {
-  modal.style.display = show ? 'block' : 'none';
+  modal.style.display = show ? "block" : "none";
 }
 
 function openEditModal(productId) {
-  editModal = document.getElementById('editProductModal');
-  console.log(productId)
+  editModal = document.getElementById("editProductModal");
+  // console.log(productId);
   const url = `http://localhost:8000/product-details/${productId}`;
-  console.log('Fetching details from:', url);  // This will help verify the URL is correct
+  console.log("Fetching details from:", url); // This will help verify the URL is correct
 
   fetch(url)
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error(`Failed to fetch product details: ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch product details: ${response.statusText}`
+        );
       }
       return response.json();
     })
-    .then(data => {
-      console.log("Received product details:", data);  // Log to see what's received
+    .then((data) => {
+      console.log("Received product details:", data); // Log to see what's received
       const { product, attributes } = data;
-      
       // Populate the product details in form fields
-      document.getElementById('editProductId').value = product.Product_ID;
-      document.getElementById('editProductName').value = product.Product_Name;
-      document.getElementById('editProductDescription').value = product.Product_Description;
-      document.getElementById('editProductIngredient').value = product.Product_Ingredients;
-      document.getElementById('editProductImage').value = product.Product_image;
+      document.getElementById("editProductId").value = product.Product_ID;
+      document.getElementById("editProductName").value = product.Product_Name;
+      document.getElementById("editProductDescription").value =
+        product.Product_Description;
+      document.getElementById("editProductIngredient").value =
+        product.Product_Ingredients;
+      // document.getElementById("EditProductImage2").value = product.Product_image;
 
       // Handle attributes - assuming attributes could have multiple entries
       // You would need to adjust this if you manage multiple attributes like different sizes/prices
-      if (attributes && attributes.length > 0) {
-        document.getElementById('editProductPrice').value = attributes[0].Product_Price; // Just as an example
-        // If handling multiple sizes/prices, you might need to build UI elements dynamically here
-      }
+      let sizeSelect = document.getElementById("editProductSize");
+      sizeSelect.innerHTML = attributes
+        .map(
+          (attr) =>
+            `<option value="${attr.Product_Size}" data-price="${attr.Product_Price}">${attr.Product_Size} ml</option>`
+        )
+        .join("");
 
+      // Initialize price with the first attribute
+      document.getElementById("editProductPrice").value =
+        attributes[0].Product_Price;
+
+      sizeSelect.addEventListener("change", () => {
+        let selectedPrice =
+          sizeSelect.options[sizeSelect.selectedIndex].getAttribute(
+            "data-price"
+          );
+        document.getElementById("editProductPrice").value = selectedPrice;
+      });
       // Show the modal
       toggleModal(editModal, true);
     })
-    .catch(error => {
-      console.error('Error loading product details:', error);
+    .catch((error) => {
+      console.error("Error loading product details:", error);
       alert(`Failed to load product details: ${error.message}`);
     });
 }
-
 
 // Utility function to extract Google Drive ID from URL
 function extractGoogleDriveId(url) {
   const fileIdMatch = url.match(/file\/d\/(.*?)\//);
   return fileIdMatch ? fileIdMatch[1] : null;
 }
-

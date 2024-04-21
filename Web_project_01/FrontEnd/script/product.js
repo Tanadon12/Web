@@ -5,14 +5,16 @@ const backendBaseUrl = 'http://localhost:8000';
 document.addEventListener('DOMContentLoaded', function() {
     const productId = window.location.pathname.split('/').pop();
     fetchProductDetails(productId);
-  });
+  }); 
   
   function fetchProductDetails(productId) {
+    
     fetch(`http://localhost:8000/product-details/${productId}`)
+    
       .then((response) => response.json())
       .then((productDetails) => {
         const { product, attributes } = productDetails;
-  
+        console.log("open product ID" + productId);
         // Populate the page with product info
         document.getElementById("productName").textContent = product.Product_Name;
         document.getElementById("productBrand").textContent = 'Brand: ' + product.Product_Brand;

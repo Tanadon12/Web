@@ -5,22 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advance-Search</title>
     <link rel="stylesheet" href="../style/advance.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
       <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      integrity="sha512-..."
-      crossorigin="anonymous"
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-..."
+        crossorigin="anonymous"
       />
       <!-- 1st top part -->
       <div class="nav-login">
         <ul>
-          <li><a class="link" href="MyAccount"> <i class="fa fa-user"></i>  My account </a></li>
+          <li>
+            <a class="link" href="MyAccount">
+              <i class="fa fa-user"></i> My account
+            </a>
+          </li>
           <li><a href="SignIn">Sign In</a></li>
         </ul>
       </div>
@@ -30,12 +37,16 @@
       <!-- 2nd part -->
       <section class="section2">
         <div class="Logo">
-          <a href="Homepage"><img  src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N" /> </a>
+          <a href="Homepage"
+            ><img
+              src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N"
+            />
+          </a>
           <!-- <h1> E N I G M A </h1> -->
         </div>
 
         <div class="Search">
-          <form action="/search" method="POST">
+          <form action="/AdvanceSearch" method="POST">
             <input type="text" placeholder="You Looking for ?" name="search" />
             <button type="submit">🔍</button>
           </form>
@@ -58,66 +69,78 @@
 
       <div class="advanced-search-container">
         <div class="search-title">ADVANCE SEARCH</div>
-        <form class="search-form">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name">
-            </div>
-            <div class="form-group">
-                <label for="type">Type</label>
-                <select id="type" name="type">
-                    <option value="">Select Type</option>
-                   
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="brand">Brand</label>
-                <select id="brand" name="brand">
-                  <option value="">Select Brand</option>
-                  
-              </select>
-            </div>
+        <form method="POST" class="search-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" />
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" name="type">
+              <option value="">Select Type</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="brand">Brand</label>
+            <select id="brand" name="brand">
+              <option value="">Select Brand</option>
+            </select>
+          </div>
 
-            <div class="form-group">
-                <label for="gender">Gender </label>
-                <select id="gender" name="gender">
-                    <option value="">Select Gender</option>
-                    
-                </select>
-            </div>
+          <div class="form-group">
+            <label for="gender">Gender </label>
+            <select id="gender" name="gender">
+              <option value="">Select Gender</option>
+            </select>
+          </div>
 
-            <div class="form-group">
-              <label>Size</label>
-              <div class="size-options">
-                
-              </div>
-            </div>
-            
-            <div class="price-input-container">
-              <label for="min-price">Min Price (฿)</label>
-              <input type="number" id="min-price" name="min-price" value="0" min="0" max="60000" oninput="validatePriceRange()" />
-              <small id="min-price-warning" style="display:none; color: red;">Minimum price cannot be less than 0.</small>
-              
-              <label for="max-price">Max Price (฿)</label>
-              <input type="number" id="max-price" name="max-price" value="60000" min="0" max="60000" oninput="validatePriceRange()" />
-              <small id="max-price-warning" style="display:none; color: red;">Maximum price cannot exceed 60,000.</small>
-            </div>
-            
-            
-            
-            
-            <div class="form-buttons">
-                <button type="reset" class="button-clear">Clear</button>
-                <button type="submit" class="button-search">Search</button>
-            </div>
+          <div class="form-group">
+            <label>Size</label>
+            <div class="size-options"></div>
+          </div>
+
+          <div class="price-input-container">
+            <label for="min-price">Min Price (฿)</label>
+            <input
+              type="number"
+              id="min-price"
+              name="min-price"
+              value="0"
+              min="0"
+              max="60000"
+              oninput="validatePriceRange()"
+            />
+            <small id="min-price-warning" style="display: none; color: red"
+              >Minimum price cannot be less than 0.</small
+            >
+
+            <label for="max-price">Max Price (฿)</label>
+            <input
+              type="number"
+              id="max-price"
+              name="max-price"
+              value="60000"
+              min="0"
+              max="60000"
+              oninput="validatePriceRange()"
+            />
+            <small id="max-price-warning" style="display: none; color: red"
+              >Maximum price cannot exceed 60,000.</small
+            >
+          </div>
+
+          <div class="form-buttons">
+            <button type="reset" class="button-clear">Clear</button>
+            <button type="submit" class="button-search">Search</button>
+          </div>
         </form>
-    </div>
-     <div class="ProductSearchResult"></div>
+      </div>
+      <div class="ProductSearchResult"></div>
     </main>
     <footer>
-      <a id ="About" href ="AboutUs.html">About us </a>
+      <a id="About" href="AboutUs.html">About us </a>
     </footer>
     <script src="../script/advancesearch.js"></script>
+  
   </body>
-
 </html>

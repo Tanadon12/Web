@@ -18,15 +18,23 @@ app.use("/script", express.static(path.join(__dirname, "script")));
 
 
 
-console.log(path.join(__dirname, "style"));
+// console.log(path.join(__dirname, "style"));
 router.get("/", (req, res) => {
   console.log("Request at /");
   res.status(200);
   res.sendFile(path.join(__dirname, "html", "Homepage.html"));
 });
 
+
+
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
+
+router.get("/SearchRes/:name", (req, res) => {
+  console.log("Request at /SearchRes");
+  res.status(200);
+  res.sendFile(path.join(__dirname, "html", "SearchRes.html"));
+});
 
 router.get("/Homepage", (req, res) => {
   console.log("Request at /Homepage");

@@ -31,8 +31,8 @@
 
       <div class="header-actions">
         <div class="Search">
-          <form action="/search" method="get">
-            <input type="text" placeholder="You Looking for ?" name="search" />
+          <form action="/SearchRes" method="get">
+            <input id=search type="text" placeholder="You Looking for ?" name="search" />
             <button type="submit">🔍</button>
           </form>
         </div>
@@ -40,8 +40,7 @@
       </div>
       
       
-       <!-- 4rd part  -->
-      <div class="randomProductContainer first"></div>
+   
       <!-- 4rd part  -->
       <div class="frame-container">
         <div class="form-group">
@@ -113,20 +112,31 @@
     <div class="modal-content">
         <span class="close-edit">&times;</span>
         <h2>Edit Product</h2>
-        <form id="editProductForm">
-            <!-- The product ID is hidden -->
+        <form id="editProductForm"  enctype="multipart/form-data">
             <input type="hidden" id="editProductId" name="productId">
-            <!-- Product name -->
+
+            <label for="editProductName"></label>
             <input type="text" id="editProductName" name="productName" placeholder="Product Name" required>
-            <!-- Product description -->
+
+            <label for="editProductDescription"></label>
             <textarea id="editProductDescription" name="productDescription" placeholder="Product Description" required></textarea>
-            <!-- Product ingredient -->
-            <textarea id="editProductIngredient" name="productIngredient" placeholder="Ingredient" required></textarea>
-            <!-- Product price -->
+
+            <label for="editProductIngredient"></label>
+            <textarea id="editProductIngredient" name="productIngredient" placeholder="Ingredients" required></textarea>
+            
+            <label for="EditProductImage2"></label>
+            <input type="file" id="EditProductImage2" name="productImageFile" accept=".jpg, .jpeg, .png">
+            <!-- <label for="editProductImage"></label>
+            <textarea id="editProductImage" name="productImage" placeholder="Image URL" required></textarea> -->
+
+            <label for="editProductSize"></label>
+            <select id="editProductSize" name="productSize">
+                <!-- Size options will be populated here -->
+            </select>
+
+            <label for="editProductPrice"></label>
             <input type="number" id="editProductPrice" name="productPrice" placeholder="Price" required>
-            <!-- Product image -->
-            <input type="text" id="editProductImage" name="productImage" placeholder="Image URL">
-            <!-- Submit button -->
+
             <button type="submit" class="btn">Save Changes</button>
         </form>
     </div>

@@ -1,10 +1,12 @@
 // Initialize event listeners on DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function () {
+   
   validatePriceRange();
   initializeSizeCheckboxes();
   initializeFormReset();
   initializeProductSearchOptions();
   initializeSearchFormSubmission();
+  
 });
 
 // Price range validation function
@@ -133,38 +135,33 @@ function populateSizes(sizes) {
 function initializeSearchFormSubmission() {
   const form = document.querySelector(".search-form");
   form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    performSearch();
+      event.preventDefault();
+      performSearch();
   });
+}
 
-  function performSearch() {
-    const formData = new FormData(form);
-    const searchParams = new URLSearchParams();
-    for (const pair of formData) {
-      let value = pair[1];
-      if (pair[0] === "min-price" && value.trim() === "") {
-        value = "0"; // Default min price
-      }
-      if (pair[0] === "max-price" && value.trim() === "") {
-        value = "60000"; // Default max price
-      }
+function performSearch() {
+  const formData = new FormData(document.querySelector(".search-form"));
+  const searchParams = new URLSearchParams();
+  for (const pair of formData) {
       searchParams.append(pair[0], pair[1]);
-    }
+  }
 
-    fetch("http://localhost:8000/searchRes", {
+  fetch("http://localhost:8000/searchRes", {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: searchParams,
-    })
-      .then((response) => response.json())
-      .then((products) => {
-        displayProducts(products);
-      })
-      .catch((error) => console.error("Error fetching search results:", error));
-  }
+      body: searchParams.toString(),
+  })
+  .then((response) => response.json())
+  .then((products) => {
+      displayProducts(products);
+  })
+  .catch((error) => console.error("Error fetching search results:", error));
 }
+
+
 
 function displayProducts(products) {
   const container = document.querySelector(".ProductSearchResult");

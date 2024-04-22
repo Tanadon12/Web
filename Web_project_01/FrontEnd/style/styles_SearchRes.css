@@ -284,6 +284,10 @@ footer {
   margin-bottom: 20px;
 }
 
+article{
+  text-align: center;
+  font-weight: bold;
+}
 
 @media screen and (max-width: 1000px) {
   .products-container {

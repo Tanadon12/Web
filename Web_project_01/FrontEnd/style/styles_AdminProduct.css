@@ -299,13 +299,14 @@ textarea,
     list-style-type: none;
     padding: 0;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-top: 35px;
+    margin-bottom: 60px;
   }
   
   .frame {
     cursor: pointer;
     padding: 5px 10px;
-    margin: 0 5px;
+    margin: 5px;
     background-color: #f0f0f0;
     border: 1px solid #dcdcdc;
     border-radius: 5px;

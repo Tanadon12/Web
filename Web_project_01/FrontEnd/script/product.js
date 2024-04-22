@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("productIngredient").textContent = 'Ingredients: ' + product.Product_Ingredients;
         document.getElementById("productType").textContent = 'Type: ' + product.Product_Type;
         document.getElementById("productGender").textContent = 'Gender: ' + product.Product_Gender;
-        
+        document.getElementById("productLink").textContent = 'Link: ' + product.Product_image;
         const imageUrl = `https://drive.google.com/thumbnail?id=${extractGoogleDriveId(product.Product_image)}`;
         document.getElementById("productImage").src = imageUrl;
         

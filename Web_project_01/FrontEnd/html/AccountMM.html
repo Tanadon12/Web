@@ -14,9 +14,13 @@
           <li><a href="SignIn">LOGOUT</a></li>
         </ul>
       </div>
-     
+
       <div class="Logo">
-        <a href="Homepage"><img  src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N" /> </a>
+        <a href="Homepage"
+          ><img
+            src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N"
+          />
+        </a>
       </div>
       <nav>
         <ul class="navbar">
@@ -26,47 +30,22 @@
         </ul>
       </nav>
     </header>
-      
+
     <main class="account-main">
-        <div class="account-container">
-          <div class="account-header">
-            <h2>Account list</h2>
-            <button class="add-account-btn">+ Add Account</button>
-          </div>
-    
-          <!-- Repeat this block for each account -->
-          <div class="account-item">
-            <div class="account-info">
-              <p>Username <span>Admin0001</span></p>
-              <p>Password <span>•••••••</span></p>
-              <p>Firstname <span>Jimmy</span></p>
-              <p>Lastname <span>Gonzalez</span></p>
-              <p>Address <span>123, Supanika road, Gotham City, Floptropica</span></p>
-              <p>Email <span>jimmygonzalez@gmail.com</span></p>
-            </div>
-            <div class="account-actions">
-                <button class="edit-account-btn">EDIT</button>
-                <button class="delete-account-btn">DELETE</button>
-              </div>
-          </div>
-          <!-- ... other account items -->
-          <div class="account-item">
-            <div class="account-info">
-              <p>Username <span>Admin0002</span></p>
-              <p>Password <span>•••••••</span></p>
-              <p>Firstname <span>Jimmy2</span></p>
-              <p>Lastname <span>Gonzahee</span></p>
-              <p>Address <span>666, Supod road, Gothee City, LavaSpoon</span></p>
-              <p>Email <span>jimmygonzaHEE@outlook.ru</span></p>
-            </div>
-            <div class="account-actions">
-                <button class="edit-account-btn">EDIT</button>
-                <button class="delete-account-btn">DELETE</button>
-              </div>
+      <div class="account-container">
+        <div class="account-header">
+          <h2>Account list</h2>
+          <button class="add-account-btn">+ Add Account</button>
+        </div>
+
+        <div class="account-item">
+          <div id="accountsContainer">
+            <!-- Dynamic account items will be added here -->
           </div>
         </div>
-      </main>
-  
-    
+      </div>
+      <!-- ... other account items -->
+    </main>
   </body>
+  <script src="../script/accountmanagement.js"></script>
 </html>

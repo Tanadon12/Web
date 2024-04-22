@@ -13,11 +13,12 @@
 
     .add-product-container {
         position: static; /* Resets to normal document flow on smaller screens */
-        text-align: center; /* Centers the button */
+        text-align: right; /* Centers the button */
         padding: 10px 0; /* Adds vertical padding for spacing */
 
     }
 }
+
 
 body {
     margin: 0; /* Reset default margin */
@@ -29,6 +30,7 @@ body {
     background-position: center; /* Centers the background image */
     
   }
+
   
   header {
     margin: 0; /* Reset margin */
@@ -317,7 +319,6 @@ textarea,
   .Search button:hover {
     background-color: #130020; /* Darker shade for hover */
   }
-
 
   .frame-group {
     display: flex;

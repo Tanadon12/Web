@@ -5,34 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HomePage</title>
     <link rel="stylesheet" href="../style/styles_SignIn.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   </head>
   <body>
-
     <header>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-..."
-        crossorigin="anonymous"
-      />
-      <!-- 1st top part -->
       <div class="nav-login">
         <ul>
-          <li>
-            <a class="link" href="../Admin">
-              <i class="fa fa-user"></i> My account
-            </a>
-          </li>
-          <li><a class="link" href="../SignIn">Sign In</a></li>
+          <li><a href="MyAccount">👨🏻‍💼My account</a></li>
+          <li><a href="SignIn">Sign In</a></li>
         </ul>
       </div>
-    </header>
-
       
-
+    </header>
     <main>
     <div class="Logo">
         <a href="Homepage"><img  src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N" /></a>
@@ -40,8 +23,8 @@
     <form name="Login" action="/submit_login" method="post">
       <div class="login-container">
         <div class="login-title">
-          <h1 id = "text-l">LOGIN</h1>
-  
+          <h1>Login</h1>
+          <h3>E N I G M A.</h3>
         </div>
         <label for="username"></label><br />
         <input
@@ -67,14 +50,10 @@
           Remember me </label
         ><br />
         <input type="submit" value="LOG IN" />
+        <p><a href="#">Forgot Password?</a></p>
       </div>
     </form>
     </main>
-
-    <footer>
-
-    </footer>
-
     <script src="../script/SignInScript.js"></script>
   </body>
 </html>

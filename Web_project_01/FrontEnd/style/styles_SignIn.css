@@ -1,14 +1,9 @@
 header {
-  margin: 0;
+  margin: 0px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
- position: fixed; 
-  /* margin: 0; */
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding-bottom: 10px;
+  padding-bottom: 50px;
 }
 
 header li {
@@ -32,18 +27,12 @@ header li {
   padding: 1px 10px;
 }
 
-.link:hover {
-  color: grey;
-}
-
-
 section {
   display: flex;
   justify-content: space-between;
 }
 
 .Logo {
-  margin-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center; /* Align Logo to the left */
@@ -59,7 +48,7 @@ body {
 .login-container {
   width: 300px;
   padding: 16px;
-  background: #200035;
+  background: linear-gradient(to bottom, #4e0b5f, #b1007c);
   border: 1px solid #ccc;
   border-radius: 15px;
   margin: 0 auto;
@@ -81,7 +70,6 @@ body {
 .login-container label {
   display: block;
   margin-bottom: 8px;
-  
 }
 
 .login-container input[type="text"],
@@ -111,7 +99,6 @@ body {
   color: white;
   font-size: 16px;
   cursor: pointer;
-
 }
 
 /* Change the color of the submit button on hover */
@@ -137,15 +124,9 @@ body {
 }
 
 body {
-  font-family: "Rubik", sans-serif;
   background-image: url("background-image.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; /* Keeps the background image fixed while scrolling */
   background-position: center; /* Centers the background image */
 }
-
-#text-l{
-  color: white;
-}
-

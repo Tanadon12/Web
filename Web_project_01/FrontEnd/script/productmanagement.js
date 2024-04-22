@@ -1,42 +1,29 @@
 let editProductForm = document.getElementById("editProductForm");
 document.addEventListener("DOMContentLoaded", function () {
   // Initial setup
-  
+
   const editProductForm = document.getElementById("editProductForm");
   editProductForm.addEventListener("submit", function (event) {
     event.preventDefault();
+    console.log(editProductForm.value);
     const formData = new FormData(editProductForm);
     const productId = document.getElementById("editProductId").value;
     submitForm(productId, formData);
   });
+
+  const addProductForm = document.getElementById("addProductForm");
+  addProductForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const formAddData = new FormData(addProductForm);
+    for (let [key, value] of formAddData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+    submitNewProduct(formAddData);
+  });
+
   updateProducts(1);
   initializeEventListeners();
 });
-
-function submitForm(productId, formData) {
-  console.log("Submitting form for product ID:", productId);
-  fetch(`http://localhost:8000/editproduct/${productId}`, {
-    method: "PUT",
-    body: formData,
-  })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then((data) => {
-    alert("Product updated successfully!");
-    console.log("Success:", data);
-    toggleModal(editModal, false);
-    updateProducts();
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-    alert("Failed to update product: " + error.message);
-  });
-}
-
 
 document
   .getElementById("Sort")
@@ -49,6 +36,9 @@ function initializeEventListeners() {
   const spanCloseEdit = document.querySelector(".close-edit");
   const viewSelector = document.getElementById("view");
   const paginationButtons = document.querySelectorAll(".frame");
+  // Make sure editModal is defined here
+  const editModal = document.getElementById("editProductModal");
+  // const addProductForm = document.getElementById("addProductForm");
 
   // Modal open and close handlers
   addBtn.onclick = () => toggleModal(addModal, true);
@@ -80,6 +70,60 @@ function initializeEventListeners() {
   });
 }
 
+function submitNewProduct(formAddData) {
+  // const addProductForm = document.getElementById('addProductForm');
+  // const formData = new FormData(addProductForm);
+  console.log(formAddData);
+  for (let [key, value] of formAddData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
+
+  fetch("http://localhost:8000/insert_product", {
+    method: "POST",
+    body: formAddData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("New product added:", data);
+      alert("Product added successfully!");
+      toggleModal(document.getElementById("addProductModal"), false);
+      updateProducts(); // Refresh the list to show the new product
+    })
+    .catch((error) => {
+      console.error("Error adding new product:", error);
+      alert("Failed to add new product: " + error.message);
+    });
+}
+
+function submitForm(productId, formData) {
+  console.log("Submitting form for product ID:", productId);
+  fetch(`http://localhost:8000/editproduct/${productId}`, {
+    method: "PUT",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      alert("Product updated successfully!");
+      console.log("Success:", data);
+      toggleModal(editModal, false);
+      updateProducts();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Failed to update product: " + error.message);
+    });
+}
+
 function updateProducts(page = 1) {
   const viewCount = document.getElementById("view").value;
   const sortOption = document.getElementById("Sort").value;
@@ -93,17 +137,36 @@ function updateProducts(page = 1) {
       }
       return response.json();
     })
-    .then((data) => renderProducts(data))
+    .then((data) => renderProducts(data, page))
     .catch((error) => console.error("Error loading products:", error));
 }
 
-function renderProducts(data) {
+function updatePaginationControls(totalPages, currentPage) {
+  const pagination = document.querySelector(".frame-group");
+  pagination.innerHTML = ""; // Clear existing pagination controls
+
+  for (let i = 1; i <= totalPages; i++) {
+    const pageElement = document.createElement("div");
+    pageElement.className = "frame" + (i === currentPage ? " active" : "");
+    pageElement.textContent = i;
+    pageElement.addEventListener("click", function () {
+      updateProducts(i); // This function needs to handle data fetching and updating the DOM
+    });
+    pagination.appendChild(pageElement);
+  }
+}
+
+function renderProducts(data, page) {
+  const viewCount = document.getElementById("view").value;
   const container = document.querySelector(".products-container");
   container.innerHTML = ""; // Clear previous content
   const products = data.products;
   const totalPages = Math.ceil(
     data.totalProducts / parseInt(document.getElementById("view").value)
   );
+  // const totalPages = Math.ceil(
+  //   data.totalProducts / parseInt(document.getElementById("view").value)
+  // );
 
   products.forEach((product) => {
     const productDiv = document.createElement("div");
@@ -125,7 +188,7 @@ function renderProducts(data) {
       if (target.classList.contains("edit-btn")) {
         openEditModal(product.Product_ID);
       } else if (target.classList.contains("delete-btn")) {
-        // Handle delete (additional code needed here if you have delete functionality)
+        deleteProduct(product.Product_ID);
       } else if (
         !target.classList.contains("edit-btn") &&
         !target.classList.contains("delete-btn")
@@ -139,22 +202,27 @@ function renderProducts(data) {
     // Attach event listener to each edit button within the productDiv
   });
 
-  updatePaginationControls(
-    totalPages,
-    parseInt(document.getElementById("view").value)
-  );
+  updatePaginationControls(totalPages, page);
 }
 
-function updatePaginationControls(totalPages, currentPage) {
-  const pagination = document.querySelector(".frame-group");
-  pagination.innerHTML = ""; // Clear existing pagination controls
-
-  for (let i = 1; i <= totalPages; i++) {
-    const pageElement = document.createElement("div");
-    pageElement.className = "frame" + (i === currentPage ? " active" : "");
-    pageElement.textContent = i;
-    pageElement.addEventListener("click", () => updateProducts(i));
-    pagination.appendChild(pageElement);
+function deleteProduct(productId) {
+  if (confirm("Are you sure you want to delete this product?")) {
+    const url = `http://localhost:8000/delete/${productId}`;
+    fetch(url, { method: "DELETE" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete the product");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        alert("Product deleted successfully!");
+        updateProducts();
+      })
+      .catch((error) => {
+        console.error("Error deleting product:", error);
+        alert("Error deleting product: " + error.message);
+      });
   }
 }
 

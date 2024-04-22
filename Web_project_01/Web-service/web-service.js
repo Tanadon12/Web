@@ -157,7 +157,62 @@ async function updateProductPrice(prodId, productSize, productPrice) {
   });
 }
 
+router.get("/Account", (req, res) => {
+  const sqlQuery = `
+          SELECT a.Account_ID, a.First_Name, a.Last_Name, a.Email, a.Address, l.Username, l.Password ,l.Acc_Role
+          FROM Admin a 
+          JOIN Login_Information l ON a.Account_ID = l.Account_ID`;
 
+  connection.query(sqlQuery, (err, results) => {
+    if (err) {
+      console.error("Failed to retrieve accounts:", err);
+      return res.status(500).send({
+        error: true,
+        message: "Failed to retrieve accounts due to database error",
+        details: err.message,
+      });
+    }
+
+    res.json(results);
+  });
+});
+
+router.get("/getAccount/:accountId", (req, res) => {
+  const accountId = parseInt(req.params.accountId);
+
+  if (!accountId) {
+    return res.status(400).send({
+      error: true,
+      message: "Invalid account ID",
+    });
+  }
+
+  const sqlQuery = `
+          SELECT a.Account_ID, a.First_Name, a.Last_Name, a.Email, a.Address, l.Username, l.Password ,l.Acc_Role
+          FROM Admin a 
+          JOIN Login_Information l ON a.Account_ID = l.Account_ID
+          WHERE a.Account_ID = ?`;
+
+  connection.query(sqlQuery, [accountId], (err, results) => {
+    if (err) {
+      console.error("Failed to retrieve account:", err);
+      return res.status(500).send({
+        error: true,
+        message: "Failed to retrieve account due to database error",
+        details: err.message,
+      });
+    }
+
+    if (results.length > 0) {
+      res.json(results[0]); // Send back the first result since Account_ID should be unique
+    } else {
+      res.status(404).send({
+        error: true,
+        message: "Account not found",
+      });
+    }
+  });
+});
 
 router.get("/random-products", (req, res) => {
   console.log("applied random-product");

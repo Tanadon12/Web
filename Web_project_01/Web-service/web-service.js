@@ -741,8 +741,8 @@ router.post("/insert_account", upload.none(), async (req, res) => {
       });
   }
 
-  try {
       // Insert into Admin table
+      console.log("This is working");
       const adminInsertQuery = `
           INSERT INTO Admin (First_Name, Last_Name, Email, Address)
           VALUES (?, ?, ?, ?);
@@ -761,14 +761,8 @@ router.post("/insert_account", upload.none(), async (req, res) => {
           error: false,
           message: "Account created successfully."
       });
-  } catch (error) {
-      console.error("Failed to create account:", error);
-      res.status(500).send({
-          error: true,
-          message: "Failed to create account due to database error",
-          details: error.message
-      });
-  }
+ 
+
 });
 
 

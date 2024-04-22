@@ -10,36 +10,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header>
-      <div class="nav-login">
-        <ul>
-          <li><a>WELCOME : ADMIN</a></li>
-          <li><a href="SignIn">LOGOUT</a></li>
-        </ul>
-      </div>
-     
-      <div class="Logo">
-        <a href="Homepage"><img  src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N" /> </a>
-      </div>
-      <nav>
-        <ul class="navbar">
-          <li><a href="Admin">DASHBORD</a></li>
-          <li><a>PRODUCT</a></li>
-          <li><a href="AccountMM">ACCOUNT</a></li>
-        </ul>
-      </nav>
+   
+      <header>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-..."
+          crossorigin="anonymous"
+        />
+        <!-- 1st top part -->
+        <div class="nav-login">
+          <ul>
+            <li><a class="link" href="Admin"> <i class="fa fa-user"></i> WELCOME : ....... </a></li>
+            <li><a class="link" href="SignIn">LOGOUT</a></li>
+          </ul>
+        </div>
     </header>
+
+    <section class="section2">
+      <div class="Logo">
+        <a href="../Homepage">
+          <img
+            src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N"
+          />
+        </a>
+      </section>
+
+        <nav>
+          <ul class="navbar">
+            <li><a href="Admin">Dashboard</a></li>
+            <li><a href="ProductMM">Product</a></li>
+            <li><a href="AccountMM">Account</a></li>
+          </ul>
+        </nav>
+        <div class="separator"></div>
+      </div>
+
+      
+   
     
     <main>
-
-      <div class="header-actions">
-        <div class="Search">
-          <form action="/SearchRes" method="get">
-            <input id=search type="text" placeholder="You Looking for ?" name="search" />
-            <button type="submit">🔍</button>
-          </form>
-        </div>
-        <button class="add-product-btn">+ Add Product</button>
+      <div class="add-product-container">
+        <button class="add-product-btn">Add Product</button>
       </div>
       
       
@@ -147,7 +159,9 @@
 
       </main>
       <footer>
-
+        <article>
+          Hey admin, Thank you for doing your work! but this month we don't have salary for you!
+        </article>
       </footer>
   
     <script src="../script/productmanagement.js"></script>

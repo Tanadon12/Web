@@ -362,6 +362,10 @@ footer{
   display: none;
 }
 
+article{
+  text-align: center;
+  margin-bottom: 50px;
+}
  /* END OF SIZE CSS */
 
  /*  RESPONSIVE CSS */

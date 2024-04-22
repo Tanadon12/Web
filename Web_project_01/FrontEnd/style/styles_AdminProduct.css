@@ -1,22 +1,98 @@
+header {
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* position: fixed; */
+  /* margin: 0; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-bottom: 10px;
+}
 
-@media (max-width: 768px) {
-    /* Adjust styles for smaller screens */
-    .nav-login ul {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+header li {
+  display: inline;
+}
+.nav-login {
+  background-color: #200035;
+  padding: 10px;
+}
 
-    header {
-        flex-direction: row;
-    }
+.nav-login ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  justify-content: left;
+}
 
-    .add-product-container {
-        position: static; /* Resets to normal document flow on smaller screens */
-        text-align: center; /* Centers the button */
-        padding: 10px 0; /* Adds vertical padding for spacing */
+.nav-login a {
+  text-decoration: none;
+  color: white; /* Set text color to white */
+  padding: 1px 10px;
+}
 
-    }
+.navbar li a:hover {
+  color: #9066ab; 
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  margin: 0;
+  background-size: cover;
+  background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */
+  background-attachment: fixed; /* Optional: Fixes the background image in place */
+}
+
+.section2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.separator {
+  height: 1px;
+  background-color: black;
+  margin-top: 20px; 
+}
+
+.Logo {
+  align-items: center; 
+  margin-bottom: 60px;
+}
+
+
+.navbar {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Display list items in the same line */
+  justify-content: center; /* Center the navigation bar horizontally */
+}
+
+.navbar li {
+  display: inline; /* Display list items in the same line */
+  margin: 0 5%; /* Add spacing between items */
+}
+
+.navbar li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold; /* Apply bold text */
+  font-size: 20px; /* Apply larger font size */
+}
+
+
+/* Style for the separator */
+.separator {
+  height: 1px;
+  background-color: black;
+  margin-top: 20px; /* Adjust margin as needed */
 }
 
 body {
@@ -30,84 +106,6 @@ body {
     
   }
   
-  header {
-    margin: 0; /* Reset margin */
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-    border-bottom: 1px solid #ddd; /* Adds a border line */
-  }
-  
-  header li {
-    display: inline;
-  }
-  .nav-login {
-    background-color: #200035;
-    padding: 10px;
-  }
-  
-  .nav-login ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    justify-content: left;
-  }
-  
-  
-  .nav-login a {
-    text-decoration: none;
-    color: white; /* Set text color to white */
-    padding: 1px 10px;
-  }
-  
-  .nav-login a:hover {
-    background-color: #3e2066; /* Darker shade for hover state */
-    border-radius: 5px; /* Optional: adds rounded corners on hover */
-}
-
-  
-  section {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .Logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    padding: 10px;
-    padding-top: 40px;
-    margin-bottom: 20px;
-  }
-
-  .navbar {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 20px;
-    display: flex; /* Display list items in the same line */
-    justify-content: center; /* Center navigation bar horizontally */
-  }
-  
-  .navbar li {
-    display: inline; /* Display list items in the same line */
-    margin: 0 2%; /* Add spacing between items */
-  }
-  
-  .navbar li a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold; /* Apply bold text */
-    font-size: 15px; /* Apply larger font size */
-  }
-
-  .navbar a:hover {
-    color: white;
-    background-color: #3e2066; /* Darker shade for hover state */
-    border-radius: 3px; /* Optional: adds rounded corners on hover */
-}
-
 body {
     font-family: "Rubik", sans-serif;
   }
@@ -122,10 +120,7 @@ body {
 }
 
 .add-product-container {
-    text-align: right; /* Aligns the button to the right */
-    padding: 10px 20px; /* Adds some spacing */
-    position: absolute; /* Position the container absolutely to its parent */
-    right: 20px; /* 20px from the right */
+    padding: 10px 20px; 
 }
 
 .add-product-btn {
@@ -133,11 +128,12 @@ body {
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 0 0 20px;
+    margin-top: 50px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow */
+    align-items: right;
 }
 
 .add-product-btn:hover{
@@ -272,53 +268,7 @@ textarea,
     box-sizing: border-box; /* Include padding in the element's total width and height */
   }
 
-  .header-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
   
-  .Search {
-    flex-grow: 1; /* Allow the search bar to take up available space */
-    display: flex;
-    margin-right: 20px; /* Adjust this as necessary */
-    justify-content: center;
-    
-  }
-  
-  .Search form {
-    display: flex;
-    width: 60%;
-    justify-content: center;
-    margin-left: 200px;
-}
-
-  .Search input[type="text"] {
-    width: 60%; /* Input should take up remaining space */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-    height: 40px; /* This should be the height of your button */
-}
-  
-  .Search button {
-    width: 40px; /* Adjust the width as necessary */
-    height: 40px; /* Make the button the same height as the search box */
-    border: none;
-    background-color: #200035;
-    color: white;
-    border-radius: 0 5px 5px 0;
-    margin-top: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-  
-  .Search button:hover {
-    background-color: #130020; /* Darker shade for hover */
-  }
-
-
   .frame-group {
     display: flex;
     list-style-type: none;
@@ -415,22 +365,68 @@ textarea,
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Make the shadow a bit deeper */
 }
 
-  /* Adjustments for smaller screens */
-  @media (max-width: 768px) {
-    .Search form {
-      width: auto;
-    }
-  
-    .Search input[type="text"] {
-      flex-grow: 0;
-      width: calc(100% - 45px); /* Subtract the button width */
-    }
-  
-    .Search button {
-      width: 45px; 
-    }
-  }
-  
- 
+.link:hover {
+  color: grey;
+}
 
-  
+.add-product-container {
+  text-align: right; 
+  padding: 10px 20px; 
+}
+
+article{
+  text-align:center;
+ 
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    padding-bottom: 20px;
+  }
+
+  .add-product-container {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .navbar li a {
+    font-size: 16px;
+  }
+
+  .perfume {
+    width: calc(45% - 20px);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .products-container {
+    padding: 20px;
+  }
+
+  .perfume {
+    width: calc(30% - 20px);
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .products-container {
+    padding: 10px;
+    margin: 0;
+    justify-content: center;
+  }
+
+  .perfume {
+    width: calc(50% - 20px);
+    margin: 10px;
+  }
+}

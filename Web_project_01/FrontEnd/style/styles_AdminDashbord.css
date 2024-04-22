@@ -104,7 +104,7 @@ body {
   
 #map {
   margin-top: 70px;
-  width: 100%; /* Adjust the width as needed */
+  width: 50%; /* Adjust the width as needed */
   height: 500px; /* Adjust the height as needed */
   margin: 0 auto; 
 }

@@ -88,25 +88,7 @@ section {
 }
 
 
-/* Style for the separator */
-.separator {
-  height: 1px;
-  background-color: black;
-  margin-top: 20px; /* Adjust margin as needed */
-}
 
-body {
-    margin: 0; /* Reset default margin */
-    padding: 0; /* Reset default padding */
-    background-image: url("background-image.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
-    background-position: center; /* Centers the background image */
-    
-  }
-  
-  
 body {
     font-family: "Rubik", sans-serif;
   }
@@ -235,11 +217,7 @@ textarea,
     margin-bottom: 20px;
   }
   
-  h3 {
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
+ 
   .price {
     color: #666;
     margin-bottom: 20px;

@@ -3,8 +3,6 @@ header {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* position: fixed; */
-  /* margin: 0; */
   top: 0;
   left: 0;
   width: 100%;
@@ -85,14 +83,6 @@ section {
   color: black;
   font-weight: bold; /* Apply bold text */
   font-size: 20px; /* Apply larger font size */
-}
-
-
-/* Style for the separator */
-.separator {
-  height: 1px;
-  background-color: black;
-  margin-top: 20px; /* Adjust margin as needed */
 }
 
 .account-main {

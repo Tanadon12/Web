@@ -1,86 +1,71 @@
+header {
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* position: fixed; */
+  /* margin: 0; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-bottom: 10px;
+}
 
-@media (max-width: 768px) {
-    /* Adjust styles for smaller screens */
-    .nav-login ul {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+header li {
+  display: inline;
+}
+.nav-login {
+  background-color: #200035;
+  padding: 10px;
+}
 
-    header {
-        flex-direction: row;
-    }
+.nav-login ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  justify-content: left;
+}
 
-    .add-product-container {
-        position: static; /* Resets to normal document flow on smaller screens */
-        text-align: center; /* Centers the button */
-        padding: 10px 0; /* Adds vertical padding for spacing */
+.nav-login a {
+  text-decoration: none;
+  color: white; /* Set text color to white */
+  padding: 1px 10px;
+}
 
-    }
+.navbar li a:hover {
+  color: #9066ab; 
 }
 
 body {
-    margin: 0; /* Reset default margin */
-    padding: 0; /* Reset default padding */
-    background-image: url("background-image.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
-    background-position: center; /* Centers the background image */
-    
-  }
-  
-  header {
-    margin: 0; /* Reset margin */
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-    border-bottom: 1px solid #ddd; /* Adds a border line */
-  }
-  
-  header li {
-    display: inline;
-  }
-  .nav-login {
-    background-color: #200035;
-    padding: 10px;
-  }
-  
-  .nav-login ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    justify-content: left;
-  }
-  
-  
-  .nav-login a {
-    text-decoration: none;
-    color: white; /* Set text color to white */
-    padding: 1px 10px;
-  }
-  
-  .nav-login a:hover {
-    background-color: #3e2066; /* Darker shade for hover state */
-    border-radius: 5px; /* Optional: adds rounded corners on hover */
+  font-family: "Rubik", sans-serif;
+  margin: 0;
+  background-size: cover;
+  background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */
+  background-attachment: fixed; /* Optional: Fixes the background image in place */
 }
 
-  
-  section {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .Logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    padding: 10px;
-    padding-top: 40px;
-    margin-bottom: 20px;
-  }
+.section2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.separator {
+  height: 1px;
+  background-color: black;
+  margin-top: 20px; 
+}
+
+.Logo {
+  align-items: center; 
+  margin-bottom: 60px;
+}
+
 
 .navbar {
   list-style-type: none;
@@ -283,53 +268,7 @@ textarea,
     box-sizing: border-box; /* Include padding in the element's total width and height */
   }
 
-  .header-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
   
-  .Search {
-    flex-grow: 1; /* Allow the search bar to take up available space */
-    display: flex;
-    margin-right: 20px; /* Adjust this as necessary */
-    justify-content: center;
-    
-  }
-  
-  .Search form {
-    display: flex;
-    width: 60%;
-    justify-content: center;
-    margin-left: 200px;
-}
-
-  .Search input[type="text"] {
-    width: 60%; /* Input should take up remaining space */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-    height: 40px; /* This should be the height of your button */
-}
-  
-  .Search button {
-    width: 40px; /* Adjust the width as necessary */
-    height: 40px; /* Make the button the same height as the search box */
-    border: none;
-    background-color: #200035;
-    color: white;
-    border-radius: 0 5px 5px 0;
-    margin-top: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-  
-  .Search button:hover {
-    background-color: #130020; /* Darker shade for hover */
-  }
-
-
   .frame-group {
     display: flex;
     list-style-type: none;

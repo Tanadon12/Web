@@ -1,5 +1,5 @@
 const express = require("express");
-// const cors = require('cors');
+const cors = require('cors');
 const path = require("path");
 
 
@@ -9,7 +9,7 @@ const router = express.Router();
 
 app.use("/", router);
 
-// app.use(cors());
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public'))); // Static files directory
 
 app.use("/style", express.static(path.join(__dirname, "style")));

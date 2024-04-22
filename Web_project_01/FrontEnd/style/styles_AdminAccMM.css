@@ -108,7 +108,6 @@ body {
   
   
   body {
-    background-image: url("background-image.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed; /* Keeps the background image fixed while scrolling */
@@ -160,6 +159,8 @@ body {
     justify-content: space-between;
     align-items: center;
   }
+
+  .sub
   
   .account-info p {
     font-size: 14px;
@@ -198,4 +199,6 @@ body {
   .account-item:last-child {
     border-bottom: none;
   }
+  
+
   

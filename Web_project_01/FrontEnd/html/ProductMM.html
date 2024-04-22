@@ -50,8 +50,15 @@
    
     
     <main>
-      <div class="add-product-container">
-        <button class="add-product-btn">Add Product</button>
+
+      <div class="header-actions">
+        <div class="Search">
+          <form action="/SearchRes" method="get">
+            <input id=search type="text" placeholder="You Looking for ?" name="search" />
+            <button type="submit">🔍</button>
+          </form>
+        </div>
+        <button class="add-product-btn">+ Add Product</button>
       </div>
       
       
@@ -93,21 +100,26 @@
 
   
 
-   <div id="addProductModal" class="modal">
+  <div id="addProductModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Add New Product</h2>
-        <form id="addProductForm">
+        <form id="addProductForm" enctype="multipart/form-data">
             <!-- Product name -->
             <input type="text" id="productName" name="productName" placeholder="Product Name" required>
+            
             <!-- Product description -->
             <textarea id="productDescription" name="productDescription" placeholder="Product Description" required></textarea>
+            
             <!-- Product price -->
             <input type="number" id="productPrice" name="productPrice" placeholder="Price" required>
+            
             <!-- Product ingredient -->
             <textarea id="productIngredient" name="productIngredient" placeholder="Ingredient" required></textarea>
+            
             <!-- Product Size -->
             <input type="number" id="productSize" name="productSize" placeholder="Size" required>
+            
             <!-- Product Gender -->
             <select id="productGender" name="productGender" required>
                 <option value="">Select Gender</option>
@@ -115,13 +127,22 @@
                 <option value="women">Women</option>
                 <option value="unisex">Unisex</option>
             </select> 
+            
+            <!-- Product Brand -->
+            <input type="text" id="productBrand" name="productBrand" placeholder="Product Brand">
+            
+            <!-- Product Type -->
+            <input type="text" id="productType" name="productType" placeholder="Product Type">
+            
             <!-- Product image -->
             <input type="text" id="editProductImage" name="productImage" placeholder="Image URL">
+            
             <!-- Submit button -->
             <button type="submit" class="btn">Add Product</button>
         </form>
     </div>
 </div>
+
 
 <div id="editProductModal" class="modal">
     <div class="modal-content">

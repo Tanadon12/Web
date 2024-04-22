@@ -24,17 +24,10 @@
           <li><a class="link" href="SignIn">LOGOUT</a></li>
         </ul>
       </div>
-  </header>
-
-  <section class="section2">
-    <div class="Logo">
-      <a href="../Homepage">
-        <img
-          src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N"
-        />
-      </a>
-    </section>
-
+     
+      <div class="Logo">
+        <a href="Homepage"><img  src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N" /> </a>
+      </div>
       <nav>
         <ul class="navbar">
           <li><a href="Admin">Dashboard</a></li>
@@ -42,49 +35,170 @@
           <li><a href="AccountMM">Account</a></li>
         </ul>
       </nav>
-      <div class="separator"></div>
-    </div>
+    </header>
       
     <main class="account-main">
-        <div class="account-container">
-          <div class="account-header">
-            <h2>Account list</h2>
-            <button class="add-account-btn">+ Add Account</button>
-          </div>
-    
-          <!-- Repeat this block for each account -->
-          <div class="account-item">
-            <div class="account-info">
-              <p>Username <span>Admin0001</span></p>
-              <p>Password <span>•••••••</span></p>
-              <p>Firstname <span>Jimmy</span></p>
-              <p>Lastname <span>Gonzalez</span></p>
-              <p>Address <span>123, Supanika road, Gotham City, Floptropica</span></p>
-              <p>Email <span>jimmygonzalez@gmail.com</span></p>
-            </div>
-            <div class="account-actions">
-                <button class="edit-account-btn">EDIT</button>
-                <button class="delete-account-btn">DELETE</button>
-              </div>
-          </div>
-          <!-- ... other account items -->
-          <div class="account-item">
-            <div class="account-info">
-              <p>Username <span>Admin0002</span></p>
-              <p>Password <span>•••••••</span></p>
-              <p>Firstname <span>Jimmy2</span></p>
-              <p>Lastname <span>Gonzahee</span></p>
-              <p>Address <span>666, Supod road, Gothee City, LavaSpoon</span></p>
-              <p>Email <span>jimmygonzaHEE@outlook.ru</span></p>
-            </div>
-            <div class="account-actions">
-                <button class="edit-account-btn">EDIT</button>
-                <button class="delete-account-btn">DELETE</button>
-              </div>
+      <div class="account-container">
+        <div class="account-header">
+          <h2>Account list</h2>
+          <button class="add-account-btn">+ Add Account</button>
+        </div>
+
+        <div class="account-item">
+          <div id="accountsContainer">
+            <!-- Dynamic account items will be added here -->
           </div>
         </div>
-      </main>
-  
-    
+      </div>
+      <!-- ... other account items -->
+    </main>
+    <div id="addAccountModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Account</h2>
+        <form id="addAccountForm" enctype="multipart/form-data">
+          <label for="addFirstName">First Name</label>
+          <input
+            type="text"
+            id="addFirstName"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+
+          <label for="addLastName">Last Name</label>
+          <input
+            type="text"
+            id="addLastName"
+            name="lastName"
+            placeholder="Last Name"
+            required
+          />
+
+          <label for="addEmail">Email</label>
+          <input
+            type="email"
+            id="addEmail"
+            name="email"
+            placeholder="Email"
+            required
+          />
+
+          <label for="addAddress">Address</label>
+          <input
+            type="text"
+            id="addAddress"
+            name="address"
+            placeholder="Address"
+            required
+          />
+
+          <label for="addUsername">Username</label>
+          <input
+            type="text"
+            id="addUsername"
+            name="username" 
+            placeholder="Username"
+            required
+          />
+
+          <label for="addPassword">Password</label>
+          <input
+            type="text"
+            id="addPassword"
+            name="password"
+            placeholder="Password"
+            required
+          />
+
+          <label for="addRole">Role</label>
+          <input
+            type="text"
+            id="addRole"
+            name="addRole"
+            placeholder="addRole"
+            required
+          />
+
+          <button type="submit" class="btn">Add Account</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="editAccountModal" class="modal">
+      <div class="modal-content">
+        <span class="close-edit">&times;</span>
+        <h2>Edit Account</h2>
+        <form id="editAccountForm" enctype="multipart/form-data">
+          <input type="hidden" id="editAccountId" name="accountId" />
+
+          <label for="editFirstName">First Name</label>
+          <input
+            type="text"
+            id="editFirstName"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+
+          <label for="editLastName">Last Name</label>
+          <input
+            type="text"
+            id="editLastName"
+            name="lastName"
+            placeholder="Last Name"
+            required
+          />
+
+          <label for="editEmail">Email</label>
+          <input
+            type="email"
+            id="editEmail"
+            name="email"
+            placeholder="Email"
+            required
+          />
+
+          <label for="editAddress">Address</label>
+          <input
+            type="text"
+            id="editAddress"
+            name="address"
+            placeholder="Address"
+            required
+          />
+
+          <label for="editUsername">Username</label>
+          <input
+            type="text"
+            id="editUsername"
+            name="username"
+            placeholder="Username"
+            required
+          />
+
+          <label for="editPassword">Password</label>
+          <input
+            type="text"
+            id="editPassword"
+            name="password"
+            placeholder="Password"
+            required
+          />
+
+          <label for="editRole">Username</label>
+          <input
+            type="text"
+            id="editRole"
+            name="editRole"
+            placeholder="editRole"
+            required
+          />
+
+          <button type="submit" class="btn">Save Changes</button>
+        </form>
+      </div>
+    </div>
   </body>
+  <script src="../script/accountmanagement.js"></script>
 </html>

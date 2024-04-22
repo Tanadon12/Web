@@ -24,7 +24,7 @@
       <div class="nav-login">
         <ul>
           <li>
-            <a class="link" href="MyAccount">
+            <a class="link" href="Admin">
               <i class="fa fa-user"></i> My account
             </a>
           </li>
@@ -46,8 +46,8 @@
         </div>
 
         <div class="Search">
-          <form action="/AdvanceSearch" method="POST">
-            <input type="text" placeholder="You Looking for ?" name="search" />
+          <form action="/SearchRes" method="get">
+            <input id = "searchbyname" type="text" placeholder="You Looking for ?" name="search" />
             <button type="submit">🔍</button>
           </form>
         </div>
@@ -62,7 +62,6 @@
         <ul class="navbar">
           <li><a href="Perfume/Men">Men Perfume</a></li>
           <li><a href="Perfume/Female">Female Perfume</a></li>
-          <li><a href="#">Brand </a></li>
         </ul>
       </nav>
       <div class="separator"></div>
@@ -138,9 +137,9 @@
       <div class="ProductSearchResult"></div>
     </main>
     <footer>
-      <a id="About" href="AboutUs.html">About us </a>
+      <a id="About" href="AboutUs">About us </a>
     </footer>
     <script src="../script/advancesearch.js"></script>
-  
+    <script src="../script/searchbyname.js"></script>
   </body>
 </html>

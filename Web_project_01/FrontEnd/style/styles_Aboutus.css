@@ -158,6 +158,11 @@ main {
   color: white;
 }
 
+#quote{
+  margin-top: 60px;
+  text-align: center;
+  font-weight: bold;
+}
 body{
   font-family: "Rubik", sans-serif;
 }

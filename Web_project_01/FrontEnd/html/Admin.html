@@ -5,8 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ADMIN</title>
     <link rel="stylesheet" href="../style/styles_AdminDashbord.css" />
+    <script type="text/javascript" src="https://api.longdo.com/map/?key=f4c609ce0f7eec84984ba14931def9a6"></script>
+    <script>
+    var marker1 = new longdo.Marker({ lon: 100.175453, lat: 13.773936 },
+    { 
+      title: 'Marker',
+      icon: {
+           url: 'https://map.longdo.com/mmmap/images/pin_mark.png',
+          offset: { x: 12, y: 45 }
+        },
+        detail: 'This is ceo house!',
+        visibleRange: { min: 0, max: 100 },
+        draggable: false,
+        weight: longdo.OverlayWeight.Top,
+    });
+      function init() {
+        var map = new longdo.Map({
+          placeholder: document.getElementById('map')
+        });
+        map.Layers.setBase(longdo.Layers.NORMAL_EN);
+        map.Overlays.add(marker1);
+      }
+    </script>
   </head>
-  <body>
+
+  <body onload="init();">
     <header>
       <link
         rel="stylesheet"
@@ -41,23 +64,13 @@
       </nav>
       <div class="separator"></div>
     </div>
-      
-      <div class="dashboard-container">
-        <h1>Dashboard</h1>
-        <div class="stats-container">
-            <div class="stat-box">
-              <img src="https://cdn-icons-png.flaticon.com/512/3033/3033143.png" alt="Total Account" class="stat-image" />
-                <p>Total Account</p>
-                
-            </div>
-            <div class="stat-box">
-              <img src="https://cdn-icons-png.flaticon.com/512/3082/3082748.png" alt="Total Product" class="stat-image" />
-                <p>Total Product</p>
-           
-            </div>
-        </div>
-      </div>
-  
+    
+    <div id="map"></div>
+
+
+      <footer>
+     
+      </footer>
     
   </body>
 </html>

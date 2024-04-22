@@ -1,9 +1,14 @@
 header {
-  margin: 0px;
+  margin: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding-bottom: 50px;
+  position: fixed; 
+  margin: 0; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-bottom: 10px;
 }
 
 header li {
@@ -33,22 +38,23 @@ section {
 }
 
 .Logo {
+  margin-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center; /* Align Logo to the left */
 }
 
+
 /* General styles */
 body {
   font-family: "Rubik", sans-serif;
-  background-color: #ffffff;
 }
 
 /* Form container */
 .login-container {
   width: 300px;
   padding: 16px;
-  background: linear-gradient(to bottom, #4e0b5f, #b1007c);
+  background: #200035;
   border: 1px solid #ccc;
   border-radius: 15px;
   margin: 0 auto;
@@ -63,7 +69,8 @@ body {
 }
 
 .login-title h1 {
-  margin-top: 0;
+  margin-top: 20px;
+  color: white;
 }
 
 /* Form input fields */
@@ -99,6 +106,7 @@ body {
   color: white;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 /* Change the color of the submit button on hover */
@@ -111,6 +119,10 @@ body {
   background-color: #f44336;
 }
 
+#togglePassword{
+  margin-top: 30px;
+  padding: 10px;
+}
 /* Form link */
 .login-container p a {
   color: #007bff;
@@ -123,10 +135,14 @@ body {
   text-decoration: underline;
 }
 
-body {
-  background-image: url("background-image.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* Keeps the background image fixed while scrolling */
-  background-position: center; /* Centers the background image */
+footer {
+  background-color: #200035;
+  padding: 20px;
+  margin: 0; 
+  position: fixed; 
+  bottom: 0; 
+  left: 0; 
+  width: 100%; 
+  text-align: center;
+  color: white;
 }

@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const mysql = require("mysql2");
+const TokenManager = require("./token_manager");
 const cors = require("cors");
 
 
@@ -176,6 +177,39 @@ router.get("/Account", (req, res) => {
     res.json(results);
   });
 });
+
+router.post("/submit_login", (req, res) => {
+  const { username, password } = req.body;
+  const sqlQuery = `
+    SELECT * FROM Login_Information WHERE Username = ? AND Password = ?`;
+
+  connection.query(sqlQuery, [username, password], (err, results) => {
+    if (err) {
+      console.error("Failed to retrieve accounts:", err);
+      return res.status(500).send({
+        error: true,
+        message: "Failed to retrieve accounts due to database error",
+        details: err.message,
+      });
+    }
+    if(results.length == 0 ){
+      return res.status(401).send(JSON.stringify({status:"0"}));
+    } 
+    let accessToken = TokenManager.getGenerateAccessToken({username});
+    console.log(results);
+    res.send(JSON.stringify({status:"1","access_token":accessToken}));
+  });
+});
+
+router.post("/check_authen",(req,res)=>{
+  let jwtStatus = TokenManager.checkAuthentication(req);
+  if(jwtStatus!=false){
+      res.send(jwtStatus);
+  }else{
+      res.send(false);
+  }
+});
+
 
 router.get("/getAccount/:accountId", (req, res) => {
   const accountId = parseInt(req.params.accountId);

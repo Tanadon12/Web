@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MenPerfume</title>
     <link rel="stylesheet" href="../style/styles_SearchRes.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -18,7 +24,7 @@
       <div class="nav-login">
         <ul>
           <li>
-            <a class="link" href="../MyAccount">
+            <a class="link" href="../Admin">
               <i class="fa fa-user"></i> My account
             </a>
           </li>
@@ -36,13 +42,11 @@
               src="https://drive.google.com/thumbnail?id=17Dsynr_XSkuKgpIZGrK6EhkSBp0Ydh8N"
             />
           </a>
-
-          <!-- <h1> E N I G M A </h1> -->
         </div>
 
         <div class="Search">
-          <form action="/search" method="get">
-            <input type="text" placeholder="You Looking for ?" name="search" />
+          <form action="/SearchRes" method="get">
+            <input id = "searchbyname" type="text" placeholder="You Looking for ?" name="search" />
             <button type="submit">🔍</button>
           </form>
         </div>
@@ -55,9 +59,8 @@
       <!-- 3rd part  -->
       <nav>
         <ul class="navbar">
-          <li><a href=" Men">Men Perfume</a></li>
-          <li><a href="Female">Female Perfume</a></li>
-          <li><a href="../Brand">Brand </a></li>
+          <li><a href="../Perfume/Men">Men Perfume</a></li>
+          <li><a href="../Perfume/Female">Female Perfume</a></li>
         </ul>
       </nav>
       <div class="separator"></div>
@@ -75,7 +78,9 @@
         <h2>Search Result</h2>
       </div>
       <!-- 4rd part  -->
-     
+      <article>
+        Want to find more fragrance  <a class="yt-link" href="https://www.youtube.com/@ScentofByrdOfficial">Click this link! </a>
+      </article>
     </main>
     <footer>
       <a class="link" href="AboutUs">About us </a>

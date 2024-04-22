@@ -1,44 +1,14 @@
-@media (max-width: 768px) {
-  /* Adjust styles for smaller screens */
-  .nav-login ul {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-
-  header {
-      flex-direction: row;
-  }
-
-  .account-header, .account-item {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .delete-account-btn {
-      margin-top: 10px;
-    }
-}
-
-body {
-  margin: 0; /* Reset default margin */
-  padding: 0; /* Reset default padding */
-  background-image: url("background-image.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* Keeps the background image fixed while scrolling */
-  background-position: center; /* Centers the background image */
-  
-}
-
 header {
-  margin: 0; /* Reset margin */
+  margin: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  /* position: fixed; */
+  /* margin: 0; */
+  top: 0;
+  left: 0;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-  border-bottom: 1px solid #ddd; /* Adds a border line */
+  padding-bottom: 10px;
 }
 
 header li {
@@ -56,73 +26,73 @@ header li {
   justify-content: left;
 }
 
-
 .nav-login a {
   text-decoration: none;
   color: white; /* Set text color to white */
   padding: 1px 10px;
 }
 
-.nav-login a:hover {
-  background-color: #3e2066; /* Darker shade for hover state */
-  border-radius: 5px; /* Optional: adds rounded corners on hover */
+.navbar li a:hover {
+  color: #9066ab; 
 }
 
+body {
+  font-family: "Rubik", sans-serif;
+  margin: 0;
+  background-size: cover;
+  background-repeat: no-repeat; /* Optional: Prevents the background image from repeating */
+  background-attachment: fixed; /* Optional: Fixes the background image in place */
+}
 
+.section2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 section {
   display: flex;
   justify-content: space-between;
 }
 
-.Logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;    
-  padding: 10px;
-  padding-top: 40px;
-  margin-bottom: 20px;
+.separator {
+  height: 1px;
+  background-color: black;
+  margin-top: 20px; 
 }
+
+.Logo {
+  align-items: center; 
+  margin-bottom: 60px;
+}
+
 
 .navbar {
   list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex; /* Display list items in the same line */
-  justify-content: center; /* Center navigation bar horizontally */
-  margin-bottom: 20px;
+  justify-content: center; /* Center the navigation bar horizontally */
 }
 
 .navbar li {
   display: inline; /* Display list items in the same line */
-  margin: 0 2%; /* Add spacing between items */
+  margin: 0 5%; /* Add spacing between items */
 }
 
 .navbar li a {
   text-decoration: none;
   color: black;
   font-weight: bold; /* Apply bold text */
-  font-size: 15px; /* Apply larger font size */
+  font-size: 20px; /* Apply larger font size */
 }
 
-.navbar a:hover {
-  color: white;
-  background-color: #3e2066; /* Darker shade for hover state */
-  border-radius: 3px; /* Optional: adds rounded corners on hover */
-}
 
-body {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* Keeps the background image fixed while scrolling */
-  background-position: center; /* Centers the background image */
-  font-family: "Rubik", sans-serif;
-  color: #333; /* Dark grey color for better readability */
-}
-
-body, p {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+/* Style for the separator */
+.separator {
+  height: 1px;
+  background-color: black;
+  margin-top: 20px; /* Adjust margin as needed */
 }
 
 .account-main {
@@ -162,8 +132,6 @@ body, p {
   justify-content: space-between;
   align-items: center;
 }
-
-.sub
 
 .account-info p {
   font-size: 14px;
@@ -216,84 +184,12 @@ body, p {
   text-decoration: underline;
 }
 
-
-/* General Body and Background Styles */
-body {
-margin: 0;
-padding: 0;
-font-family: 'Rubik', sans-serif;
-background-image: url('../images/background-image.jpg'); /* Assuming you have a folder named 'images' */
-background-size: cover;
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-position: center;
-}
-
-/* Header Styles */
-header {
-background: #fff;
-box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-padding: 10px 0;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.nav-login ul {
-display: flex;
-list-style: none;
-margin: 0;
-padding: 0;
-}
-
-.nav-login ul li {
-padding: 0 15px;
-}
-
-.nav-login a {
-text-decoration: none;
-color: #333;
-font-weight: bold;
-}
-
-.nav-login a:hover {
-color: #007bff;
-}
-
-/* Logo and Navigation Styles */
-.Logo img {
-height: 50px;
-width: auto;
-}
-
-.navbar {
-list-style: none;
-display: flex;
-padding: 0;
-}
-
-.navbar li {
-padding: 0 10px;
-}
-
-.navbar a {
-text-decoration: none;
-color: #333;
-font-weight: bold;
-}
-
-.navbar a:hover {
-color: #007bff;
-}
-
 /* Main Section Styles */
 .account-main {
 padding: 20px;
 display: flex;
 justify-content: center;
 }
-
-
 
 .account-header {
 display: flex;
@@ -376,19 +272,5 @@ width: 100%;
 background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
-.nav-login ul {
-    flex-direction: column;
-}
-
-.account-header {
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.add-account-btn {
-    margin-top: 10px;
-}
-}
 
 

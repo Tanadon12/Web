@@ -25,6 +25,10 @@ window.onload = async () => {
   }
 };
 
+function logout() {
+  localStorage.clear();
+  location.href = `${location.origin}/SignIn`;
+}
 
 let editProductForm = document.getElementById("editProductForm");
 document.addEventListener("DOMContentLoaded", function () {

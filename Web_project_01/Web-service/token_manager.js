@@ -2,7 +2,7 @@ const jwt =require("jsonwebtoken");
 const tokenData = require("./token_data.json");
 class TokenManager{
     static getGenerateAccessToken(payload){
-        return jwt.sign(payload,tokenData["secret_key"],{"expiresIn":"10s"});
+        return jwt.sign(payload,tokenData["secret_key"],{"expiresIn":"4h"});
     }
 
     static checkAuthentication(request){

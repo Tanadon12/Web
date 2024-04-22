@@ -291,4 +291,4 @@ function openEditModal(productId) {
 function extractGoogleDriveId(url) {
   const fileIdMatch = url.match(/file\/d\/(.*?)\//);
   return fileIdMatch ? fileIdMatch[1] : null;
-}
+} 

@@ -774,6 +774,41 @@ async function updateProductPrice(prodId, productSize, productPrice) {
     );
   });
 }
+router.post("/insert_account", upload.none(), async (req, res) => {
+  const { firstName, lastName, email, address, username, password,addRole} = req.body;
+  console.log(req.body);
+
+  // Basic validation to ensure all required fields are provided
+  // if (!firstName || !lastName || !email || !address || !username || !password || !role) {
+  //     return res.status(400).send({
+  //         error: true,
+  //         message: "All fields are required."
+  //     });
+  // }
+
+      // Insert into Admin table
+      console.log("This is working" + addRole);
+      const adminInsertQuery = `
+          INSERT INTO Admin (First_Name, Last_Name, Email, Address)
+          VALUES (?, ?, ?, ?);
+      `;
+      const adminResults = await connection.promise().query(adminInsertQuery, [firstName, lastName, email, address]);
+      const adminId = adminResults[0].insertId; // Get the newly created Admin ID
+
+      // Insert into Login_Information table
+      const loginInsertQuery = `
+          INSERT INTO Login_Information (Username, Password, Account_ID, Acc_Role)
+          VALUES (?, ?, ?, ?);
+      `;
+      await connection.promise().query(loginInsertQuery, [username, password, adminId, addRole]);
+
+      res.send({
+          error: false,
+          message: "Account created successfully."
+      });
+ 
+
+});
 
 router.post("/insert_product", upload.none(), async function (req, res) {
   console.log(req.body); // Check the parsed body to debug
@@ -827,7 +862,7 @@ router.post("/insert_product", upload.none(), async function (req, res) {
 
           // If everything was successful
           res.send({
-            
+      
               error: false,
               data: result.affectedRows,
               message: "New product has been created successfully."
@@ -843,41 +878,7 @@ function insertProductAttributes(productId, size, price, callback) {
   });
 }
 
-router.post("/insert_account", upload.none(), async (req, res) => {
-  const { firstName, lastName, email, address, username, password,role} = req.body;
-  console.log(req.body);
 
-  // Basic validation to ensure all required fields are provided
-  if (!firstName || !lastName || !email || !address || !username || !password || !role) {
-      return res.status(400).send({
-          error: true,
-          message: "All fields are required."
-      });
-  }
-
-      // Insert into Admin table
-      console.log("This is working");
-      const adminInsertQuery = `
-          INSERT INTO Admin (First_Name, Last_Name, Email, Address)
-          VALUES (?, ?, ?, ?);
-      `;
-      const adminResults = await connection.promise().query(adminInsertQuery, [firstName, lastName, email, address]);
-      const adminId = adminResults[0].insertId; // Get the newly created Admin ID
-
-      // Insert into Login_Information table
-      const loginInsertQuery = `
-          INSERT INTO Login_Information (Username, Password, Account_ID, Acc_Role)
-          VALUES (?, ?, ?, ?);
-      `;
-      await connection.promise().query(loginInsertQuery, [username, password, adminId, role]);
-
-      res.send({
-          error: false,
-          message: "Account created successfully."
-      });
- 
-
-});
 
 
 connection.connect((err) => {

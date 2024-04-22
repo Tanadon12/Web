@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MenPerfume</title>
+    <title>Perfume</title>
     <link rel="stylesheet" href="../style/styles_Perfume.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -18,7 +21,7 @@
       <div class="nav-login">
         <ul>
           <li>
-            <a class="link" href="../MyAccount">
+            <a class="link" href="../Admin">
               <i class="fa fa-user"></i> My account
             </a>
           </li>
@@ -41,8 +44,8 @@
         </div>
 
         <div class="Search">
-          <form action="/search" method="get">
-            <input type="text" placeholder="You Looking for ?" name="search" />
+          <form action="/SearchRes" method="get">
+            <input id = "searchbyname" type="text" placeholder="You Looking for ?" name="search" />
             <button type="submit">🔍</button>
           </form>
         </div>
@@ -57,7 +60,6 @@
         <ul class="navbar">
           <li><a href=" Men">Men Perfume</a></li>
           <li><a href="Female">Female Perfume</a></li>
-          <li><a href="../Brand">Brand </a></li>
         </ul>
       </nav>
       <div class="separator"></div>
@@ -112,5 +114,6 @@
       <a class="link" href="AboutUs">About us </a>
     </footer>
     <script src="../script/PerfumeScript.js"></script>
+    <script src="../script/searchbyname.js"></script>
   </body>
 </html>

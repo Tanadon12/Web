@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HomePage</title>
+    <title>Product</title>
     <link rel="stylesheet" href="../style/styles_ProductPage.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -17,7 +20,7 @@
       <!-- 1st top part -->
       <div class="nav-login">
         <ul>
-          <li><a class="link" href="MyAccount"> <i class="fa fa-user"></i>  My account </a></li>
+          <li><a class="link" href="../Admin"> <i class="fa fa-user"></i>  My account </a></li>
           <li><a class="link" href="../SignIn">Sign In</a></li>
         </ul>
       </div>
@@ -35,8 +38,8 @@
       </div>
 
       <div class="Search">
-        <form action="/search" method="get">
-          <input type="text" placeholder="You Looking for ?" name="search" />
+        <form action="/SearchRes" method="get">
+          <input id = "searchbyname" type="text" placeholder="You Looking for ?" name="search" />
           <button type="submit">🔍</button>
         </form>
       </div>
@@ -49,9 +52,8 @@
     <!-- 3rd part  -->
     <nav>
       <ul class="navbar">
-        <li><a href="Perfume/Men">Men Perfume</a></li>
-        <li><a href="Perfume/Female">Female Perfume</a></li>
-        <li><a href="Brand">Brand </a></li>
+        <li><a href="../Perfume/Men">Men Perfume</a></li>
+        <li><a href="../Perfume/Female">Female Perfume</a></li>
       </ul>
     </nav>
     <div class="separator"></div>
@@ -78,5 +80,6 @@
       </div>
     </main>
     <script src="../script/product.js"></script>
+    <script src="../script/searchbyname.js"></script>
   </body>
 </html>

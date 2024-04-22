@@ -1,3 +1,35 @@
+window.onload = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/check_authen', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const responseData = await response.json();
+  
+      if (responseData !== false) {
+        console.log(responseData);
+      } else {
+        location.href = `${location.origin}/SignIn`;
+      }
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
+  };
+
+  function logout() {
+    localStorage.clear();
+    location.href = `${location.origin}/SignIn`;
+  }
+  
 document.addEventListener("DOMContentLoaded", function () {
     initializeAccountEventListeners();
     fetchAccountDetails();

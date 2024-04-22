@@ -38,6 +38,7 @@ async function submitForm(event) {
   } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
   };
+  
   // Send the form data to the server using the Fetch API
   // fetch("http://localhost:8000/submit_login", {
   //   method: "POST",

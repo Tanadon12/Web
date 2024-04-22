@@ -253,11 +253,11 @@ router.get("/product-search-options", (req, res) => {
     });
 });
 
-router.get("/getAccount", (req, res) => {
+router.get("/Account", (req, res) => {
   const sqlQuery = `
-      SELECT a.Account_ID, a.First_Name, a.Last_Name, a.Email, a.Address, l.Username, l.Password 
-      FROM Admin a 
-      JOIN Login_Information l ON a.Account_ID = l.Account_ID`;
+          SELECT a.Account_ID, a.First_Name, a.Last_Name, a.Email, a.Address, l.Username, l.Password ,l.Acc_Role
+          FROM Admin a 
+          JOIN Login_Information l ON a.Account_ID = l.Account_ID`;
 
   connection.query(sqlQuery, (err, results) => {
     if (err) {
@@ -273,8 +273,44 @@ router.get("/getAccount", (req, res) => {
   });
 });
 
-// Searching
+router.get("/getAccount/:accountId", (req, res) => {
+  const accountId = parseInt(req.params.accountId);
 
+  if (!accountId) {
+    return res.status(400).send({
+      error: true,
+      message: "Invalid account ID",
+    });
+  }
+
+  const sqlQuery = `
+          SELECT a.Account_ID, a.First_Name, a.Last_Name, a.Email, a.Address, l.Username, l.Password 
+          FROM Admin a 
+          JOIN Login_Information l ON a.Account_ID = l.Account_ID
+          WHERE a.Account_ID = ?`;
+
+  connection.query(sqlQuery, [accountId], (err, results) => {
+    if (err) {
+      console.error("Failed to retrieve account:", err);
+      return res.status(500).send({
+        error: true,
+        message: "Failed to retrieve account due to database error",
+        details: err.message,
+      });
+    }
+
+    if (results.length > 0) {
+      res.json(results[0]); // Send back the first result since Account_ID should be unique
+    } else {
+      res.status(404).send({
+        error: true,
+        message: "Account not found",
+      });
+    }
+  });
+});
+
+// Searching
 router.get("/searchByName/:name", (req, res) => {
   const productName = req.params.name;
   console.log("Search applied for: " + productName);
@@ -383,6 +419,21 @@ router.post("/searchRes", (req, res) => {
   });
 });
 
+router.delete("/deleteAccount/:id", (req, res) => {
+  const accountID = req.params.id;
+  const query = "DELETE FROM Admin WHERE Account_ID = ?";
+
+  connection.query(query, [accountID], (err, result) => {
+      if (err) {
+          console.error("Failed to delete account:", err);
+          res.status(500).send({ error: "Failed to delete account", details: err.message });
+      } else {
+          res.send({ message: "Account deleted successfully" });
+      }
+  });
+});
+
+
 // deleting product
 router.delete("/delete/:id", (req, res) => {
   const productId = req.params.id;
@@ -399,8 +450,57 @@ router.delete("/delete/:id", (req, res) => {
   });
 });
 
-//edit product
+router.put("/editAccount/:id", async (req, res) => {
+  const accountId = req.params.id;
+  const {
+    firstName,
+    lastName,
+    email,
+    address,
+    username,
+    password
+  } = req.body;
 
+  // Validation to ensure all fields are provided
+  if (!firstName || !lastName || !email || !address || !username || !password) {
+    return res.status(400).send({ error: true, message: "All fields are required." });
+  }
+
+  try {
+    // Update Admin information
+    const adminUpdateQuery = `
+      UPDATE Admin SET
+      First_Name = ?,
+      Last_Name = ?,
+      Email = ?,
+      Address = ?
+      WHERE Account_ID = ?;
+    `;
+    await connection.promise().query(adminUpdateQuery, [firstName, lastName, email, address, accountId]);
+
+    // Update Login Information
+    const loginUpdateQuery = `
+      UPDATE Login_Information SET
+      Username = ?,
+      Password = ?
+      WHERE Account_ID = ?;
+    `;
+    await connection.promise().query(loginUpdateQuery, [username, password, accountId]);
+
+    res.send({ error: false, message: "Account updated successfully." });
+  } catch (error) {
+    console.error("Failed to update account:", error);
+    res.status(500).send({
+      error: true,
+      message: "Failed to update account due to database error",
+      details: error.message
+    });
+  }
+});
+
+
+
+//edit product
 router.put(
   "/editproduct/:id",
   upload.single("productImage"),
@@ -560,6 +660,117 @@ async function updateProductPrice(prodId, productSize, productPrice) {
     );
   });
 }
+
+router.post("/insert_product", upload.none(), async function (req, res) {
+  console.log(req.body); // Check the parsed body to debug
+
+  const {
+      productName,
+      productDescription,
+      productPrice,
+      productIngredient,
+      productSize,
+      productGender,
+      productImage,
+      productBrand,    // Added variable for product brand
+      productType      // Added variable for product type
+  } = req.body;
+
+  // Check if all required fields are provided
+  if (!productName || !productDescription || !productPrice || !productIngredient || !productSize || !productGender || !productImage || !productBrand || !productType) {
+      return res.status(400).send({
+          error: true,
+          message: "All fields must be filled"
+      });
+  }
+
+  // SQL query to insert a new product into the database
+  const query = `INSERT INTO Products (Product_Name, Product_Description, Product_Brand, Product_Gender, Product_image, Product_Ingredients, Product_Type)
+                 VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+  // Use all fields, including the new ones
+  connection.query(query, [productName, productDescription, productBrand, productGender, productImage, productIngredient, productType], (err, result) => {
+      if (err) {
+          console.error("Failed to insert new product:", err);
+          return res.status(500).send({
+              error: true,
+              message: "Failed to insert new product due to database error",
+              details: err.message
+          });
+      }
+
+      // If the insert was successful, proceed to insert product attributes
+      const newProductId = result.insertId;
+      insertProductAttributes(newProductId, productSize, productPrice, (err, attrResult) => {
+          if (err) {
+              console.error("Failed to insert product attributes:", err);
+              return res.status(500).send({
+                  error: true,
+                  message: "Product created but failed to insert product attributes",
+                  details: err.message
+              });
+          }
+
+          // If everything was successful
+          res.send({
+            
+              error: false,
+              data: result.affectedRows,
+              message: "New product has been created successfully."
+          });
+      });
+  });
+});
+
+function insertProductAttributes(productId, size, price, callback) {
+  const attributesQuery = `INSERT INTO Product_Attributes (Product_ID, Product_Size, Product_Price) VALUES (?, ?, ?)`;
+  connection.query(attributesQuery, [productId, size, price], (err, result) => {
+      callback(err, result);
+  });
+}
+
+router.post("/insert_account", upload.none(), async (req, res) => {
+  const { firstName, lastName, email, address, username, password,role} = req.body;
+  console.log(req.body);
+
+  // Basic validation to ensure all required fields are provided
+  if (!firstName || !lastName || !email || !address || !username || !password || !role) {
+      return res.status(400).send({
+          error: true,
+          message: "All fields are required."
+      });
+  }
+
+  try {
+      // Insert into Admin table
+      const adminInsertQuery = `
+          INSERT INTO Admin (First_Name, Last_Name, Email, Address)
+          VALUES (?, ?, ?, ?);
+      `;
+      const adminResults = await connection.promise().query(adminInsertQuery, [firstName, lastName, email, address]);
+      const adminId = adminResults[0].insertId; // Get the newly created Admin ID
+
+      // Insert into Login_Information table
+      const loginInsertQuery = `
+          INSERT INTO Login_Information (Username, Password, Account_ID, Acc_Role)
+          VALUES (?, ?, ?, ?);
+      `;
+      await connection.promise().query(loginInsertQuery, [username, password, adminId, role]);
+
+      res.send({
+          error: false,
+          message: "Account created successfully."
+      });
+  } catch (error) {
+      console.error("Failed to create account:", error);
+      res.status(500).send({
+          error: true,
+          message: "Failed to create account due to database error",
+          details: error.message
+      });
+  }
+});
+
 
 connection.connect((err) => {
   if (err) {

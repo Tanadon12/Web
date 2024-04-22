@@ -46,6 +46,153 @@
       </div>
       <!-- ... other account items -->
     </main>
+    <div id="addAccountModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Account</h2>
+        <form id="addAccountForm" enctype="multipart/form-data">
+          <label for="addFirstName">First Name</label>
+          <input
+            type="text"
+            id="addFirstName"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+
+          <label for="addLastName">Last Name</label>
+          <input
+            type="text"
+            id="addLastName"
+            name="lastName"
+            placeholder="Last Name"
+            required
+          />
+
+          <label for="addEmail">Email</label>
+          <input
+            type="email"
+            id="addEmail"
+            name="email"
+            placeholder="Email"
+            required
+          />
+
+          <label for="addAddress">Address</label>
+          <input
+            type="text"
+            id="addAddress"
+            name="address"
+            placeholder="Address"
+            required
+          />
+
+          <label for="addUsername">Username</label>
+          <input
+            type="text"
+            id="addUsername"
+            name="username" 
+            placeholder="Username"
+            required
+          />
+
+          <label for="addPassword">Password</label>
+          <input
+            type="text"
+            id="addPassword"
+            name="password"
+            placeholder="Password"
+            required
+          />
+
+          <label for="addRole">Role</label>
+          <input
+            type="text"
+            id="addRole"
+            name="addRole"
+            placeholder="addRole"
+            required
+          />
+
+          <button type="submit" class="btn">Add Account</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="editAccountModal" class="modal">
+      <div class="modal-content">
+        <span class="close-edit">&times;</span>
+        <h2>Edit Account</h2>
+        <form id="editAccountForm" enctype="multipart/form-data">
+          <input type="hidden" id="editAccountId" name="accountId" />
+
+          <label for="editFirstName">First Name</label>
+          <input
+            type="text"
+            id="editFirstName"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+
+          <label for="editLastName">Last Name</label>
+          <input
+            type="text"
+            id="editLastName"
+            name="lastName"
+            placeholder="Last Name"
+            required
+          />
+
+          <label for="editEmail">Email</label>
+          <input
+            type="email"
+            id="editEmail"
+            name="email"
+            placeholder="Email"
+            required
+          />
+
+          <label for="editAddress">Address</label>
+          <input
+            type="text"
+            id="editAddress"
+            name="address"
+            placeholder="Address"
+            required
+          />
+
+          <label for="editUsername">Username</label>
+          <input
+            type="text"
+            id="editUsername"
+            name="username"
+            placeholder="Username"
+            required
+          />
+
+          <label for="editPassword">Password</label>
+          <input
+            type="text"
+            id="editPassword"
+            name="password"
+            placeholder="Password"
+            required
+          />
+
+          <label for="editRole">Username</label>
+          <input
+            type="text"
+            id="editRole"
+            name="editRole"
+            placeholder="editRole"
+            required
+          />
+
+          <button type="submit" class="btn">Save Changes</button>
+        </form>
+      </div>
+    </div>
   </body>
   <script src="../script/accountmanagement.js"></script>
 </html>

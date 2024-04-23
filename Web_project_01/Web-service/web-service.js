@@ -6,13 +6,7 @@ const TokenManager = require("./token_manager");
 const cors = require("cors");
 
 
-const multer = require('multer');
-const upload = multer({ storage: multer.memoryStorage() });
-const fs = require('fs');
-const { google }= require('googleapis');
 
-const apikeys = require('./apikeys.json');
-const SCOPE = ['https://www.googleapis.com/auth/drive'];
 
 const app = express();
 dotenv.config();
@@ -44,7 +38,7 @@ async function authorize() {
   return jwtClient;
 }
 
-router.put("/editproduct/:id", upload.single('productImage'), async function(req, res) {
+router.put("/editproduct/:id", async function(req, res) {
   const prodId = parseInt(req.params.id);
   if (!prodId) {
     return res.status(400).send({ error: true, message: "Error: product ID is not found" });
@@ -681,9 +675,7 @@ router.put("/editAccount/:id", async (req, res) => {
 
 //edit product
 router.put(
-  "/editproduct/:id",
-  upload.single("productImage"),
-  async function (req, res) {
+  "/editproduct/:id", async function (req, res) {
     const prodId = parseInt(req.params.id);
     if (!prodId) {
       return res
@@ -839,7 +831,7 @@ async function updateProductPrice(prodId, productSize, productPrice) {
     );
   });
 }
-router.post("/insert_account", upload.none(), async (req, res) => {
+router.post("/insert_account",  async (req, res) => {
   const { firstName, lastName, email, address, username, password,addRole} = req.body;
   console.log(req.body);
 
@@ -867,7 +859,7 @@ router.post("/insert_account", upload.none(), async (req, res) => {
 
 });
 
-router.post("/insert_product", upload.none(), async function (req, res) {
+router.post("/insert_product", async function (req, res) {
   console.log(req.body); // Check the parsed body to debug
 
   const {

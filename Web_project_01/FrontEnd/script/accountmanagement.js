@@ -133,7 +133,7 @@ function submitNewAccount(formAddData) {
       console.log(`${key}: ${value}`);
     }
   
-    fetch("http://localhost:8000/insert_account", {
+    fetch("/proxy/insert_account", {
       method: "POST",
       body: formAddData,
     })
@@ -164,7 +164,7 @@ function toggleModal(modal, show) {
 
 
 function openEditAccountModal(accountId) {
-    fetch(`http://localhost:8000/getAccount/${accountId}`)
+    fetch(`/proxy/getAccount/${accountId}`)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Failed to fetch account details: ${response.statusText}`);

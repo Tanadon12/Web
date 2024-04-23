@@ -5,7 +5,7 @@ const mysql = require("mysql2");
 const TokenManager = require("./token_manager");
 const cors = require("cors");
 
-
+// const { google }= require('googleapis');
 
 
 const app = express();
@@ -27,30 +27,31 @@ app.use("/", router);
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-async function authorize() {
-  const jwtClient = new google.auth.JWT(
-      apikeys.client_email,
-      null,
-      apikeys.private_key,
-      SCOPE
-  );
-  await jwtClient.authorize();
-  return jwtClient;
-}
+// async function authorize() {
+//   const jwtClient = new google.auth.JWT(
+//       apikeys.client_email,
+//       null,
+//       apikeys.private_key,
+//       SCOPE
+//   );
+//   await jwtClient.authorize();
+//   return jwtClient;
+// }
 
 router.put("/editproduct/:id", async function(req, res) {
   const prodId = parseInt(req.params.id);
+  console.log(req.body);
   if (!prodId) {
     return res.status(400).send({ error: true, message: "Error: product ID is not found" });
   }
 
   const { productName, productDescription, productIngredient, productSize, productPrice,productBrand, productType,productImage } = req.body;
-  console.log(req.body);
+  
   if (!productName || !productDescription || !productIngredient || !productSize || !productPrice || !productBrand|| !productType || !productImage) {
     return res.status(400).send({ error: true, message: "Error: All fields must be filled" });
   }
 
-  const authClient = await authorize();
+  // const authClient = await authorize();
 
   try {
     // Update product details
@@ -673,170 +674,12 @@ router.put("/editAccount/:id", async (req, res) => {
 
 
 
-//edit product
-router.put(
-  "/editproduct/:id", async function (req, res) {
-    const prodId = parseInt(req.params.id);
-    if (!prodId) {
-      return res
-        .status(400)
-        .send({ error: true, message: "Error: product ID is not found" });
-    }
-
-    const {
-      productName,
-      productDescription,
-      productIngredient,
-      productSize,
-      productPrice,
-    } = req.body;
-
-    console.log(req.body);
-    if (
-      !productName ||
-      !productDescription ||
-      !productIngredient ||
-      !productSize ||
-      !productPrice
-    ) {
-      return res
-        .status(400)
-        .send({ error: true, message: "Error: All fields must be filled" });
-    }
-
-    const authClient = await authorize();
-
-    try {
-      // Update product details
-      await updateProductDetails(
-        prodId,
-        productName,
-        productDescription,
-        productIngredient
-      );
-
-      let fileLink = req.body.productImage || ""; // Assume existing image URL is sent in the request body if not uploading a new one.
-
-      // Check if there is a new image to upload
-      if (req.file) {
-        fileLink = await uploadProductImage(authClient, req.file);
-      }
-
-      // Update product image URL in the database only if a new image was uploaded
-      if (req.file && fileLink) {
-        await updateProductImage(prodId, fileLink);
-      }
-
-      // Update product price
-      await updateProductPrice(prodId, productSize, productPrice);
-
-      res.send({
-        error: false,
-        message: "Product and price updated successfully",
-      });
-    } catch (error) {
-      res.status(500).send({ error: true, message: error.message });
-    }
-  }
-);
-
-async function uploadProductImage(authClient, file) {
-  const drive = google.drive({ version: "v3", auth: authClient });
-  const fileMetadata = {
-    name: file.originalname,
-    parents: ["1b1adXUfgw_Xj3ZaDHMTD63Xyuvia_Xe3"], // Ensure this is the correct folder ID
-  };
-
-  const media = {
-    mimeType: file.mimetype,
-    body: Buffer.from(file.buffer), // Ensure the file buffer is not empty
-  };
-
-  try {
-    console.log("Attempting to upload file to Google Drive:", fileMetadata);
-    const driveResponse = await drive.files.create({
-      resource: fileMetadata,
-      media: media,
-      fields: "id",
-    });
-
-    if (!driveResponse.data || !driveResponse.data.id) {
-      throw new Error("Google Drive upload failed, no file ID returned");
-    }
-
-    console.log(
-      "File uploaded to Google Drive with ID:",
-      driveResponse.data.id
-    );
-    return `https://drive.google.com/uc?id=${driveResponse.data.id}`;
-  } catch (error) {
-    console.error("Failed to upload image to Google Drive:", error);
-    throw new Error("Google Drive API Error: " + error.message);
-  }
-}
-
-async function updateProductDetails(
-  prodId,
-  productName,
-  productDescription,
-  productIngredient
-) {
-  return new Promise((resolve, reject) => {
-    const updateProductQuery = `
-          UPDATE products SET 
-              Product_Name = ?, 
-              Product_Description = ?, 
-              Product_Ingredients = ?
-          WHERE Product_ID = ?
-      `;
-
-    connection.query(
-      updateProductQuery,
-      [productName, productDescription, productIngredient, prodId],
-      function (error, results) {
-        if (error) {
-          reject(new Error("Error updating product details: " + error.message));
-        } else {
-          resolve();
-        }
-      }
-    );
-  });
-}
-
-async function updateProductPrice(prodId, productSize, productPrice) {
-  return new Promise((resolve, reject) => {
-    const updatePriceQuery = `
-          UPDATE Product_Attributes SET 
-              Product_Price = ?
-          WHERE Product_ID = ? AND Product_Size = ?
-      `;
-
-    connection.query(
-      updatePriceQuery,
-      [productPrice, prodId, productSize],
-      function (error, results) {
-        if (error) {
-          reject(new Error("Error updating product price: " + error.message));
-        } else {
-          if (results.affectedRows === 0) {
-            reject(
-              new Error("No product attribute found with that ID and size")
-            );
-          } else {
-            resolve();
-          }
-        }
-      }
-    );
-  });
-}
 router.post("/insert_account",  async (req, res) => {
   const { firstName, lastName, email, address, username, password,addRole} = req.body;
   console.log(req.body);
 
       // Insert into Admin table
-      console.log("This is working" + addRole);
+      
       const adminInsertQuery = `
           INSERT INTO Admin (First_Name, Last_Name, Email, Address)
           VALUES (?, ?, ?, ?);
@@ -860,7 +703,7 @@ router.post("/insert_account",  async (req, res) => {
 });
 
 router.post("/insert_product", async function (req, res) {
-  console.log(req.body); // Check the parsed body to debug
+  console.log(req.body); // Check the parsed body to debug  
 
   const {
       productName,

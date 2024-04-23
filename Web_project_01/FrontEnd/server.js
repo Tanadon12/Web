@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require('cors');
 const path = require("path");
 const axios = require('axios');
-
+const multer = require('multer');
+const upload = multer();
+const formdata  = require("form-data");
 
 const app = express();
 
@@ -105,6 +107,19 @@ router.get("/ProductMM", (req, res) => {
 });
 
 
+router.get("/proxy/Perfume/:gender", async (req, res) => {
+  const { gender } = req.params;
+  const { limit, page, sort } = req.query;
+  
+  try {
+    const backendResponse = await axios.get(`http://localhost:8000/Perfume/${gender}?limit=${limit}&page=${page}&sort=${sort}`);
+    res.json(backendResponse.data);
+  } catch (error) {
+    console.error("Error fetching perfumes:", error.response || error.message);
+    res.status(error.response?.status || 500).send(error.response?.data || "Internal Server Error");
+  }
+});
+
 router.get("/proxy/product-details/:productId", async (req, res) => {
   const { productId } = req.params;
   try {
@@ -170,7 +185,7 @@ router.get("/proxy/random-products", async (req, res) => {
 router.get("/proxy/product-search-options", async (req, res) => {
   try {
     // Forward the request to the backend service
-    const backendResponse = await axios.get(`http://localhost:8000//product-search-options`);
+    const backendResponse = await axios.get(`http://localhost:8000/product-search-options`);
     // Send the response back to the frontend
     res.json(backendResponse.data);
   } catch (error) {
@@ -184,7 +199,7 @@ router.get("/proxy/product-search-options", async (req, res) => {
 router.post("/proxy/searchRes", async (req, res) => {
   try {
     // Forward the search request to the backend service
-    const backendResponse = await axios.post(`${backendBaseUrl}/searchRes`, req.body, {
+    const backendResponse = await axios.post(`http://localhost:8000/searchRes`, req.body, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
     // Send the response back to the frontend
@@ -212,14 +227,13 @@ router.post("/proxy/check_authen", async (req, res) => {
 });
 
 // Proxy endpoint for editing products
-router.put("/proxy/editproduct/:id", async (req, res) => {
+router.put("/proxy/editproduct/:id", upload.none(), async (req, res) => {
   const { id } = req.params;
-  // Forward the PUT request to the backend service
   try {
     const backendResponse = await axios.put(`http://localhost:8000/editproduct/${id}`, req.body, {
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json"
+    }
     });
     res.json(backendResponse.data);
   } catch (error) {
@@ -228,8 +242,9 @@ router.put("/proxy/editproduct/:id", async (req, res) => {
 });
 
 // Proxy endpoint for inserting new products
-router.post("/proxy/insert_product", async (req, res) => {
+router.post("/proxy/insert_product", upload.none(), async (req, res) => {
   // Forward the POST request to the backend service
+  console.log(req.body);
   try {
     const backendResponse = await axios.post('http://localhost:8000/insert_product', req.body, {
       headers: {
@@ -264,10 +279,11 @@ router.get("/proxy/getAccount/:accountId", async (req, res) => {
 });
 
 // Proxy endpoint for inserting a new account
-router.post("/proxy/insert_account", async (req, res) => {
+router.post("/proxy/insert_account", upload.none(), async (req, res) => {
   try {
     const backendResponse = await axios.post(`http://localhost:8000/insert_account`, req.body, {
       headers: { 'Content-Type': 'application/json' }
+      
     });
     res.json(backendResponse.data);
   } catch (error) {
@@ -276,7 +292,7 @@ router.post("/proxy/insert_account", async (req, res) => {
 });
 
 // Proxy endpoint for updating an account
-router.put("/proxy/editAccount/:accountId", async (req, res) => {
+router.put("/proxy/editAccount/:accountId", upload.none(), async (req, res) => {
   try {
     const backendResponse = await axios.put(`http://localhost:8000/editAccount/${req.params.accountId}`, req.body, {
       headers: { 'Content-Type': 'application/json' }
@@ -291,6 +307,15 @@ router.put("/proxy/editAccount/:accountId", async (req, res) => {
 router.delete("/proxy/deleteAccount/:accountId", async (req, res) => {
   try {
     const backendResponse = await axios.delete(`http://localhost:8000/deleteAccount/${req.params.accountId}`);
+    res.json(backendResponse.data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete("/proxy/deleteProduct/:productId", async (req, res) => {
+  try {
+    const backendResponse = await axios.delete(`http://localhost:8000/delete/${req.params.productId}`);
     res.json(backendResponse.data);
   } catch (error) {
     res.status(500).json({ message: error.message });

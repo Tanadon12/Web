@@ -55,28 +55,25 @@ function extractGoogleDriveId(url) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  fetchAndDisplayProducts(1); // Initially load the first page
+  updateProducts(1); // Initial load of products
 
   // Add event listener to the view selector to reload products when the view changes
-document.getElementById("view").addEventListener("change", function () {
-    fetchAndDisplayProducts(1); // Always go back to the first page when view changes
-});
+  document.getElementById("view").addEventListener("change", function () {
+    updateProducts(1); // Load the first page with new view settings
+  });
 
   // Event listeners for pagination
-const paginationButtons = document.querySelectorAll(".frame");
-  paginationButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const pageNumber = this.textContent.trim();
-      if (pageNumber === ">") {
-        const currentPage = parseInt(
-          document.querySelector(".frame.active")?.textContent || "1",
-          10
-        );
-        fetchAndDisplayProducts(currentPage + 1);
-      } else {
-        fetchAndDisplayProducts(parseInt(pageNumber, 10));
-      }
+  // Pagination controls
+  document.querySelectorAll(".frame").forEach((frame) => {
+    frame.addEventListener("click", function () {
+      const pageNum = parseInt(this.innerText.trim());
+      updateProducts(pageNum); // Load specific page
     });
+  });
+
+  // Listen for changes in the sort selection
+  document.getElementById("Sort").addEventListener("change", function () {
+    updateProducts(1); // Reload the first page with new sorting
   });
 });
 
@@ -99,7 +96,7 @@ function updateProducts(page = 1) {
   const viewCount = document.getElementById("view").value;
   const sortOption = document.getElementById("Sort").value;
   const gender = window.location.pathname.split("/")[2];
-  const url = `http://localhost:8000/Perfume/${gender}?limit=${viewCount}&page=${page}&sort=${sortOption}`;
+  const url = `/proxy/Perfume/${gender}?limit=${viewCount}&page=${page}&sort=${sortOption}`;
 
   fetch(url)
     .then((response) => response.json())

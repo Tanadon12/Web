@@ -105,11 +105,6 @@ function initializeEventListeners() {
 function submitNewProduct(formAddData) {
   // const addProductForm = document.getElementById('addProductForm');
   // const formData = new FormData(addProductForm);
-  console.log(formAddData);
-  for (let [key, value] of formAddData.entries()) {
-    console.log(`${key}: ${value}`);
-  }
-
   fetch("/proxy/insert_product", {
     method: "POST",
     body: formAddData,
@@ -242,7 +237,7 @@ function renderProducts(data, page) {
 
 function deleteProduct(productId) {
   if (confirm("Are you sure you want to delete this product?")) {
-    const url = `http://localhost:8000/delete/${productId}`;
+    const url = `/proxy/deleteProduct/${productId}`;
     fetch(url, { method: "DELETE" })
       .then((response) => {
         if (!response.ok) {
@@ -268,7 +263,7 @@ function toggleModal(modal, show) {
 function openEditModal(productId) {
   editModal = document.getElementById("editProductModal");
   // console.log(productId);
-  const url = `http://localhost:8000/product-details/${productId}`;
+  const url = `/proxy/product-details/${productId}`;
   console.log("Fetching details from:", url); // This will help verify the URL is correct
 
   fetch(url)

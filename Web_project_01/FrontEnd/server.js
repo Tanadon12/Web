@@ -134,7 +134,7 @@ router.get("/proxy/searchByName/:name", async (req, res) => {
   }
 });
 
-router.post("/proxy/submit_login", async (req,  s) => {
+router.post("/proxy/submit_login", async (req,  res) => {
   try {
     // Forward the login request to the backend service
     const backendResponse = await axios.post('http://localhost:8000/submit_login', req.body, {
@@ -170,7 +170,7 @@ router.get("/proxy/random-products", async (req, res) => {
 router.get("/proxy/product-search-options", async (req, res) => {
   try {
     // Forward the request to the backend service
-    const backendResponse = await axios.get(`${backendBaseUrl}/product-search-options`);
+    const backendResponse = await axios.get(`http://localhost:8000//product-search-options`);
     // Send the response back to the frontend
     res.json(backendResponse.data);
   } catch (error) {

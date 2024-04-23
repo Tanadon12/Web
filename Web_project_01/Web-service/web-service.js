@@ -56,7 +56,7 @@ router.put("/editproduct/:id", upload.single('productImage'), async function(req
     return res.status(400).send({ error: true, message: "Error: All fields must be filled" });
   }
 
-  // const authClient = await authorize();
+  const authClient = await authorize();
 
   try {
     // Update product details

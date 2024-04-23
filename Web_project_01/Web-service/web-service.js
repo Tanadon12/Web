@@ -5,9 +5,6 @@ const mysql = require("mysql2");
 const TokenManager = require("./token_manager");
 const cors = require("cors");
 
-// const { google }= require('googleapis');
-
-
 const app = express();
 dotenv.config();
 
@@ -27,16 +24,7 @@ app.use("/", router);
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-// async function authorize() {
-//   const jwtClient = new google.auth.JWT(
-//       apikeys.client_email,
-//       null,
-//       apikeys.private_key,
-//       SCOPE
-//   );
-//   await jwtClient.authorize();
-//   return jwtClient;
-// }
+
 
 router.put("/editproduct/:id", async function(req, res) {
   const prodId = parseInt(req.params.id);
@@ -115,74 +103,7 @@ async function updateProductPrice(prodId, productSize, productPrice) {
   });
 }
 
-// router.put("/editProduct/:id", async (req, res) => {
-//   console.log(req.body);
-//   const proId = req.params.id;
-//   const {
-//     productName,
-//     productDescription,
-//     productBrand,
-//     productType,
-//     productIngredient,
-//     productImage,
-//     productSize,
-//     productPrice
-//   } = req.body;
 
-//   // Validation
-//   if (!productName || !productDescription || !productBrand || !productType || !productIngredient || !productImage || !productSize || !productPrice) {
-//     console.log("asdassadasdasda");
-//     return res.status(400).send({ error: true, message: "All fields are required." });
-//   }
-
-//   try {
-//     // Update Admin information
-//     const pdetail = `
-//     UPDATE products SET 
-//     Product_Name = ?, 
-//     Product_Description = ?, 
-//     Product_Brand = ?,
-//     Product_type = ?,
-//     Product_Ingredients = ?, 
-//     Product_image = ?
-//     WHERE Product_ID = ?
-//     `;
-//     await connection.promise().query(pdetail, [productName,
-//       productDescription,
-//       productBrand,
-//       productType,
-//       productIngredient,
-//       productImage,
-//       proId ]);
-
-//     // Update Login Information
-//     const updatePriceQuery = `
-//           UPDATE Product_Attributes SET 
-//               Product_Price = ?
-//           WHERE Product_ID = ? AND Product_Size = ?
-//       `;
-
-//       connection.query(updatePriceQuery, [productPrice, proId, productSize], function(error, results) {
-//           if (error) {
-//               reject(new Error("Error updating product price: " + error.message));
-//           } else {
-//               if (results.affectedRows === 0) {
-//                   reject(new Error("No product attribute found with that ID and size"));
-//               } else {
-//                   resolve();
-//               }
-//           }
-//       });
-//     res.send({ error: false, message: "Products updated successfully." });
-//   } catch (error) {
-//     console.error("Failed to update Products:", error);
-//     res.status(500).send({
-//       error: true,
-//       message: "Failed to update prooo due to database error",
-//       details: error.message
-//     });
-//   }
-// });
 
 router.get("/Account", (req, res) => {
   const sqlQuery = `
@@ -717,13 +638,7 @@ router.post("/insert_product", async function (req, res) {
       productType      // Added variable for product type
   } = req.body;
 
-  // Check if all required fields are provided
-  // if (!productName || !productDescription || !productPrice || !productIngredient || !productSize || !productGender || !productImage || !productBrand || !productType) {
-  //     return res.status(400).send({
-  //         error: true,
-  //         message: "All fields must be filled"
-  //     });
-  // }
+
 
   // SQL query to insert a new product into the database
   const query = `INSERT INTO Products (Product_Name, Product_Description, Product_Brand, Product_Gender, Product_image, Product_Ingredients, Product_Type)
@@ -769,8 +684,6 @@ function insertProductAttributes(productId, size, price, callback) {
       callback(err, result);
   });
 }
-
-
 
 
 connection.connect((err) => {

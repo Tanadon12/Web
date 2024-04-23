@@ -1,6 +1,6 @@
 window.onload = async () => {
     try {
-      const response = await fetch('http://localhost:8000/check_authen', {
+      const response = await fetch('/proxy/check_authen', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchAccountDetails() {
-    fetch(`http://localhost:8000/Account`)
+    fetch(`/proxy/account`)
     .then(response => {
         if (!response.ok) {
             throw new Error("Failed to fetch account details");
@@ -193,7 +193,7 @@ function openEditAccountModal(accountId) {
 
 function deleteAccount(accountId) {
     if (confirm('Are you sure you want to delete this account?')) {
-        fetch(`http://localhost:8000/deleteAccount/${accountId}`, { method: 'DELETE' })
+        fetch(`/proxy/deleteAccount/${accountId}`, { method: 'DELETE' })
             .then(response => response.json())
             .then(result => {
                 alert('Account deleted successfully');
@@ -210,7 +210,7 @@ function submitForm(accountId, formData) {
       }
     
     console.log("Submitting form for account ID:", accountId);
-    fetch(`http://localhost:8000/editAccount/${accountId}`, {
+    fetch(`/proxy/editAccount/${accountId}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'

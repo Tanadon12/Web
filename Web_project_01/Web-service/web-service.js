@@ -60,7 +60,7 @@ router.put("/editproduct/:id", upload.single('productImage'), async function(req
 
   try {
     // Update product details
-    await updateProductDetails(productName,  productType,productIngredient,productDescription,productBrand,productImage, prodId);
+    await updateProductDetails(productName,  productType,productIngredient,productDescription,productBrand,productImage, prodId); 
 
     
     // Update product price

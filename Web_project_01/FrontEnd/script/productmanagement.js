@@ -1,6 +1,6 @@
 window.onload = async () => {
   try {
-    const response = await fetch('http://localhost:8000/check_authen', {
+    const response = await fetch('/proxy/check_authen', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ function submitNewProduct(formAddData) {
     console.log(`${key}: ${value}`);
   }
 
-  fetch("http://localhost:8000/insert_product", {
+  fetch("/proxy/insert_product", {
     method: "POST",
     body: formAddData,
   })
@@ -137,7 +137,7 @@ function submitForm(productId, formData) {
   for (let [key, value] of formData.entries()) {
     console.log(`${key}: ${value}`);
   }
-  fetch(`http://localhost:8000/editproduct/${productId}`, {
+  fetch(`/proxy/editproduct/${productId}`, {
     method: "PUT",
     body: formData,
   })

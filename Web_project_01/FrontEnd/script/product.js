@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }); 
   
   function fetchProductDetails(productId) {
-    
-    fetch(`http://localhost:8000/product-details/${productId}`)
-    
+    fetch(`/proxy/product-details/${productId}`) // Use the new proxy endpoint
       .then((response) => response.json())
       .then((productDetails) => {
         const { product, attributes } = productDetails;

@@ -12,7 +12,7 @@ function fetchProductsForContainer(containerClass) {
       : null;
 
   // Construct the URL with the gender parameter if available
-  let fetchUrl = `${backendBaseUrl}/random-products`;
+  let fetchUrl = `/proxy/random-products`;
   if (gender) {
     fetchUrl += `?gender=${gender}`;
   }

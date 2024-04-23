@@ -13,7 +13,7 @@ function extractGoogleDriveId(url) {
 
 function fetchProductsForContainer(containerClass) {
   const backendBaseUrl = "http://localhost:8000";
-  fetch("http://localhost:8000/random-products")
+  fetch("/proxy/random-products")
   .then(response => response.json())
   .then(products => {
       const container = document.querySelector(`.randomProductContainer.${containerClass}`);

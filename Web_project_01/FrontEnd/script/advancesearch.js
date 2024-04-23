@@ -86,7 +86,7 @@ function initializeFormReset() {
 
 // Fetch and populate product search options from server
 function initializeProductSearchOptions() {
-  fetch("http://localhost:8000/product-search-options")
+  fetch("/proxy/product-search-options")
     .then((response) => response.json())
     .then((data) => {
       populateDropdown("type", data.types);
@@ -147,7 +147,7 @@ function performSearch() {
       searchParams.append(pair[0], pair[1]);
   }
 
-  fetch("http://localhost:8000/searchRes", {
+  fetch("/proxy/searchRes", {
       method: "POST",
       headers: {
           "Content-Type": "application/x-www-form-urlencoded",

@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchSearchResult(pName);
 });
 
-function fetchSearchResult(name){
+function fetchSearchResult(name) {
     console.log("Product Name:", name); // Log the extracted product name
 
     if (name) {
-        const url = `http://localhost:8000/searchByName/${encodeURIComponent(name)}`;
+        const url = `/proxy/searchByName/${encodeURIComponent(name)}`; // Use the new proxy endpoint
         fetch(url)
         .then(response => {
             if (!response.ok) {

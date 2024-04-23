@@ -11,28 +11,6 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
     />
-    <script type="text/javascript" src="https://api.longdo.com/map/?key=f4c609ce0f7eec84984ba14931def9a6"></script>
-    <script>
-    var marker1 = new longdo.Marker({ lon: 100.175453, lat: 13.773936 },
-    { 
-      title: 'Want to know CEO house?',
-      icon: {
-           url: 'https://map.longdo.com/mmmap/images/pin_mark.png',
-          offset: { x: 12, y: 45 }
-        },
-        detail: 'This is ceo house!',
-        visibleRange: { min: 0, max: 100 },
-        draggable: false,
-        weight: longdo.OverlayWeight.Top,
-    });
-      function init() {
-        var map = new longdo.Map({
-          placeholder: document.getElementById('map')
-        });
-        map.Layers.setBase(longdo.Layers.NORMAL_EN);
-        map.Overlays.add(marker1);
-      }
-    </script>
 
   </head>
 
@@ -72,13 +50,12 @@
       <div class="separator"></div>
     </div>
     
-    <div id="map"></div>
-
-    <div class = "ceo">
-    <article>
-     <h2>This is the route to CEO House</h2>
+    <article class = "YT">
+     <h3> You want some motivate ? Admin. Look at this clip!</h3>
+     <iframe width="560" height="315" src="https://www.youtube.com/embed/qDVl_wNi9PI?si=eQ6lF0f8bWSJ76AL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </article>
-    </div>
+    
+
     <div class="footer">
       <footer>
       <article>This is ENIGMA foundation</article>

@@ -8,9 +8,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://api.longdo.com/map/?key=f4c609ce0f7eec84984ba14931def9a6"></script>
+    <script>
+    var marker1 = new longdo.Marker({ lon: 100.175453, lat: 13.773936 },
+    { 
+      title: 'Want to know CEO house?',
+      icon: {
+           url: 'https://map.longdo.com/mmmap/images/pin_mark.png',
+          offset: { x: 12, y: 45 }
+        },
+        detail: 'This is ceo house!',
+        visibleRange: { min: 0, max: 100 },
+        draggable: false,
+        weight: longdo.OverlayWeight.Top,
+    });
+      function init() {
+        var map = new longdo.Map({
+          placeholder: document.getElementById('map')
+        });
+        map.Layers.setBase(longdo.Layers.NORMAL_EN);
+        map.Overlays.add(marker1);
+      }
+    </script>
+
 </head>
 
-<body>
+<body onload="init();">
  <header>
     <link
       rel="stylesheet"
@@ -138,10 +161,9 @@
     </article>
 
   </div>
-  <article id = "quote">
-    Fragrance is a symphony of senses, a subtle yet potent storyteller that dances upon the breeze and whispers secrets to our souls. It is the essence of memory, the lingering echo of a moment long past, captured in a delicate bouquet of scents.<br>
-    In the realm of fragrance, each note plays a crucial role, like characters in a finely crafted novel. The top notes, fleeting and ethereal, announce their presence with a burst of freshness,<br> teasing the senses and inviting exploration. They are the first impression, the tantalizing introduction to a fragrant journey yet to unfold.
-    </article>
+
+  <div id="map"></div>
+    
 </main>
 
 <footer>

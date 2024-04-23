@@ -106,11 +106,16 @@
             <!-- Product description -->
             <textarea id="productDescription" name="productDescription" placeholder="Product Description" required></textarea>
             <!-- Product price -->
-            <input type="number" id="productPrice" name="productPrice" placeholder="Price" required>
+            
             <!-- Product ingredient -->
             <textarea id="productIngredient" name="productIngredient" placeholder="Ingredient" required></textarea>
             <!-- Product Size -->
             <input type="number" id="productSize" name="productSize" placeholder="Size" required>
+
+            <input type="number" id="productPrice" name="productPrice" placeholder="Price" required>
+            
+            <textarea type="text" id="productBrand" name="productBrand" placeholder="Brand" required></textarea>
+            <textarea type="text" id="productType" name="productType" placeholder="Type" required></textarea>
             <!-- Product Gender -->
             <select id="productGender" name="productGender" required>
                 <option value="">Select Gender</option>
@@ -139,13 +144,19 @@
             <label for="editProductDescription"></label>
             <textarea id="editProductDescription" name="productDescription" placeholder="Product Description" required></textarea>
 
+            <label for="editProductBrand"></label>
+            <textarea id="editProductBrand" name="productBrand" placeholder="product Brand" required></textarea>
+
+            <label for="editProductType"></label>
+            <textarea id="editProductType" name="ProductType" placeholder="ProductType" required></textarea>
+
             <label for="editProductIngredient"></label>
             <textarea id="editProductIngredient" name="productIngredient" placeholder="Ingredients" required></textarea>
             
-            <label for="EditProductImage2"></label>
-            <input type="file" id="EditProductImage2" name="productImageFile" accept=".jpg, .jpeg, .png">
-            <!-- <label for="editProductImage"></label>
-            <textarea id="editProductImage" name="productImage" placeholder="Image URL" required></textarea> -->
+            <!-- <label for="EditProductImage2"></label>
+            <input type="file" id="EditProductImage2" name="productImageFile" accept=".jpg, .jpeg, .png"> -->
+            <label for="editProductImage2"></label>
+            <textarea id="editProductImage2" name="productImage" placeholder="Image URL" required></textarea>
 
             <label for="editProductSize"></label>
             <select id="editProductSize" name="productSize">

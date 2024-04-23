@@ -812,14 +812,6 @@ router.post("/insert_account", upload.none(), async (req, res) => {
   const { firstName, lastName, email, address, username, password,addRole} = req.body;
   console.log(req.body);
 
-  // Basic validation to ensure all required fields are provided
-  // if (!firstName || !lastName || !email || !address || !username || !password || !role) {
-  //     return res.status(400).send({
-  //         error: true,
-  //         message: "All fields are required."
-  //     });
-  // }
-
       // Insert into Admin table
       console.log("This is working" + addRole);
       const adminInsertQuery = `
@@ -860,12 +852,12 @@ router.post("/insert_product", upload.none(), async function (req, res) {
   } = req.body;
 
   // Check if all required fields are provided
-  if (!productName || !productDescription || !productPrice || !productIngredient || !productSize || !productGender || !productImage || !productBrand || !productType) {
-      return res.status(400).send({
-          error: true,
-          message: "All fields must be filled"
-      });
-  }
+  // if (!productName || !productDescription || !productPrice || !productIngredient || !productSize || !productGender || !productImage || !productBrand || !productType) {
+  //     return res.status(400).send({
+  //         error: true,
+  //         message: "All fields must be filled"
+  //     });
+  // }
 
   // SQL query to insert a new product into the database
   const query = `INSERT INTO Products (Product_Name, Product_Description, Product_Brand, Product_Gender, Product_image, Product_Ingredients, Product_Type)

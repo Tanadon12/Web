@@ -283,11 +283,11 @@ function openEditModal(productId) {
       // Populate the product details in form fields
       document.getElementById("editProductId").value = product.Product_ID;
       document.getElementById("editProductName").value = product.Product_Name;
-      document.getElementById("editProductDescription").value =
-        product.Product_Description;
-      document.getElementById("editProductIngredient").value =
-        product.Product_Ingredients;
-      // document.getElementById("EditProductImage2").value = product.Product_image;
+      document.getElementById("editProductDescription").value =product.Product_Description;
+      document.getElementById("editProductIngredient").value =product.Product_Ingredients;
+      document.getElementById("editProductBrand").value =product.Product_Brand;
+      document.getElementById("editProductType").value =product.Product_Type;
+      document.getElementById("editProductImage2").value = product.Product_image;
 
       // Handle attributes - assuming attributes could have multiple entries
       // You would need to adjust this if you manage multiple attributes like different sizes/prices

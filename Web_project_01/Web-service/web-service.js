@@ -50,29 +50,19 @@ router.put("/editproduct/:id", upload.single('productImage'), async function(req
     return res.status(400).send({ error: true, message: "Error: product ID is not found" });
   }
 
-  const { productName, productDescription, productIngredient, productSize, productPrice } = req.body;
-  if (!productName || !productDescription || !productIngredient || !productSize || !productPrice) {
+  const { productName, productDescription, productIngredient, productSize, productPrice,productBrand, productType,productImage } = req.body;
+  console.log(req.body);
+  if (!productName || !productDescription || !productIngredient || !productSize || !productPrice || !productBrand|| !productType || !productImage) {
     return res.status(400).send({ error: true, message: "Error: All fields must be filled" });
   }
 
-  const authClient = await authorize();
+  // const authClient = await authorize();
 
   try {
     // Update product details
-    await updateProductDetails(prodId, productName, productDescription, productIngredient);
+    await updateProductDetails(productName,  productType,productIngredient,productDescription,productBrand,productImage, prodId);
 
-    let fileLink = req.body.productImage || ''; // Assume existing image URL is sent in the request body if not uploading a new one.
-
-    // Check if there is a new image to upload
-    if (req.file) {
-      fileLink = await uploadProductImage(authClient, req.file);
-    }
-
-    // Update product image URL in the database only if a new image was uploaded
-    if (req.file && fileLink) {
-      await updateProductImage(prodId, fileLink);
-    }
-
+    
     // Update product price
     await updateProductPrice(prodId, productSize, productPrice);
 
@@ -82,49 +72,21 @@ router.put("/editproduct/:id", upload.single('productImage'), async function(req
   }
 });
 
-async function uploadProductImage(authClient, file) {
-  const drive = google.drive({ version: 'v3', auth: authClient });
-  const fileMetadata = {
-    name: file.originalname,
-    parents: ['1b1adXUfgw_Xj3ZaDHMTD63Xyuvia_Xe3']  // Ensure this is the correct folder ID
-  };
 
-  const media = {
-    mimeType: file.mimetype,
-    body: Buffer.from(file.buffer)  // Ensure the file buffer is not empty
-  };
-
-  try {
-    console.log("Attempting to upload file to Google Drive:", fileMetadata);
-    const driveResponse = await drive.files.create({
-      resource: fileMetadata,
-      media: media,
-      fields: 'id'
-    });
-
-    if (!driveResponse.data || !driveResponse.data.id) {
-      throw new Error('Google Drive upload failed, no file ID returned');
-    }
-
-    console.log("File uploaded to Google Drive with ID:", driveResponse.data.id);
-    return `https://drive.google.com/uc?id=${driveResponse.data.id}`;
-  } catch (error) {
-    console.error("Failed to upload image to Google Drive:", error);
-    throw new Error('Google Drive API Error: ' + error.message);
-  }
-}
-
-async function updateProductDetails(prodId, productName, productDescription, productIngredient) {
+async function updateProductDetails(productName,  productType,productIngredient,productDescription,productBrand,productImage, prodId) {
   return new Promise((resolve, reject) => {
       const updateProductQuery = `
-          UPDATE products SET 
-              Product_Name = ?, 
-              Product_Description = ?, 
-              Product_Ingredients = ?
+      UPDATE products SET 
+           Product_Name = ?, 
+           Product_Type = ?,
+           Product_Ingredients = ?, 
+           Product_Description = ?, 
+           Product_Brand = ?,
+           Product_image = ?
           WHERE Product_ID = ?
       `;
 
-      connection.query(updateProductQuery, [productName, productDescription, productIngredient, prodId], function(error, results) {
+      connection.query(updateProductQuery, [productName,  productType,productIngredient,productDescription,productBrand,productImage, prodId], function(error, results) {
           if (error) {
               reject(new Error("Error updating product details: " + error.message));
           } else {
@@ -157,6 +119,75 @@ async function updateProductPrice(prodId, productSize, productPrice) {
       });
   });
 }
+
+// router.put("/editProduct/:id", async (req, res) => {
+//   console.log(req.body);
+//   const proId = req.params.id;
+//   const {
+//     productName,
+//     productDescription,
+//     productBrand,
+//     productType,
+//     productIngredient,
+//     productImage,
+//     productSize,
+//     productPrice
+//   } = req.body;
+
+//   // Validation
+//   if (!productName || !productDescription || !productBrand || !productType || !productIngredient || !productImage || !productSize || !productPrice) {
+//     console.log("asdassadasdasda");
+//     return res.status(400).send({ error: true, message: "All fields are required." });
+//   }
+
+//   try {
+//     // Update Admin information
+//     const pdetail = `
+//     UPDATE products SET 
+//     Product_Name = ?, 
+//     Product_Description = ?, 
+//     Product_Brand = ?,
+//     Product_type = ?,
+//     Product_Ingredients = ?, 
+//     Product_image = ?
+//     WHERE Product_ID = ?
+//     `;
+//     await connection.promise().query(pdetail, [productName,
+//       productDescription,
+//       productBrand,
+//       productType,
+//       productIngredient,
+//       productImage,
+//       proId ]);
+
+//     // Update Login Information
+//     const updatePriceQuery = `
+//           UPDATE Product_Attributes SET 
+//               Product_Price = ?
+//           WHERE Product_ID = ? AND Product_Size = ?
+//       `;
+
+//       connection.query(updatePriceQuery, [productPrice, proId, productSize], function(error, results) {
+//           if (error) {
+//               reject(new Error("Error updating product price: " + error.message));
+//           } else {
+//               if (results.affectedRows === 0) {
+//                   reject(new Error("No product attribute found with that ID and size"));
+//               } else {
+//                   resolve();
+//               }
+//           }
+//       });
+//     res.send({ error: false, message: "Products updated successfully." });
+//   } catch (error) {
+//     console.error("Failed to update Products:", error);
+//     res.status(500).send({
+//       error: true,
+//       message: "Failed to update prooo due to database error",
+//       details: error.message
+//     });
+//   }
+// });
 
 router.get("/Account", (req, res) => {
   const sqlQuery = `

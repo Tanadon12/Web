@@ -103,7 +103,7 @@ function initializeAccountEventListeners() {
         event.preventDefault();
         const accountId = document.getElementById('editAccountId').value;
         const formData = new FormData(editAccountForm);
-        for (let [key, value] of formAddData.entries()) {
+        for (let [key, value] of formData.entries()) {
             console.log(`${key}: ${value}`);
           }
         submitForm(accountId, formData);
@@ -205,7 +205,7 @@ function deleteAccount(accountId) {
 }
 
 function submitForm(accountId, formData) {
-    for (let [key, value] of formAddData.entries()) {
+    for (let [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
       }
     

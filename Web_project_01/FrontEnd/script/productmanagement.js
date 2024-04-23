@@ -134,6 +134,9 @@ function submitNewProduct(formAddData) {
 
 function submitForm(productId, formData) {
   console.log("Submitting form for product ID:", productId);
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
   fetch(`http://localhost:8000/editproduct/${productId}`, {
     method: "PUT",
     body: formData,

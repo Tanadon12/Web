@@ -324,7 +324,7 @@ router.delete("/proxy/deleteProduct/:productId", async (req, res) => {
 
 
 
-const FRONT_END_PORT = 3000; // Use environment variable or default to 3000
-app.listen(process.env.FRONT_END_PORT || FRONT_END_PORT, () => {
+const FRONT_END_PORT = 8080; // Use environment variable or default to 3000
+app.listen(process.env.FRONT_END_PORT || FRONT_END_PORT, "0.0.0.0" , () => {
   console.log(`Front-end server listening on port: ${FRONT_END_PORT}`);
 });
